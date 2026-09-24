@@ -1,28 +1,54 @@
 # Kinetics
 
-A theme for [Filament 5](https://filamentphp.com) admin panels. Pages sit on a
-quiet canvas as one rounded panel, with no outlines, calm tables, compact
-controls and quick, eased-out motion. It takes its colours from your panel, and
-stays out of the way of your own Tailwind classes.
+A calm, compact theme for [Filament 5](https://filamentphp.com) admin panels.
 
-Kinetics is still being designed, so expect changes before 1.0.
+![Kinetics in light mode: the Orders page of a marketplace admin, on a rounded panel beside the sidebar](docs/images/orders-light.png)
 
-## Installation
+Pages sit on a quiet canvas as one rounded panel. Tables have no lines,
+controls are compact, and motion is quick and eased out. Kinetics takes its
+colours from your panel and stays out of the way of your own Tailwind classes.
+
+Kinetics is still being designed, so expect changes before 1.0. See
+[Upgrading](docs/upgrading.md) when you update.
+
+## What you get
+
+- **A calmer layout.** No top bar: search, notifications and the account menu
+  live in the sidebar, and the content sits on one rounded panel with no
+  outlines.
+- **Quiet tables.** No card, lines or background, compact rows, a soft rounded
+  hover, and headings, cells and pagination on one edge.
+- **Compact controls.** 40px inputs and buttons that line up, pill-shaped
+  buttons, small checkboxes and switches, and links instead of buttons inside
+  dropdowns.
+- **Quick motion.** Everything under 300ms, eased out, and nothing moves when
+  reduced motion is on.
+- **A warm dark mode.** Charcoal with a hint of sepia, and off-white text.
+- **Open Runde and Lucide.** A rounded, friendly font and a lighter icon set,
+  bundled.
+- **Better notifications.** Pop-ups in the bottom-right corner, clear of your
+  buttons, and a plain, scannable notifications panel.
+- **Your colours, accessible.** Every colour comes from the panel's palette, and
+  buttons and links use the 700 shade so text passes contrast checks.
+- **Setup checks.** A missing theme or wrong import order tells you what to fix.
+
+![Kinetics in dark mode: the same Orders page on warm charcoal surfaces](docs/images/orders-dark.png)
+
+## Requirements
+
+PHP 8.3+, Laravel 12 or 13, Filament 5.8.3+, and a
+[custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme)
+built with Vite.
+
+## Quick start
 
 ```bash
 composer require otatechie/filament-kinetics
+php artisan make:filament-theme   # if your panel doesn't have a theme yet
 ```
 
-Kinetics styles your panel through a
-[custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme).
-If your panel doesn't have one yet, create it:
-
-```bash
-php artisan make:filament-theme
-```
-
-Then add the Kinetics imports to your theme's `theme.css`. `layers.css` goes
-first, before Filament's CSS, and `kinetics.css` after it:
+In your theme's `theme.css`, import `layers.css` before Filament and
+`kinetics.css` after it:
 
 ```css
 @import '../../../../vendor/otatechie/filament-kinetics/resources/css/layers.css';
@@ -33,7 +59,7 @@ first, before Filament's CSS, and `kinetics.css` after it:
 @source '../../../../resources/views/filament/**/*';
 ```
 
-Add the plugin to your panel, next to your theme:
+Add the plugin to your panel, then build:
 
 ```php
 use Otatechie\Kinetics\KineticsPlugin;
@@ -43,43 +69,47 @@ $panel
     ->viteTheme('resources/css/filament/admin/theme.css');
 ```
 
-Then build your assets:
-
 ```bash
 npm run build
 ```
 
-The plugin adds the Open Runde font and Lucide icons, and sets up the sidebar
-layout. The font is published to `public/` by `php artisan filament:assets`.
-Filament's installer runs it after every `composer install` and
-`composer update`, through `filament:upgrade`; if your app doesn't, run it once
-yourself.
-
-Kinetics checks its setup for you. A panel without a custom theme stops with an
-error explaining what to add. If the panel has a theme but the Kinetics imports
-are missing, the browser console shows a warning. To check by hand, run this in
-the console. It returns `ok`:
-
-```js
-getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order')
-```
+[Installation](docs/installation.md) covers each step in detail, including
+multiple panels, updating and removing.
 
 ## Documentation
 
-- [Design principles](docs/design-principles.md): the decisions behind the look
-- [Customising](docs/customising.md): colours, font, layout, icons and every variable
+**Getting started**
+
+- [Installation](docs/installation.md): requirements, setup, multiple panels,
+  updating and removing
+- [Troubleshooting](docs/troubleshooting.md): what each warning means, and
+  fixes for common problems
+- [Upgrading](docs/upgrading.md): what to change between versions
+
+**Using Kinetics**
+
+- [Customising](docs/customising.md): what the plugin sets, colours, font,
+  layout, icons, notifications, every variable, dark mode, and styling your
+  own pages
 - [Components](docs/components.md): how each part of Filament is styled
+
+**Background**
+
+- [Design principles](docs/design-principles.md): the decisions behind the look
 - [Motion](docs/motion.md): timing, easing and reduced motion
-- [Accessibility](docs/accessibility.md): contrast, focus and keyboard use
+- [Accessibility](docs/accessibility.md): contrast, focus, keyboard use and
+  notifications
 
-## Development
+**Contributing**
 
-The theme is [`resources/css/kinetics.css`](resources/css/kinetics.css). Apps
-build it with their own theme, so there's nothing to compile here.
+- [Development](docs/development.md): how the package is organised, the CSS
+  rules, testing and releasing
+- [Changelog](CHANGELOG.md)
 
-```bash
-composer test
-```
+## Demo
+
+The screenshots come from the [Kinetics demo](https://github.com/otatechie/kinetics),
+a small marketplace admin with realistic data on every page.
 
 ## Credits
 

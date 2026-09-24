@@ -80,4 +80,4 @@ Every button scales to 0.97 while pressed.
 | Badges | Fully rounded, tinted background, coloured text |
 | Stats widgets | Large semibold figures with even-width digits, muted labels |
 | Empty states | A small icon in a muted circle, a 15px heading, muted description |
-| Sign-in page | No card: a 360px column on the canvas, with a small footer |
+| Sign-in page | No card: a 360px column on the canvas. An optional footer is styled if you add one; see [Customising](customising.md#a-footer-on-the-sign-in-page) |

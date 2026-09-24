@@ -14,6 +14,14 @@ a difference.
   | Teal | 3.74:1 | 5.47:1 |
   | Orange | 3.56:1 | 5.18:1 |
 
+- **Muted text** (descriptions, times, read notifications, "Clear") still
+  passes 4.5:1, measured with the default `gray` palette:
+
+  | Muted text on | Light | Dark |
+  |---|---|---|
+  | Cards and inputs | 4.84:1 | 5.65:1 |
+  | The content panel | 4.63:1 | 6.16:1 |
+
 - **Checkboxes and radios** have a stronger outline than dividers, since they
   have no fill when unchecked.
 - **Dark-mode inputs** have a stronger edge than dividers, so fields stay easy
@@ -34,6 +42,19 @@ Kinetics doesn't change how anything works, only how it looks. Tab order,
 shortcuts, Escape to close a modal and keyboard use of menus, selects and date
 pickers all stay as Filament built them. Kinetics overrides none of Filament's
 templates.
+
+## Notifications
+
+- **Unread isn't shown by colour alone.** Unread notifications have a dot, a
+  shape you can see without telling colours apart, and a semibold title.
+  Filament also labels each one "Unread notification" for screen readers.
+- **Dismiss buttons are always reachable.** With a mouse they appear on hover,
+  but they also appear on keyboard focus, and on touch screens, which have no
+  hover, they're always shown.
+- **"Clear" is quiet, not hidden.** It's grey until you point at or tab to it,
+  then red, and stays in the tab order.
+- **Pop-up notifications appear bottom-right**, away from the buttons you just
+  used. Filament announces them to screen readers wherever they are.
 
 ## Motion
 

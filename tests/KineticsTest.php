@@ -88,6 +88,21 @@ it('only maps to Lucide icons that exist', function () {
     expect($missing)->toBeEmpty();
 });
 
+it('only reports ok when Kinetics sits below Tailwind utilities', function () {
+    $css = file_get_contents(__DIR__.'/../resources/css/kinetics.css');
+
+    // "wrong" in the Kinetics layer, "ok" in utilities: utilities only wins
+    // when it comes after Kinetics.
+    expect($css)->toMatch('/@layer kinetics \{\s*body \{\s*--kinetics-layer-order: wrong;/')
+        ->toMatch('/@layer utilities \{\s*body \{\s*--kinetics-layer-order: ok;/');
+});
+
+it('warns about a missing theme and a wrong layer order separately', function () {
+    $this->get('/admin/login')
+        ->assertSee('the theme CSS is missing', escape: false)
+        ->assertSee('layers.css must be imported before', escape: false);
+});
+
 it('ships the layer order for your theme to import first', function () {
     expect(file_get_contents(__DIR__.'/../resources/css/layers.css'))
         ->toContain('@layer theme, base, components, kinetics, utilities;');

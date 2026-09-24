@@ -1,5 +1,15 @@
-/* Load-order check: getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order') returns "ok". */
+/* Load-order check: getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order')
+   returns "ok" only when Kinetics sits between Filament's components and
+   Tailwind's utilities, since utilities only wins when it comes after Kinetics.
+   Without layers.css first, Kinetics lands after utilities and it returns
+   "wrong". Without kinetics.css, it returns nothing. */
 @layer kinetics {
+    body {
+        --kinetics-layer-order: wrong;
+    }
+}
+
+@layer utilities {
     body {
         --kinetics-layer-order: ok;
     }

@@ -2,6 +2,30 @@
 
 Most of Kinetics is set by your panel. For the rest, change a variable.
 
+## What the plugin sets
+
+`KineticsPlugin::make()` changes these on its panel. Anything you call after
+`->plugin()` overrides it.
+
+| Setting | Kinetics sets | To change it, after the plugin |
+|---|---|---|
+| Font | Open Runde | `->font('Inter')` |
+| Top bar | Off | `->topbar()` |
+| Search | In the sidebar | `->globalSearch(position: GlobalSearchPosition::Topbar)` |
+| Account menu | At the foot of the sidebar | `->userMenu(position: UserMenuPosition::Topbar)` |
+| Sidebar | Collapsible on desktop | `->sidebarCollapsibleOnDesktop(false)` |
+| Breadcrumbs | Off | `->breadcrumbs()` |
+| Content width | Full | `->maxContentWidth(Width::SevenExtraLarge)` |
+| Sign-out item | No icon | `->userMenuItems(['logout' => fn (Action $action) => $action->icon('lucide-log-out')])` |
+| Filament's icons | Lucide | `->icons([...])`, see [Icons](#icons) |
+| Notifications | Bottom-right | `->bootUsing(...)`, see [Notifications](#notifications) |
+
+It also adds a small script that warns in the browser console if the theme is
+missing or loaded in the wrong order, and stops a panel that has no custom
+theme. See [Troubleshooting](troubleshooting.md).
+
+It doesn't set your colours, brand name, logo or navigation.
+
 ## Colours
 
 Kinetics takes every colour from the panel's palette:
@@ -186,3 +210,48 @@ Tailwind's utilities. `layers.css` sets that order:
 So a Tailwind class in your own Blade views wins over Kinetics without
 `!important`. A plain CSS rule in your theme wins too, as long as it isn't
 inside a lower layer.
+
+## Matching your own pages
+
+Custom pages and widgets can use Kinetics' variables, so they follow the theme
+in light and dark mode. In Blade, with Tailwind:
+
+```blade
+<p class="text-sm text-(--kinetics-muted-foreground)">
+    Paystack pays sellers the next working day.
+</p>
+
+<div class="rounded-(--kinetics-radius) bg-(--kinetics-card) p-4">
+    ...
+</div>
+```
+
+Or in your theme's CSS, after the Kinetics import:
+
+```css
+.payout-note {
+    color: var(--kinetics-muted-foreground);
+    border-radius: var(--kinetics-radius);
+}
+```
+
+Filament's own components, such as `<x-filament::section>` and
+`<x-filament::button>`, are styled by Kinetics already, so prefer them where
+they fit.
+
+## A footer on the sign-in page
+
+Kinetics styles a small, muted footer under the sign-in form. To show one, add
+it with a render hook:
+
+```php
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\HtmlString;
+
+$panel->renderHook(
+    PanelsRenderHook::SIMPLE_LAYOUT_END,
+    fn (): HtmlString => new HtmlString('<footer class="fi-simple-footer">Marketplace · support@marketplace.test</footer>'),
+);
+```
+
+Escape anything that comes from your database with `e()`.

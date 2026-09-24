@@ -4,6 +4,20 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Added
+- Guides for [installation](docs/installation.md),
+  [troubleshooting](docs/troubleshooting.md), [upgrading](docs/upgrading.md) and
+  [development](docs/development.md), a reference of everything the plugin sets,
+  recipes for styling your own pages and adding a sign-in footer, and
+  screenshots in the README.
+
+### Fixed
+- The load-order check (`--kinetics-layer-order`) returned `ok` even when
+  `layers.css` was missing or imported after Filament's theme. It now returns
+  `wrong` in that case, and the console warning says to move `layers.css`.
+
 ## 0.3.0 - 2026-09-24
 
 ### Added

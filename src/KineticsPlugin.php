@@ -175,12 +175,19 @@ class KineticsPlugin implements Plugin
             ->userMenuItems([
                 'logout' => fn (Action $action): Action => $action->icon(null),
             ])
-            // kinetics.css sets this variable, so if it's missing, so are the imports.
+            // kinetics.css sets this variable: empty means the imports are
+            // missing, "wrong" means layers.css isn't first.
             ->renderHook(PanelsRenderHook::SCRIPTS_AFTER, fn (): HtmlString => new HtmlString(<<<'HTML'
                 <script>
-                    if (getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order').trim() !== 'ok') {
-                        console.warn('Kinetics: the theme CSS is missing. Add the Kinetics imports to your theme.css: https://github.com/otatechie/filament-kinetics#installation')
-                    }
+                    (() => {
+                        const order = getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order').trim()
+
+                        if (order === 'wrong') {
+                            console.warn("Kinetics: layers.css must be imported before Filament's theme in your theme.css: https://github.com/otatechie/filament-kinetics/blob/main/docs/troubleshooting.md")
+                        } else if (order !== 'ok') {
+                            console.warn('Kinetics: the theme CSS is missing. Add the Kinetics imports to your theme.css: https://github.com/otatechie/filament-kinetics/blob/main/docs/troubleshooting.md')
+                        }
+                    })()
                 </script>
                 HTML));
     }
