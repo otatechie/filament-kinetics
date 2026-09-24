@@ -417,10 +417,16 @@
         }
     }
 
+    /* On desktops the page sits a little further in from the panel's edges,
+       and the title starts where the content does. */
     @media (min-width: 1024px) {
+        .fi-main {
+            padding-inline: 3rem;
+        }
+
         .fi-header {
-            margin-inline: -2rem;
-            padding-inline: 1.5rem;
+            margin-inline: -3rem;
+            padding-inline: 3rem;
         }
     }
 

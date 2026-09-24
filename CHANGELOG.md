@@ -11,6 +11,8 @@ All notable changes to Kinetics are recorded here. The format follows
   gives no sign it can be copied until it's clicked.
 
 ### Changed
+- On desktops, pages sit 48px in from the panel's edges instead of 32px, and
+  the page title starts where the content does instead of 8px to its left.
 - Modals have the same edge as dropdowns and toasts: a solid border, the
   Kinetics radius and a soft shadow. Before, a faint ring and a long shadow
   made the bottom edge heavier than the top, and in dark mode the edge almost
