@@ -276,10 +276,27 @@
     /* The collapse and expand buttons: small and quiet. */
     .fi-sidebar-header .fi-icon-btn .fi-icon,
     .fi-sidebar-close-collapse-sidebar-btn .fi-icon,
-    .fi-sidebar-open-collapse-sidebar-btn .fi-icon {
+    .fi-sidebar-open-collapse-sidebar-btn .fi-icon,
+    .fi-layout-sidebar-toggle-btn .fi-icon {
         width: 1.125rem;
         height: 1.125rem;
         color: var(--kinetics-muted-foreground);
+    }
+
+    /* Phones and tablets: the menu button's strip runs into the panel below
+       instead of reading as a separate bar, and the icon sits on the page
+       title's edge (16px, then 24px). The padding is that edge minus the
+       button's own 3px around the 18px icon. */
+    .fi-layout-sidebar-toggle-btn-ctn {
+        background: var(--kinetics-panel);
+        padding-block: 0.5rem 0;
+        padding-inline: 0.8125rem;
+    }
+
+    @media (min-width: 640px) {
+        .fi-layout-sidebar-toggle-btn-ctn {
+            padding-inline: 1.3125rem;
+        }
     }
 
     /* ─── Sidebar footer: notifications and the account menu sit at the foot,
@@ -358,18 +375,21 @@
      * is a slim band with a hairline underneath, running the panel's width.
      */
 
+    /* On phones and tablets, where the sidebar is a drawer, the panel runs
+       edge to edge: a floating panel there only costs width. */
     .fi-main-ctn {
         display: flex;
         /* No outline: the panel stands apart from the canvas by colour alone. */
         background: var(--kinetics-panel);
-        border-radius: 0.75rem;
-        margin: 0.5rem;
-        min-height: calc(100dvh - 1rem);
+        min-height: 100dvh;
     }
 
     @media (min-width: 1024px) {
         .fi-main-ctn {
+            border-radius: 0.75rem;
+            margin: 0.5rem;
             margin-inline-start: 0;
+            min-height: calc(100dvh - 1rem);
         }
     }
 

@@ -4,6 +4,14 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 0.4.1 - 2026-09-24
+
+### Fixed
+- On phones and tablets, the content panel runs edge to edge instead of
+  floating with a strip of background down each side.
+- On phones and tablets, the menu button sits on the page title's edge, at the
+  size of Kinetics' other header icons, instead of alone in a strip of its own.
+
 ## 0.4.0 - 2026-09-24
 
 ### Added

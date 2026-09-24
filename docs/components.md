@@ -7,7 +7,8 @@ How Kinetics styles each part of Filament. Sizes are at the default text size.
 | Part | Style |
 |---|---|
 | Canvas | The page colour, behind the sidebar and panel |
-| Content panel | One shade lighter, 12px corners, no outline, 8px from the window edges |
+| Content panel | One shade lighter, 12px corners, no outline, 8px from the window edges. On phones and tablets it runs edge to edge, with square corners |
+| Menu button (phones and tablets) | 18px and muted, on the page title's edge, in a strip the colour of the panel |
 | Page header | A slim band at the top of the panel: 15px title, buttons on the right, one line underneath |
 | Sidebar | On the canvas, no divider. Items are 32px, with 16px icons. Groups are 12px apart, under 24px headings, and always open: no collapse arrows |
 | Active menu item | Primary colour and semibold, no background |
