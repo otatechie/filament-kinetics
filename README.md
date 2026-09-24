@@ -4,8 +4,8 @@
 [![Downloads](https://img.shields.io/packagist/dt/otatechie/filament-kinetics)](https://packagist.org/packages/otatechie/filament-kinetics/stats)
 [![License](https://img.shields.io/packagist/l/otatechie/filament-kinetics)](https://github.com/otatechie/filament-kinetics/blob/main/LICENSE.md)
 
-A [Filament](https://filamentphp.com) 4 and 5 theme with less clutter, compact
-controls and a warm dark mode. Free and MIT-licensed.
+[Filament](https://filamentphp.com) 4 and 5 theme: quiet tables, rounded
+panels, Lucide icons and a warm dark mode. Free and MIT-licensed.
 
 **[Try the live demo](https://kinetics.atoaugustine.com/admin)**: a small
 marketplace admin with sample data on every page. The sign-in is filled in, and
