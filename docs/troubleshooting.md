@@ -49,6 +49,18 @@ Make `layers.css` the first import in `theme.css`, before Filament's:
 
 Then rebuild.
 
+## Console warning: "KineticsPlugin isn't on this panel"
+
+The panel's theme includes Kinetics' CSS, but the panel doesn't have the
+plugin. The colours and components are Kinetics', but the layout, font, icons,
+notification position and modal alignment are still Filament's, since the
+plugin sets those. Add it to the panel provider, as in
+[Installation, step 4](installation.md#4-add-the-plugin):
+
+```php
+->plugin(KineticsPlugin::make())
+```
+
 ## The panel looks like plain Filament, with no warnings
 
 The warnings come from the plugin, so no warnings usually means the plugin

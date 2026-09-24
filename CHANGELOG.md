@@ -4,6 +4,18 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 0.5.1 - 2026-09-24
+
+### Added
+- A browser console warning when a panel's theme includes Kinetics' CSS but
+  the panel doesn't have the plugin. That panel gets Kinetics' colours on
+  Filament's layout, font and icons, and before, nothing said why.
+
+### Changed
+- On phones, modal buttons sit one per row at full width, with the button that
+  acts on top. Before, a third button, such as *Create & create another*,
+  pushed Cancel onto a row of its own.
+
 ## 0.5.0 - 2026-09-24
 
 ### Changed

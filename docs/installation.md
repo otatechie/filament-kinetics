@@ -12,6 +12,11 @@
 Kinetics is built by your app's own Filament theme, with Vite and Tailwind CSS
 4. `php artisan make:filament-theme` sets that up if you don't have it yet.
 
+Kinetics has two parts, and a panel needs both: the CSS in its theme (step 3)
+and the plugin (step 4). The CSS alone gives Kinetics' colours and components
+on Filament's layout, font and icons, and the browser console says the plugin
+is missing.
+
 Browsers: the same as Filament 5 and Tailwind CSS 4, which means Safari 16.4,
 Chrome 111 and Firefox 128 or later.
 
@@ -103,6 +108,7 @@ Open your panel. Kinetics checks its own setup:
 | An error: *Kinetics needs a custom theme on the [admin] panel* | Step 2 is missing: the panel has no `->viteTheme()` or `->theme()` |
 | A browser console warning: *the theme CSS is missing* | Step 3 or 5 is missing: the theme doesn't include `kinetics.css`, or hasn't been rebuilt |
 | A browser console warning: *layers.css must be imported before Filament's theme* | The imports in step 3 are in the wrong order, or `layers.css` is missing |
+| A browser console warning: *the theme CSS is loaded, but KineticsPlugin isn't on this panel* | Step 4 is missing: the panel has no `->plugin(KineticsPlugin::make())` |
 
 You can also check by hand in the browser console:
 
