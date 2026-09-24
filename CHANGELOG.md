@@ -4,6 +4,19 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.2.0 - 2026-09-24
+
+### Added
+- A table emptied by a search or filters says so: `No results for “ok”` or
+  "No orders match these filters", with a button that clears them. Filament
+  says "No orders", as if there were none. A table's own empty state still
+  wins, and the wording can be translated; see
+  [Customising: Empty tables](docs/customising.md#empty-tables).
+
+### Changed
+- The row of active filters above a table has no background or line of its
+  own, sits on the columns' edge, and keeps "clear all" beside the badges.
+
 ## 1.1.1 - 2026-09-24
 
 ### Changed

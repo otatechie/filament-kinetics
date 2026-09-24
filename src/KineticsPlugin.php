@@ -12,6 +12,8 @@ use Filament\Panel;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Support\Enums\Width;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\HtmlString;
 use LogicException;
@@ -194,6 +196,24 @@ class KineticsPlugin implements Plugin
                 HTML));
     }
 
+    /**
+     * Whether a search, filters or both are narrowing the table, or null.
+     *
+     * @return 'search'|'filters'|'both'|null
+     */
+    protected static function emptiedBy(Table $table): ?string
+    {
+        $isSearching = filled($table->getLivewire()->getTableSearch());
+        $hasFilters = count($table->getFilterIndicators()) > ($isSearching ? 1 : 0);
+
+        return match (true) {
+            $isSearching && $hasFilters => 'both',
+            $isSearching => 'search',
+            $hasFilters => 'filters',
+            default => null,
+        };
+    }
+
     public function boot(Panel $panel): void
     {
         // Without a custom theme the panel gets Kinetics' layout but Filament's
@@ -217,5 +237,35 @@ class KineticsPlugin implements Plugin
         Action::configureUsing(fn (Action $action): Action => $action
             ->modalAlignment(Alignment::Start)
             ->modalFooterActionsAlignment(Alignment::Start));
+
+        // A table emptied by a search or filters says so, instead of "No
+        // orders", and offers to clear them. A table's own empty state wins.
+        Table::configureUsing(fn (Table $table): Table => $table
+            ->emptyStateIcon(fn (Table $table): ?string => match (self::emptiedBy($table)) {
+                'search', 'both' => 'lucide-search-x',
+                'filters' => 'lucide-funnel-x',
+                default => null,
+            })
+            ->emptyStateHeading(fn (Table $table): ?string => match (self::emptiedBy($table)) {
+                'search', 'both' => __('kinetics::tables.empty.search.heading', ['search' => $table->getLivewire()->getTableSearch()]),
+                'filters' => __('kinetics::tables.empty.filters.heading', ['model' => $table->getPluralModelLabel()]),
+                default => null,
+            })
+            ->emptyStateDescription(fn (Table $table): ?string => match (self::emptiedBy($table)) {
+                'search' => __('kinetics::tables.empty.search.description'),
+                'filters', 'both' => __('kinetics::tables.empty.filters.description'),
+                default => null,
+            })
+            ->emptyStateActions([
+                Action::make('kineticsClearSearchAndFilters')
+                    ->label(fn (HasTable $livewire): string => match (self::emptiedBy($livewire->getTable())) {
+                        'search' => __('kinetics::tables.empty.actions.clear_search'),
+                        'filters' => __('kinetics::tables.empty.actions.clear_filters'),
+                        default => __('kinetics::tables.empty.actions.clear_search_and_filters'),
+                    })
+                    ->color('gray')
+                    ->visible(fn (HasTable $livewire): bool => self::emptiedBy($livewire->getTable()) !== null)
+                    ->action(fn (HasTable $livewire) => $livewire->removeTableFilters()),
+            ]));
     }
 }

@@ -25,6 +25,8 @@ colours from your panel and stays out of the way of your own Tailwind classes.
   hover, and a shadow on the side that has more to scroll to.
 - **Compact controls.** 40px inputs and buttons that line up, and smaller
   checkboxes and switches.
+- **Searches that explain themselves.** A search or filter that matches
+  nothing says so, with a button to clear it, instead of "No orders".
 - **Consistent modals.** Every modal reads from the left, with the button that
   acts first. On phones, buttons stack at full width.
 - **Warm dark mode.** Charcoal surfaces and off-white text.

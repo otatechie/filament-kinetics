@@ -13,6 +13,8 @@ class KineticsServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'kinetics');
+
         // Published to public/ by `php artisan filament:assets`.
         FilamentAsset::register([
             Font::make('open-runde', __DIR__.'/../resources/fonts/open-runde'),

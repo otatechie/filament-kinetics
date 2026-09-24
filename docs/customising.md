@@ -21,6 +21,7 @@ Most of Kinetics is set by your panel. For the rest, change a variable.
 | Filament's icons | Lucide | `->icons([...])`, see [Icons](#icons) |
 | Notifications | Bottom-right | `->bootUsing(...)`, see [Notifications](#notifications) |
 | Modals | Aligned to the start, confirmations too, with no icon beside the heading | See [Modals](#modals) |
+| Empty tables | When a search or filters match nothing, say so and offer to clear them | See [Empty tables](#empty-tables) |
 
 It also adds a small script that warns in the browser console if the theme is
 missing or loaded in the wrong order, and stops a panel that has no custom
@@ -162,6 +163,27 @@ theme after the Kinetics import:
 .fi-modal-window .fi-modal-icon-ctn {
     display: flex;
 }
+```
+
+## Empty tables
+
+When a search or filters leave a table with nothing to show, Filament says
+"No orders", as if there were none. Kinetics says what happened instead,
+`No results for “ok”` or "No orders match these filters", and adds a button
+that clears the search, the filters or both.
+
+A table's own `->emptyStateHeading()`, `->emptyStateDescription()` or
+`->emptyStateActions()` still wins. To change the wording everywhere, publish
+your own copy of the translations to `lang/vendor/kinetics/en/tables.php`:
+
+```php
+return [
+    'empty' => [
+        'search' => [
+            'heading' => 'Nothing found for “:search”',
+        ],
+    ],
+];
 ```
 
 ## Variables

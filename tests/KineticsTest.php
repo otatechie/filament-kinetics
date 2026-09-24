@@ -89,6 +89,12 @@ it('lets an action keep its own modal alignment', function () {
     expect(DeleteAction::make()->modalAlignment(Alignment::Center)->getModalAlignment())->toBe(Alignment::Center);
 });
 
+it('has wording for tables emptied by a search or filters', function () {
+    expect(__('kinetics::tables.empty.search.heading', ['search' => 'ok']))->toBe('No results for “ok”')
+        ->and(__('kinetics::tables.empty.filters.heading', ['model' => 'orders']))->toBe('No orders match these filters')
+        ->and(__('kinetics::tables.empty.actions.clear_search_and_filters'))->toBe('Clear search and filters');
+});
+
 it('lets the panel move notifications back', function () {
     Filament::getPanel('overridden')->boot();
 
