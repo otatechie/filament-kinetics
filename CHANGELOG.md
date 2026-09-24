@@ -8,6 +8,8 @@ All notable changes to Kinetics are recorded here. The format follows
 
 ### Changed
 - A plainer package description: "A minimal theme for Filament 4 and 5."
+- The README's feature list says what each feature does, in plainer words, and
+  now includes modals and the missing-plugin check.
 
 ## 1.1.0 - 2026-09-24
 

@@ -19,25 +19,24 @@ colours from your panel and stays out of the way of your own Tailwind classes.
 
 ## What you get
 
-- **A calmer layout.** No top bar: search, notifications and the account menu
-  live in the sidebar, groups stay open, and the content sits on one rounded
-  panel with no outlines.
-- **Quiet tables.** No card, lines or background, compact rows, a soft rounded
-  hover, and headings, cells and pagination on one edge. Wide tables show a
-  soft shadow on the side that has more to scroll to.
-- **Compact controls.** 40px inputs and buttons that line up, pill-shaped
-  buttons, small checkboxes and switches, and links instead of buttons inside
-  dropdowns.
-- **Quick motion.** Everything under 300ms, eased out, and nothing moves when
-  reduced motion is on.
-- **A warm dark mode.** Charcoal with a hint of sepia, and off-white text.
-- **Open Runde and Lucide.** A rounded, friendly font and a lighter icon set,
-  bundled.
-- **Better notifications.** Pop-ups in the bottom-right corner, clear of your
-  buttons, and a plain, scannable notifications panel.
-- **Your colours, accessible.** Every colour comes from the panel's palette, and
-  buttons and links use the 700 shade so text passes contrast checks.
-- **Setup checks.** A missing theme or wrong import order tells you what to fix.
+- **Sidebar layout.** Search, notifications and the account menu sit in the
+  sidebar, so there's no top bar.
+- **Tables without lines.** No borders or cards, compact rows, a rounded
+  hover, and a shadow on the side that has more to scroll to.
+- **Compact controls.** 40px inputs and buttons that line up, and smaller
+  checkboxes and switches.
+- **Consistent modals.** Every modal reads from the left, with the button that
+  acts first. On phones, buttons stack at full width.
+- **Warm dark mode.** Charcoal surfaces and off-white text.
+- **A rounded font and lighter icons.** Open Runde and Lucide, bundled.
+- **Notifications out of the way.** Pop-ups appear in the bottom-right corner,
+  clear of your buttons.
+- **Your colours, readable.** Every colour comes from your panel's palette, and
+  text on buttons and links passes contrast checks.
+- **Quick motion.** Animations stay under 300ms, and stop when reduced motion
+  is on.
+- **Setup checks.** A missing theme, a wrong import order or a missing plugin
+  comes with a message saying what to fix.
 
 ![Kinetics in dark mode: the same Orders page on warm charcoal surfaces](https://raw.githubusercontent.com/otatechie/filament-kinetics/main/docs/images/orders-dark.png)
 
