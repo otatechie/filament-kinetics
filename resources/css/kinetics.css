@@ -1595,6 +1595,7 @@
     /* Pop-ups are cards. Notifications inside the notifications panel are
        .fi-inline, and read as a list instead. */
     .fi-no-notification:not(.fi-inline) {
+        max-width: 22.25rem;
         background: var(--kinetics-card);
         border: 1px solid var(--kinetics-border);
         border-radius: var(--kinetics-radius);
@@ -1602,6 +1603,64 @@
         --tw-ring-shadow: 0 0 #0000;
         transition-duration: 250ms;
         transition-timing-function: var(--kinetics-ease-out);
+    }
+
+    /* ─── Toast deck ───
+     * Two or more toasts in the bottom corner stack behind the newest, each
+     * 10px higher and a little smaller, with only their edges showing. Hover
+     * or focus spreads them out. The plugin's script sets the variables.
+     */
+
+    .fi-no.fi-vertical-align-end .fi-no-notification:not(.fi-inline) {
+        position: relative;
+        overflow: visible;
+        transform-origin: top center;
+        transition-property: opacity, translate, scale, clip-path;
+
+        & > * {
+            transition: opacity 250ms var(--kinetics-ease-out);
+        }
+
+        /* Bridges the gap to the next toast, so moving between toasts keeps
+           the deck spread out. */
+        &::after {
+            content: '';
+            position: absolute;
+            inset-inline: 0;
+            top: 100%;
+            height: 0.75rem;
+        }
+    }
+
+    .fi-no[data-kinetics-stacked] .fi-no-notification[data-kinetics-toast-front] {
+        z-index: 10;
+    }
+
+    .fi-no[data-kinetics-stacked]:not(:hover, :focus-within) .fi-no-notification:not([data-kinetics-toast-front]) {
+        z-index: calc(10 - var(--kinetics-toast-depth));
+        translate: 0 var(--kinetics-toast-shift);
+        scale: calc(1 - var(--kinetics-toast-depth) * 0.05);
+        clip-path: inset(0 0 calc(100% - var(--kinetics-toast-front-height)) 0 round var(--kinetics-radius));
+        /* Waits a moment before closing up, so a pointer crossing the edge of
+           the deck doesn't make it jump. */
+        transition-delay: 150ms;
+
+        & > * {
+            opacity: 0;
+        }
+
+        &[data-kinetics-toast-buried] {
+            opacity: 0;
+        }
+    }
+
+    /* Reduced motion: the deck still stacks, but snaps instead of moving. */
+    @media (prefers-reduced-motion: reduce) {
+        .fi-no.fi-vertical-align-end .fi-no-notification:not(.fi-inline),
+        .fi-no.fi-vertical-align-end .fi-no-notification:not(.fi-inline) > * {
+            transition-duration: 0s;
+            transition-delay: 0s;
+        }
     }
 
     /* ─── Notifications panel (->databaseNotifications()) ───

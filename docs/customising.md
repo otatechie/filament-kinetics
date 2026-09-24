@@ -19,7 +19,7 @@ Most of Kinetics is set by your panel. For the rest, change a variable.
 | Content width | Full | `->maxContentWidth(Width::SevenExtraLarge)` |
 | Sign-out item | No icon | `->userMenuItems(['logout' => fn (Action $action) => $action->icon('lucide-log-out')])` |
 | Filament's icons | Lucide | `->icons([...])`, see [Icons](#icons) |
-| Notifications | Bottom-right | `->bootUsing(...)`, see [Notifications](#notifications) |
+| Notifications | Bottom-right, stacked when there are several, errors and warnings stay until closed | `->bootUsing(...)`, see [Notifications](#notifications) |
 | Modals | Aligned to the start, confirmations too, with no icon beside the heading | See [Modals](#modals) |
 | Empty tables | When a search or filters match nothing, say so and offer to clear them | See [Empty tables](#empty-tables) |
 
@@ -137,6 +137,22 @@ use Filament\Support\Enums\VerticalAlignment;
 $panel
     ->plugin(KineticsPlugin::make())
     ->bootUsing(fn () => Notifications::verticalAlignment(VerticalAlignment::Start));
+```
+
+When several arrive, they stack into a deck: the newest in front, the older
+ones peeking out above it. Hover or focus spreads them out. The deck is only
+in the bottom corners; at the top, notifications list as Filament shows them.
+
+Errors and warnings stay until they're closed, since they usually need
+something done. Other notifications close after six seconds, as in Filament.
+To change one, set its duration:
+
+```php
+Notification::make()
+    ->title('The refund was not requested')
+    ->danger()
+    ->seconds(10)
+    ->send();
 ```
 
 ## Modals

@@ -4,6 +4,18 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.3.0 - 2026-09-24
+
+### Added
+- Notifications in the bottom corner stack into a deck when there are several:
+  the newest in front, older ones peeking out above it. Hover or focus spreads
+  them out. With reduced motion on, they stack without moving.
+
+### Changed
+- Errors and warnings stay until they're closed, instead of disappearing after
+  six seconds. A notification's own `->duration()` or `->seconds()` still wins.
+- Notification pop-ups are narrower: 356px instead of 384px.
+
 ## 1.2.2 - 2026-09-24
 
 ### Fixed

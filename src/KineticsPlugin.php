@@ -8,6 +8,7 @@ use Filament\Enums\GlobalSearchPosition;
 use Filament\Enums\UserMenuPosition;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Notifications\Livewire\Notifications;
+use Filament\Notifications\Notification;
 use Filament\Panel;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\VerticalAlignment;
@@ -193,6 +194,56 @@ class KineticsPlugin implements Plugin
                         }
                     })()
                 </script>
+                HTML))
+            // Toasts in the bottom corner stack into a deck, newest in front,
+            // and spread out on hover. CSS can't read their heights, so this
+            // measures them and sets the variables kinetics.css stacks with.
+            ->renderHook(PanelsRenderHook::SCRIPTS_AFTER, fn (): HtmlString => new HtmlString(<<<'HTML'
+                <script>
+                    (() => {
+                        const peek = 10
+
+                        const stack = (deck) => {
+                            const toasts = [...deck.children].filter((toast) => toast.classList.contains('fi-no-notification') && getComputedStyle(toast).display !== 'none')
+                            const front = toasts.at(-1)
+
+                            deck.toggleAttribute('data-kinetics-stacked', toasts.length > 1)
+
+                            if (! front) {
+                                return
+                            }
+
+                            deck.style.setProperty('--kinetics-toast-front-height', `${front.offsetHeight}px`)
+
+                            toasts.forEach((toast, index) => {
+                                const depth = toasts.length - 1 - index
+
+                                toast.style.setProperty('--kinetics-toast-depth', depth)
+                                toast.style.setProperty('--kinetics-toast-shift', `${front.offsetTop - toast.offsetTop - depth * peek}px`)
+                                toast.toggleAttribute('data-kinetics-toast-front', depth === 0)
+                                toast.toggleAttribute('data-kinetics-toast-buried', depth > 2)
+                            })
+                        }
+
+                        const watch = () => {
+                            const deck = document.querySelector('.fi-no.fi-vertical-align-end')
+
+                            if (! deck || deck.kineticsObserver) {
+                                return
+                            }
+
+                            deck.kineticsObserver = new MutationObserver(() => requestAnimationFrame(() => stack(deck)))
+                            // Toasts are added hidden and shown by a class change, so
+                            // watch classes as well as additions and removals.
+                            deck.kineticsObserver.observe(deck, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] })
+                            stack(deck)
+                        }
+
+                        watch()
+                        document.addEventListener('DOMContentLoaded', watch)
+                        document.addEventListener('livewire:navigated', watch)
+                    })()
+                </script>
                 HTML));
     }
 
@@ -237,6 +288,12 @@ class KineticsPlugin implements Plugin
         Action::configureUsing(fn (Action $action): Action => $action
             ->modalAlignment(Alignment::Start)
             ->modalFooterActionsAlignment(Alignment::Start));
+
+        // Errors and warnings stay until they're closed: they usually need
+        // something done, and six seconds isn't always enough to read them.
+        // A notification's own ->duration() still wins.
+        Notification::configureUsing(fn (Notification $notification): Notification => $notification
+            ->duration(fn (): int|string => in_array($notification->getStatus(), ['danger', 'warning'], true) ? 'persistent' : 6000));
 
         // A table emptied by a search or filters says so, instead of "No
         // orders", and offers to clear them. A table's own empty state wins.

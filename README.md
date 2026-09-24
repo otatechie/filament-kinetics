@@ -32,7 +32,8 @@ colours from your panel and stays out of the way of your own Tailwind classes.
 - **Warm dark mode.** Charcoal surfaces and off-white text.
 - **A rounded font and lighter icons.** Open Runde and Lucide, bundled.
 - **Notifications out of the way.** Pop-ups appear in the bottom-right corner,
-  clear of your buttons.
+  clear of your buttons, and stack when there are several. Errors stay until
+  they're closed.
 - **Your colours, readable.** Every colour comes from your panel's palette, and
   text on buttons and links passes contrast checks.
 - **Quick motion.** Animations stay under 300ms, and stop when reduced motion

@@ -7,6 +7,7 @@ use Filament\Enums\GlobalSearchPosition;
 use Filament\Enums\UserMenuPosition;
 use Filament\Facades\Filament;
 use Filament\Notifications\Livewire\Notifications;
+use Filament\Notifications\Notification;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Support\Enums\Width;
@@ -93,6 +94,15 @@ it('has wording for tables emptied by a search or filters', function () {
     expect(__('kinetics::tables.empty.search.heading', ['search' => 'ok']))->toBe('No results for “ok”')
         ->and(__('kinetics::tables.empty.filters.heading', ['model' => 'orders']))->toBe('No orders match these filters')
         ->and(__('kinetics::tables.empty.actions.clear_search_and_filters'))->toBe('Clear search and filters');
+});
+
+it('keeps errors and warnings open until they are closed', function () {
+    Filament::getPanel('admin')->boot();
+
+    expect(Notification::make()->danger()->getDuration())->toBe('persistent')
+        ->and(Notification::make()->warning()->getDuration())->toBe('persistent')
+        ->and(Notification::make()->success()->getDuration())->toBe(6000)
+        ->and(Notification::make()->danger()->duration(3000)->getDuration())->toBe(3000);
 });
 
 it('lets the panel move notifications back', function () {
