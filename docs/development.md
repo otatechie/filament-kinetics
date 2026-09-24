@@ -117,10 +117,10 @@ allowed versions, every push and every Monday. Pint must pass too.
 ## Releasing
 
 1. Move the changes under **Unreleased** in the [changelog](../CHANGELOG.md) to
-   a new version with today's date. Breaking changes before 1.0 bump the minor
-   version, and also go in [Upgrading](upgrading.md).
+   a new version with today's date. Breaking changes bump the major version,
+   and also go in [Upgrading](upgrading.md).
 2. Commit and push, and wait for CI to pass.
-3. Tag and push: `git tag -a v0.4.0 -m "v0.4.0" && git push origin v0.4.0`.
+3. Tag and push: `git tag -a v1.1.0 -m "v1.1.0" && git push origin v1.1.0`.
 4. Create the GitHub release from the tag, with that version's changelog
    entry as the notes. Mark it **Latest**, not pre-release.
 5. If you keep a demo app, release it with the same version.

@@ -1,8 +1,10 @@
 # Upgrading
 
-Kinetics follows [Semantic Versioning](https://semver.org). Before 1.0, a minor
-version (0.2 to 0.3) can include changes that need work on your side. They're
-listed here. The [changelog](../CHANGELOG.md) has every change.
+Kinetics follows [Semantic Versioning](https://semver.org). Updates within a
+major version (1.0 to 1.1) need no changes on your side; only a new major
+version can, and those changes are listed here. Before 1.0, minor versions
+could too, so they're listed below. The [changelog](../CHANGELOG.md) has every
+change.
 
 After any update, rebuild your theme:
 
@@ -10,6 +12,11 @@ After any update, rebuild your theme:
 composer update otatechie/filament-kinetics
 npm run build
 ```
+
+## From 0.5 to 1.0
+
+Nothing to change. Update the version in `composer.json` to `^1.0`, then run
+`composer update otatechie/filament-kinetics` and rebuild.
 
 ## From 0.4 to 0.5
 

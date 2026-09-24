@@ -16,8 +16,9 @@ Pages sit on a quiet canvas as one rounded panel. Tables have no lines,
 controls are compact, and motion is quick and eased out. Kinetics takes its
 colours from your panel and stays out of the way of your own Tailwind classes.
 
-Kinetics is still being designed, so expect changes before 1.0. See
-[Upgrading](docs/upgrading.md) when you update.
+Kinetics follows semantic versioning: updates within 1.x won't need changes
+on your side. See [Upgrading](docs/upgrading.md) when you move between major
+versions.
 
 ## What you get
 
@@ -47,7 +48,7 @@ Kinetics is still being designed, so expect changes before 1.0. See
 
 | Kinetics | Filament | Laravel | PHP |
 |---|---|---|---|
-| 0.x | 5.8.3 or later | 12, 13 | 8.3, 8.4, 8.5 |
+| 1.x | 5.8.3 or later | 12, 13 | 8.3, 8.4, 8.5 |
 
 Your panel also needs a
 [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme)

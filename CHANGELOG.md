@@ -4,6 +4,12 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.0.0 - 2026-09-24
+
+The first stable release. It's 0.5.1 with a stability promise: updates
+within 1.x won't need changes on your side. Upgrading from 0.5 needs nothing
+but the version constraint; see [Upgrading](docs/upgrading.md#from-05-to-10).
+
 ## 0.5.1 - 2026-09-24
 
 ### Added
