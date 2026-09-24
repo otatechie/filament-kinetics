@@ -73,14 +73,14 @@ the line under the page title spans the content rather than the whole panel.
 Kinetics swaps Filament's own icons (table actions, sort arrows, modals and so
 on) for [Lucide](https://lucide.dev), drawn at a slightly lighter stroke. The
 full list is `KineticsPlugin::ICONS`; anything it leaves out keeps its
-Heroicon. Your own icons override it as usual:
+Heroicon. To change one, call `->icons()` after the plugin:
 
 ```php
-use Filament\Support\Facades\FilamentIcon;
-
-FilamentIcon::register([
-    'tables::actions.filter' => 'lucide-list-filter',
-]);
+$panel
+    ->plugin(KineticsPlugin::make())
+    ->icons([
+        'tables::actions.filter' => 'lucide-list-filter',
+    ]);
 ```
 
 Lucide is installed with Kinetics, so your own navigation items and actions can
@@ -88,8 +88,7 @@ use it too: `->icon('lucide-shopping-bag')`.
 
 ## Variables
 
-Everything else is a CSS variable. Variables need
-[your own theme](../README.md#with-your-own-theme): set them after the Kinetics
+Everything else is a CSS variable. Set them in your theme after the Kinetics
 import, light values on `:root` and dark ones on `.dark`:
 
 ```css
@@ -103,52 +102,55 @@ import, light values on `:root` and dark ones on `.dark`:
 }
 ```
 
+Defaults use Filament's palette variables: `gray-200` is `var(--gray-200)`, and
+so on. Dark mode uses fixed warm charcoal (see [Dark mode](#dark-mode)).
+
 ### Surfaces
 
-| Variable | Used for |
-|---|---|
-| `--kinetics-canvas` | The page behind the sidebar and panel |
-| `--kinetics-panel` | The rounded content panel |
-| `--kinetics-panel-border` | The line under the page title |
-| `--kinetics-card` | Sections, inputs, modals, dropdowns, notifications |
-| `--kinetics-card-border` | Section and card edges |
-| `--kinetics-background` | Secondary (outline) buttons |
-| `--kinetics-muted` | Hover tints, the segmented-control track, empty-state circles |
+| Variable | Used for | Light | Dark |
+|---|---|---|---|
+| `--kinetics-canvas` | The page behind the sidebar and panel | `gray-100` mixed 70% with `gray-200` | `#1a1918` |
+| `--kinetics-panel` | The rounded content panel | `gray-50` | `#222120` |
+| `--kinetics-panel-border` | The line under the page title | `gray-200` | `#33322f` |
+| `--kinetics-card` | Sections, inputs, modals, dropdowns, notifications | `#fff` | `#292826` |
+| `--kinetics-card-border` | Section and card edges | `gray-200` mixed 60% with white | `#33322f` |
+| `--kinetics-background` | Secondary (outline) buttons | `gray-50` | `#1a1918` |
+| `--kinetics-muted` | Hover tints, the segmented-control track, empty-state circles | `gray-100` | `#302f2c` |
 
 ### Text and lines
 
-| Variable | Used for |
-|---|---|
-| `--kinetics-foreground` | Main text |
-| `--kinetics-muted-foreground` | Secondary text, placeholders, labels, sort arrows |
-| `--kinetics-border` | Dividers and dropdown edges |
-| `--kinetics-input-border` | Text inputs and selects |
-| `--kinetics-control-border` | Unchecked checkboxes and radios |
+| Variable | Used for | Light | Dark |
+|---|---|---|---|
+| `--kinetics-foreground` | Main text | `gray-900` | `#e9e7e3` |
+| `--kinetics-muted-foreground` | Secondary text, placeholders, labels, sort arrows | `gray-500` | `#a3a09a` |
+| `--kinetics-border` | Dividers and dropdown edges | `gray-200` | `#373532` |
+| `--kinetics-input-border` | Text inputs and selects | `gray-200` | `#4a4844` |
+| `--kinetics-control-border` | Unchecked checkboxes and radios | `gray-400` | `#6a6762` |
 
 ### Primary colour
 
-| Variable | Default | Used for |
-|---|---|---|
-| `--kinetics-primary` | primary 600 | Focus borders, text selection |
-| `--kinetics-primary-text` | primary 700 | Links, active menu item, current page, active tab underline |
-| `--kinetics-primary-button` | primary 700 | Primary buttons, toggles, checked boxes, the selected date |
-| `--kinetics-primary-button-hover` | primary 800 | Primary buttons on hover |
-| `--kinetics-primary-foreground` | white | Text on primary buttons |
-| `--kinetics-primary-ring` | primary 600 at 12% | The soft ring around a focused field |
+| Variable | Used for | Light | Dark |
+|---|---|---|---|
+| `--kinetics-primary` | Focus borders, text selection | `primary-600` | `primary-500` |
+| `--kinetics-primary-text` | Links, active menu item, current page, active tab underline | `primary-700` | `primary-400` |
+| `--kinetics-primary-button` | Primary buttons, toggles, checked boxes, the selected date | `primary-700` | `primary-700` |
+| `--kinetics-primary-button-hover` | Primary buttons on hover | `primary-800` | `primary-800` |
+| `--kinetics-primary-foreground` | Text on primary buttons | `#fff` | `#fff` |
+| `--kinetics-primary-ring` | The soft ring around a focused field | `primary-600` at 12% | `primary-500` at 20% |
 
 ### Errors
 
-| Variable | Used for |
-|---|---|
-| `--kinetics-destructive` | Error text, invalid fields, destructive buttons |
-| `--kinetics-destructive-ring` | The ring around a focused invalid field |
+| Variable | Used for | Light | Dark |
+|---|---|---|---|
+| `--kinetics-destructive` | Error text, invalid fields, destructive buttons | `danger-500` | `danger-400` |
+| `--kinetics-destructive-ring` | The ring around a focused invalid field | `danger-600` at 12% | `danger-600` at 12% |
 
 ### Shape and motion
 
-| Variable | Default | Used for |
+| Variable | Used for | Default |
 |---|---|---|
-| `--kinetics-radius` | `0.5rem` | Corners of cards, inputs and dropdowns |
-| `--kinetics-ease-out` | `cubic-bezier(0.23, 1, 0.32, 1)` | Every animation |
+| `--kinetics-radius` | Corners of cards, inputs and dropdowns | `0.5rem` |
+| `--kinetics-ease-out` | Every animation | `cubic-bezier(0.23, 1, 0.32, 1)` |
 
 ## Dark mode
 
@@ -160,7 +162,7 @@ so fields stay easy to find.
 ## Your own styles
 
 Kinetics lives in its own cascade layer, between Filament's components and
-Tailwind's utilities:
+Tailwind's utilities. `layers.css` sets that order:
 
 ```css
 @layer theme, base, components, kinetics, utilities;
@@ -169,10 +171,3 @@ Tailwind's utilities:
 So a Tailwind class in your own Blade views wins over Kinetics without
 `!important`. A plain CSS rule in your theme wins too, as long as it isn't
 inside a lower layer.
-
-To check the order loaded correctly, run this in the browser console. It
-returns `ok`:
-
-```js
-getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order')
-```

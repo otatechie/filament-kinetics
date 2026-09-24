@@ -9,12 +9,12 @@ use Filament\Enums\UserMenuPosition;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Panel;
 use Filament\Support\Enums\Width;
-use Filament\Support\Facades\FilamentIcon;
 
 class KineticsPlugin implements Plugin
 {
     /**
      * Filament's own icons in Lucide. Anything not listed keeps its Heroicon.
+     * The panel's own ->icons(), called after the plugin, overrides these.
      *
      * @var array<string, string>
      */
@@ -158,7 +158,7 @@ class KineticsPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel
-            ->theme('kinetics')
+            ->icons(self::ICONS)
             ->font('Open Runde', provider: LocalFontProvider::class)
             ->topbar(false)
             ->sidebarCollapsibleOnDesktop()
@@ -171,14 +171,5 @@ class KineticsPlugin implements Plugin
             ]);
     }
 
-    public function boot(Panel $panel): void
-    {
-        // Panels boot after service providers, so skip any icon the app has
-        // already set.
-        FilamentIcon::register(array_filter(
-            self::ICONS,
-            fn (string $alias): bool => FilamentIcon::resolve($alias) === null,
-            ARRAY_FILTER_USE_KEY,
-        ));
-    }
+    public function boot(Panel $panel): void {}
 }

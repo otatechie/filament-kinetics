@@ -1,0 +1,4 @@
+/* Import this before Filament's theme. It places Kinetics above Filament's
+   components and below Tailwind's utilities, so Kinetics restyles Filament
+   without !important and your own Tailwind classes still override it. */
+@layer theme, base, components, kinetics, utilities;

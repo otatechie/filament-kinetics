@@ -13,30 +13,19 @@ Kinetics is still being designed, so expect changes before 1.0.
 composer require otatechie/filament-kinetics
 ```
 
-Add the plugin to your panel:
+Kinetics styles your panel through a
+[custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme).
+If your panel doesn't have one yet, create it:
 
-```php
-use Otatechie\Kinetics\KineticsPlugin;
-
-$panel->plugin(KineticsPlugin::make());
+```bash
+php artisan make:filament-theme
 ```
 
-That's it. The plugin loads a ready-made theme (Filament's styles with Kinetics
-on top), the Open Runde font and Lucide icons, and sets up the sidebar layout.
-The files are published to `public/` by `php artisan filament:assets`. Filament's
-installer runs it after every `composer install` and `composer update`, through
-`filament:upgrade`; if your app doesn't, run it once yourself.
-
-### With your own theme
-
-If your panel has a [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme),
-keep it and import Kinetics into it. You need this to change Kinetics'
-[variables](docs/customising.md#variables), or to use Tailwind classes in your
-own Blade views. Add the first and third lines to your `theme.css`:
+Then add the Kinetics imports to your theme's `theme.css`. `layers.css` goes
+first, before Filament's CSS, and `kinetics.css` after it:
 
 ```css
-@layer theme, base, components, kinetics, utilities;
-
+@import '../../../../vendor/otatechie/filament-kinetics/resources/css/layers.css';
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
 @import '../../../../vendor/otatechie/filament-kinetics/resources/css/kinetics.css';
 
@@ -44,8 +33,34 @@ own Blade views. Add the first and third lines to your `theme.css`:
 @source '../../../../resources/views/filament/**/*';
 ```
 
-The `@layer` line must come before Filament's import. Keep `->viteTheme()` on
-your panel alongside the plugin; your theme replaces the ready-made one.
+Add the plugin to your panel, next to your theme:
+
+```php
+use Otatechie\Kinetics\KineticsPlugin;
+
+$panel
+    ->plugin(KineticsPlugin::make())
+    ->viteTheme('resources/css/filament/admin/theme.css');
+```
+
+Then build your assets:
+
+```bash
+npm run build
+```
+
+The plugin adds the Open Runde font and Lucide icons, and sets up the sidebar
+layout. The font is published to `public/` by `php artisan filament:assets`.
+Filament's installer runs it after every `composer install` and
+`composer update`, through `filament:upgrade`; if your app doesn't, run it once
+yourself.
+
+To check Kinetics loaded in the right order, run this in the browser console. It
+returns `ok`:
+
+```js
+getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order')
+```
 
 ## Documentation
 
@@ -57,17 +72,8 @@ your panel alongside the plugin; your theme replaces the ready-made one.
 
 ## Development
 
-The theme is [`resources/css/kinetics.css`](resources/css/kinetics.css). After
-changing it, rebuild the ready-made theme and commit the result:
-
-```bash
-npm install
-npm run build
-```
-
-Rebuild after a Filament update too: the ready-made theme includes Filament's
-styles, so it has to match the Filament version it ships with. CI checks it's
-current.
+The theme is [`resources/css/kinetics.css`](resources/css/kinetics.css). Apps
+build it with their own theme, so there's nothing to compile here.
 
 ```bash
 composer test

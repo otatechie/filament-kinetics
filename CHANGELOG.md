@@ -4,6 +4,24 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Added
+- `resources/css/layers.css`, to import before Filament's theme in place of
+  typing the `@layer` order yourself.
+
+### Changed
+- Lucide icons are set through the panel's `->icons()`, so an `->icons()` call
+  after the plugin overrides them, like any other panel setting.
+- The variable tables in [Customising](docs/customising.md) list light and dark
+  defaults for every variable.
+
+### Removed
+- The ready-made theme. It bundled a compiled copy of Filament's CSS, so a
+  Filament update could leave panels half-styled until Kinetics was rebuilt.
+  Kinetics now always builds with your own theme, against the Filament version
+  you have.
+
 ## 0.2.0 - 2026-09-24
 
 ### Added

@@ -1,7 +1,0 @@
-/* Build entry for the ready-made theme (resources/dist/kinetics.css): Filament's
-   theme with Kinetics layered on top. Run `npm run build` after changing
-   kinetics.css. */
-@layer theme, base, components, kinetics, utilities;
-
-@import '../../vendor/filament/filament/resources/css/theme.css';
-@import './kinetics.css';

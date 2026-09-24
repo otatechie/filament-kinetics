@@ -18,8 +18,7 @@ it('sets up the panel layout Kinetics is designed for', function () {
         ->and($panel->getMaxContentWidth())->toBe(Width::Full)
         ->and($panel->getGlobalSearchPosition())->toBe(GlobalSearchPosition::Sidebar)
         ->and($panel->getUserMenuPosition())->toBe(UserMenuPosition::Sidebar)
-        ->and($panel->getFontFamily())->toBe('Open Runde')
-        ->and($panel->getTheme()->getId())->toBe('kinetics');
+        ->and($panel->getFontFamily())->toBe('Open Runde');
 });
 
 it('lets panel methods called after the plugin override it', function () {
@@ -30,10 +29,9 @@ it('lets panel methods called after the plugin override it', function () {
         ->and($panel->getFontFamily())->toBe('Inter');
 });
 
-it('loads the ready-made theme and Open Runde on the sign-in page', function () {
+it('loads Open Runde on the sign-in page', function () {
     $this->get('/admin/login')
         ->assertOk()
-        ->assertSee('css/otatechie/filament-kinetics/kinetics.css', escape: false)
         ->assertSee('fonts/otatechie/filament-kinetics/open-runde/index.css', escape: false);
 });
 
@@ -43,12 +41,11 @@ it('swaps Filament icons for Lucide when the panel boots', function () {
     expect(FilamentIcon::resolve('tables::search-field'))->toBe('lucide-search');
 });
 
-it("keeps the app's own icons", function () {
-    FilamentIcon::register(['tables::actions.filter' => 'lucide-list-filter']);
+it('lets icons set after the plugin override it', function () {
+    Filament::getPanel('overridden')->boot();
 
-    Filament::getPanel('admin')->boot();
-
-    expect(FilamentIcon::resolve('tables::actions.filter'))->toBe('lucide-list-filter');
+    expect(FilamentIcon::resolve('tables::actions.filter'))->toBe('lucide-list-filter')
+        ->and(FilamentIcon::resolve('tables::search-field'))->toBe('lucide-search');
 });
 
 it('only maps to Lucide icons that exist', function () {
@@ -67,9 +64,7 @@ it('only maps to Lucide icons that exist', function () {
     expect($missing)->toBeEmpty();
 });
 
-it('ships a built theme with Kinetics below Tailwind utilities', function () {
-    $css = file_get_contents(__DIR__.'/../resources/dist/kinetics.css');
-
-    expect($css)->toContain('--kinetics-layer-order')
-        ->and(strpos($css, '@layer kinetics'))->toBeLessThan(strpos($css, '@layer utilities'));
+it('ships the layer order for your theme to import first', function () {
+    expect(file_get_contents(__DIR__.'/../resources/css/layers.css'))
+        ->toContain('@layer theme, base, components, kinetics, utilities;');
 });

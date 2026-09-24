@@ -16,6 +16,7 @@ class OverriddenPanelProvider extends PanelProvider
             ->plugin(KineticsPlugin::make())
             ->topbar()
             ->breadcrumbs()
-            ->font('Inter');
+            ->font('Inter')
+            ->icons(['tables::actions.filter' => 'lucide-list-filter']);
     }
 }
