@@ -4,7 +4,8 @@
 [![Downloads](https://img.shields.io/packagist/dt/otatechie/filament-kinetics)](https://packagist.org/packages/otatechie/filament-kinetics/stats)
 [![License](https://img.shields.io/packagist/l/otatechie/filament-kinetics)](https://github.com/otatechie/filament-kinetics/blob/main/LICENSE.md)
 
-A calm, compact theme for [Filament 5](https://filamentphp.com) admin panels.
+A calm, compact theme for [Filament](https://filamentphp.com) 4 and 5 admin
+panels. Free and MIT-licensed.
 
 **[Try the live demo](https://kinetics.atoaugustine.com/admin)**: a small
 marketplace admin with sample data on every page. The sign-in is filled in, and
@@ -42,9 +43,10 @@ colours from your panel and stays out of the way of your own Tailwind classes.
 
 ## Compatibility
 
-| Kinetics | Filament | Laravel | PHP |
-|---|---|---|---|
-| 1.x | 5.8.3 or later | 12, 13 | 8.3, 8.4, 8.5 |
+| Filament | Laravel | PHP |
+|---|---|---|
+| 5.8.3 or later | 12, 13 | 8.3, 8.4, 8.5 |
+| 4.13.3 or later | 12 | 8.3, 8.4 |
 
 Your panel also needs a
 [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme)
@@ -137,7 +139,9 @@ Kinetics import, light values on `:root` and dark ones on `.dark`:
 | `--kinetics-border` | Dividers and dropdown edges |
 
 [Customising](https://github.com/otatechie/filament-kinetics/blob/main/docs/customising.md) lists every setting and variable, with
-their light and dark values.
+their light and dark values, and has [recipes](https://github.com/otatechie/filament-kinetics/blob/main/docs/customising.md#recipes)
+for common changes: rounder corners, square buttons, one flat surface, a dark
+mode from your own greys, and stronger field borders.
 
 ## Documentation
 

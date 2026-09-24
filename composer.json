@@ -1,6 +1,6 @@
 {
     "name": "otatechie/filament-kinetics",
-    "description": "A calm, compact theme for Filament 5: quiet tables, rounded panels and a warm dark mode.",
+    "description": "A calm, compact theme for Filament 4 and 5: quiet tables, rounded panels and a warm dark mode.",
     "keywords": [
         "laravel",
         "filamentphp",
@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "filament/filament": "^5.8.3",
+        "filament/filament": "^4.13.3 || ^5.8.3",
         "mallardduck/blade-lucide-icons": "^2.0"
     },
     "require-dev": {

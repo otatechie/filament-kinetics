@@ -5,8 +5,8 @@
 | | Version |
 |---|---|
 | PHP | 8.3 or later |
-| Laravel | 12 or 13 |
-| Filament | 5.8.3 or later |
+| Laravel | 12 or 13 (12 with Filament 4) |
+| Filament | 4.13.3 or later, or 5.8.3 or later |
 | Node.js | Any version your Vite build runs on |
 
 Kinetics is built by your app's own Filament theme, with Vite and Tailwind CSS
@@ -17,7 +17,7 @@ and the plugin (step 4). The CSS alone gives Kinetics' colours and components
 on Filament's layout, font and icons, and the browser console says the plugin
 is missing.
 
-Browsers: the same as Filament 5 and Tailwind CSS 4, which means Safari 16.4,
+Browsers: the same as Filament and Tailwind CSS 4, which means Safari 16.4,
 Chrome 111 and Firefox 128 or later.
 
 ## 1. Install the package

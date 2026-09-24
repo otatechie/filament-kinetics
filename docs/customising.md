@@ -47,6 +47,17 @@ selection. `gray` sets the light-mode surfaces and text. Dark mode uses fixed
 charcoal surfaces (see below), with the primary colour still following the
 panel.
 
+Kinetics is designed around Filament's own palettes, and any of them works.
+If you'd rather not choose, the [live demo](https://kinetics.atoaugustine.com/admin)
+uses warm orange on neutral greys:
+
+```php
+$panel->colors([
+    'primary' => Color::Orange,
+    'gray' => Color::Gray,
+]);
+```
+
 Buttons and coloured text use the palette's **700** shade, so white text on
 them passes contrast checks. See [Accessibility](accessibility.md).
 
@@ -225,6 +236,73 @@ Dark mode uses warm charcoal with a hint of sepia, and off-white text. These
 surfaces are fixed rather than taken from the `gray` palette; override them on
 `.dark` to change them. Inputs get a stronger edge than dividers in dark mode,
 so fields stay easy to find.
+
+## Recipes
+
+Each of these goes in your `theme.css`, after the Kinetics import.
+
+### Rounder or squarer corners
+
+One variable sets the corners of sections, inputs, modals, dropdowns and
+notifications:
+
+```css
+:root {
+    --kinetics-radius: 0.75rem; /* 0.25rem for squarer */
+}
+```
+
+### Square buttons instead of pills
+
+Buttons are pill-shaped. To give them the same corners as everything else:
+
+```css
+.fi-btn {
+    border-radius: var(--kinetics-radius);
+}
+```
+
+### One flat surface
+
+The page sits on a rounded panel over a slightly darker canvas. To make it one
+surface, give the canvas the panel's colour:
+
+```css
+:root {
+    --kinetics-canvas: var(--kinetics-panel);
+}
+```
+
+### A dark mode from your own greys
+
+Dark mode uses fixed warm charcoal. To follow the panel's `gray` palette
+instead:
+
+```css
+.dark {
+    --kinetics-canvas: var(--gray-950);
+    --kinetics-panel: var(--gray-950);
+    --kinetics-panel-border: var(--gray-800);
+    --kinetics-card: var(--gray-900);
+    --kinetics-card-border: var(--gray-800);
+    --kinetics-background: var(--gray-950);
+    --kinetics-muted: var(--gray-800);
+    --kinetics-border: var(--gray-800);
+    --kinetics-input-border: var(--gray-700);
+    --kinetics-foreground: var(--gray-50);
+    --kinetics-muted-foreground: var(--gray-400);
+}
+```
+
+### Stronger field borders
+
+Inputs have a light edge in light mode. For more contrast:
+
+```css
+:root {
+    --kinetics-input-border: var(--gray-300);
+}
+```
 
 ## Your own styles
 

@@ -4,6 +4,16 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.1.0 - 2026-09-24
+
+### Added
+- Filament 4 support, from 4.13.3, on Laravel 12. Kinetics looks the same on
+  Filament 4 as on 5.
+- [Recipes](docs/customising.md#recipes) for common changes: rounder or
+  squarer corners, square buttons, one flat surface, a dark mode from your own
+  greys, and stronger field borders.
+- A suggested palette, for anyone who'd rather not choose one.
+
 ## 1.0.0 - 2026-09-24
 
 The first release.
