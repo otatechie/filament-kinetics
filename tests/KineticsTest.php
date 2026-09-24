@@ -21,7 +21,8 @@ it('sets up the panel layout Kinetics is designed for', function () {
         ->and($panel->getMaxContentWidth())->toBe(Width::Full)
         ->and($panel->getGlobalSearchPosition())->toBe(GlobalSearchPosition::Sidebar)
         ->and($panel->getUserMenuPosition())->toBe(UserMenuPosition::Sidebar)
-        ->and($panel->getFontFamily())->toBe('Open Runde');
+        ->and($panel->getFontFamily())->toBe('Open Runde')
+        ->and($panel->hasCollapsibleNavigationGroups())->toBeFalse();
 });
 
 it('lets panel methods called after the plugin override it', function () {
@@ -29,6 +30,7 @@ it('lets panel methods called after the plugin override it', function () {
 
     expect($panel->hasTopbar())->toBeTrue()
         ->and($panel->hasBreadcrumbs())->toBeTrue()
+        ->and($panel->hasCollapsibleNavigationGroups())->toBeTrue()
         ->and($panel->getFontFamily())->toBe('Inter');
 });
 

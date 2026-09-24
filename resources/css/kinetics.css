@@ -488,6 +488,32 @@
         background: transparent;
     }
 
+    /* A table wider than its space scrolls sideways, and macOS hides the
+       scrollbar until you scroll. A soft shadow at an edge shows there's more
+       that way. Covers in the surface colour scroll with the content and hide
+       each shadow once you reach that end. It's painted behind the table, not
+       masked over it, so dropdowns inside the table aren't clipped. Both edges
+       are treated alike, so right-to-left works too. */
+    .fi-ta-content-ctn {
+        --kinetics-table-surface: var(--kinetics-panel);
+        --kinetics-table-edge: rgb(0 0 0 / 0.07);
+        background:
+            linear-gradient(to right, var(--kinetics-table-surface) 40%, transparent) left / 2.5rem 100% no-repeat local,
+            linear-gradient(to left, var(--kinetics-table-surface) 40%, transparent) right / 2.5rem 100% no-repeat local,
+            linear-gradient(to right, var(--kinetics-table-edge), transparent) left / 1rem 100% no-repeat scroll,
+            linear-gradient(to left, var(--kinetics-table-edge), transparent) right / 1rem 100% no-repeat scroll;
+    }
+
+    .dark .fi-ta-content-ctn {
+        --kinetics-table-edge: rgb(0 0 0 / 0.35);
+    }
+
+    /* Tables inside sections and modals sit on the card colour. */
+    .fi-section .fi-ta-content-ctn,
+    .fi-modal .fi-ta-content-ctn {
+        --kinetics-table-surface: var(--kinetics-card);
+    }
+
     .fi-ta-header-cell,
     .fi-ta-header-cell-sort-btn {
         height: 2.5rem;
@@ -1569,7 +1595,9 @@
                 margin-inline-start: 0.375rem;
                 vertical-align: middle;
                 border-radius: 9999px;
-                background: var(--kinetics-primary);
+                /* Neutral, so the primary colour only ever means "you can act on
+                   this". */
+                background: var(--kinetics-foreground);
             }
         }
     }

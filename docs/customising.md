@@ -14,6 +14,7 @@ Most of Kinetics is set by your panel. For the rest, change a variable.
 | Search | In the sidebar | `->globalSearch(position: GlobalSearchPosition::Topbar)` |
 | Account menu | At the foot of the sidebar | `->userMenu(position: UserMenuPosition::Topbar)` |
 | Sidebar | Collapsible on desktop | `->sidebarCollapsibleOnDesktop(false)` |
+| Navigation groups | Always open, no arrows | `->collapsibleNavigationGroups()` |
 | Breadcrumbs | Off | `->breadcrumbs()` |
 | Content width | Full | `->maxContentWidth(Width::SevenExtraLarge)` |
 | Sign-out item | No icon | `->userMenuItems(['logout' => fn (Action $action) => $action->icon('lucide-log-out')])` |

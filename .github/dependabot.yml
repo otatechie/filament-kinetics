@@ -1,0 +1,29 @@
+# One pull request a week per ecosystem, and only for releases at least a week
+# old, so a broken release has time to be fixed or pulled before it reaches CI.
+version: 2
+updates:
+  # Composer: keeps the dev tools current (Pest, Pint, Testbench). The runtime
+  # requirements are loose ranges on purpose; CI tests the lowest and latest.
+  - package-ecosystem: composer
+    directory: "/"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+    groups:
+      composer:
+        patterns:
+          - "*"
+
+  # GitHub Actions used by CI.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"

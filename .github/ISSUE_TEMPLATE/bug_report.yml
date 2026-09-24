@@ -1,0 +1,82 @@
+name: Bug report
+description: Something looks or behaves wrong with Kinetics
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting this. Most problems come from the theme setup, so please check [Troubleshooting](https://github.com/otatechie/filament-kinetics/blob/main/docs/troubleshooting.md) first, and search existing issues.
+  - type: input
+    id: kinetics-version
+    attributes:
+      label: Kinetics version
+      description: Run `composer show otatechie/filament-kinetics`.
+      placeholder: v0.4.0
+    validations:
+      required: true
+  - type: input
+    id: filament-version
+    attributes:
+      label: Filament version
+      description: Run `composer show filament/filament`.
+      placeholder: v5.8.4
+    validations:
+      required: true
+  - type: input
+    id: laravel-php-versions
+    attributes:
+      label: Laravel and PHP versions
+      placeholder: Laravel 13.3, PHP 8.4
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: Safari 26 on macOS
+    validations:
+      required: true
+  - type: input
+    id: layer-order
+    attributes:
+      label: Load-order check
+      description: "Run `getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order')` in the browser console on your panel, and paste what it returns (ok, wrong, or nothing)."
+      placeholder: ok
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you see, and on which page? A screenshot helps a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: As short as possible. Leave out anything unrelated.
+    validations:
+      required: true
+  - type: textarea
+    id: theme-css
+    attributes:
+      label: Your theme.css
+      description: The whole file, usually `resources/css/filament/{panel}/theme.css`.
+      render: css
+    validations:
+      required: true
+  - type: textarea
+    id: panel-provider
+    attributes:
+      label: Your panel provider
+      description: The `panel()` method, or at least the lines around `->plugin(KineticsPlugin::make())`.
+      render: php
+    validations:
+      required: true

@@ -168,6 +168,8 @@ class KineticsPlugin implements Plugin
             ->font('Open Runde', provider: LocalFontProvider::class)
             ->topbar(false)
             ->sidebarCollapsibleOnDesktop()
+            // Short groups gain nothing from collapsing, and a collapsed group hides pages.
+            ->collapsibleNavigationGroups(false)
             ->breadcrumbs(false)
             ->maxContentWidth(Width::Full)
             ->globalSearch(position: GlobalSearchPosition::Sidebar)

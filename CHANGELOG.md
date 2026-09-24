@@ -4,6 +4,22 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 0.4.0 - 2026-09-24
+
+### Added
+- Tables wider than their space show a soft shadow on each side that has more
+  to scroll to, since macOS hides scrollbars. It's painted behind the table,
+  so dropdowns inside it aren't clipped.
+- An issue template that asks for versions, the load-order check and your
+  `theme.css`, a security policy, and Dependabot for the dev tools and CI.
+
+### Changed
+- Navigation groups no longer collapse, so there are no arrows beside group
+  headings. See [Upgrading](docs/upgrading.md#from-03-to-04) to bring them back.
+- The unread dot in the notifications panel is neutral, so the primary colour
+  only marks things you can act on.
+- The README has a compatibility table and badges.
+
 ## 0.3.1 - 2026-09-24
 
 ### Added

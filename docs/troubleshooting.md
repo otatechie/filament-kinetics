@@ -137,9 +137,9 @@ surfaces, set the variables on `.dark`. See
 ## A table is cut off on the right
 
 A table wider than the panel scrolls sideways. On macOS, scrollbars are hidden
-until you scroll, so it can look cut off. Scroll the table with a trackpad or
-Shift and the mouse wheel, or show fewer columns by default with Filament's
-column manager:
+until you scroll, so Kinetics shows a soft shadow on the side with more
+columns. Scroll the table with a trackpad or Shift and the mouse wheel, or show
+fewer columns by default with Filament's column manager:
 
 ```php
 TextColumn::make('platform_fee')

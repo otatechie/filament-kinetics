@@ -1,5 +1,9 @@
 # Kinetics
 
+[![Latest release](https://img.shields.io/packagist/v/otatechie/filament-kinetics?label=release)](https://packagist.org/packages/otatechie/filament-kinetics)
+[![Downloads](https://img.shields.io/packagist/dt/otatechie/filament-kinetics)](https://packagist.org/packages/otatechie/filament-kinetics/stats)
+[![License](https://img.shields.io/packagist/l/otatechie/filament-kinetics)](LICENSE.md)
+
 A calm, compact theme for [Filament 5](https://filamentphp.com) admin panels.
 
 ![Kinetics in light mode: the Orders page of a marketplace admin, on a rounded panel beside the sidebar](docs/images/orders-light.png)
@@ -14,10 +18,11 @@ Kinetics is still being designed, so expect changes before 1.0. See
 ## What you get
 
 - **A calmer layout.** No top bar: search, notifications and the account menu
-  live in the sidebar, and the content sits on one rounded panel with no
-  outlines.
+  live in the sidebar, groups stay open, and the content sits on one rounded
+  panel with no outlines.
 - **Quiet tables.** No card, lines or background, compact rows, a soft rounded
-  hover, and headings, cells and pagination on one edge.
+  hover, and headings, cells and pagination on one edge. Wide tables show a
+  soft shadow on the side that has more to scroll to.
 - **Compact controls.** 40px inputs and buttons that line up, pill-shaped
   buttons, small checkboxes and switches, and links instead of buttons inside
   dropdowns.
@@ -34,11 +39,15 @@ Kinetics is still being designed, so expect changes before 1.0. See
 
 ![Kinetics in dark mode: the same Orders page on warm charcoal surfaces](docs/images/orders-dark.png)
 
-## Requirements
+## Compatibility
 
-PHP 8.3+, Laravel 12 or 13, Filament 5.8.3+, and a
+| Kinetics | Filament | Laravel | PHP |
+|---|---|---|---|
+| 0.x | 5.8.3 or later | 12, 13 | 8.3, 8.4, 8.5 |
+
+Your panel also needs a
 [custom theme](https://filamentphp.com/docs/5.x/styling/overview#creating-a-custom-theme)
-built with Vite.
+built with Vite. `php artisan make:filament-theme` creates one.
 
 ## Quick start
 

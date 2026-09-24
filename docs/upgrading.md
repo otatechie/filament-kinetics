@@ -11,6 +11,27 @@ composer update otatechie/filament-kinetics
 npm run build
 ```
 
+## From 0.3 to 0.4
+
+### Navigation groups no longer collapse
+
+**Affects you if** your users collapse sidebar groups, or your navigation is
+long enough to need it.
+
+Kinetics now turns off the collapse arrows on navigation groups: with a few
+items per group they save no space, and a collapsed group hides pages. To bring
+them back, after the plugin:
+
+```php
+$panel
+    ->plugin(KineticsPlugin::make())
+    ->collapsibleNavigationGroups();
+```
+
+### Everything else
+
+The table scroll shadows and the neutral unread dot need nothing from you.
+
 ## From 0.2 to 0.3
 
 ### The ready-made theme is gone

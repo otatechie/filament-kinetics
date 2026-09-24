@@ -9,7 +9,7 @@ How Kinetics styles each part of Filament. Sizes are at the default text size.
 | Canvas | The page colour, behind the sidebar and panel |
 | Content panel | One shade lighter, 12px corners, no outline, 8px from the window edges |
 | Page header | A slim band at the top of the panel: 15px title, buttons on the right, one line underneath |
-| Sidebar | On the canvas, no divider. Items are 32px, with 16px icons. Groups are 12px apart, under 24px headings |
+| Sidebar | On the canvas, no divider. Items are 32px, with 16px icons. Groups are 12px apart, under 24px headings, and always open: no collapse arrows |
 | Active menu item | Primary colour and semibold, no background |
 | Collapsed sidebar | One centred column of icons, 40px targets |
 | Notifications button | At the foot of the sidebar, styled like a menu item, with the unread count as a badge |
@@ -54,6 +54,7 @@ Every button scales to 0.97 while pressed.
 | Icon columns | 18px |
 | Sort arrows | 14px, muted |
 | Toolbar | A 36px search box. The filter count only shows while filters are on |
+| Wide tables | A soft shadow on each side that has more to scroll to, since macOS hides scrollbars. It disappears when you reach that end |
 | Pagination | The count on the left, small and muted. On the right, a borderless per-page select and page numbers as quiet buttons, with the current page in the primary colour |
 
 ## Tabs
@@ -70,7 +71,7 @@ Every button scales to 0.97 while pressed.
 | Modals | 12px corners and a hairline, sized to their form. Slide-overs stay square against the screen edge |
 | Dropdowns | 8px corners, a soft shadow, faint dividers between sections, 16px icons |
 | Notifications | Bottom-right, clear of the header's buttons. The card colour, a medium-weight title and muted body text |
-| Notifications panel | A plain list, no boxes. Unread items have a primary dot and a semibold title; read items are quieter. Title, then message, then the time. Dismiss buttons show on hover or focus, and stay visible on touch screens. The header has no count or divider, and "Clear" is grey until hovered, then red |
+| Notifications panel | A plain list, no boxes. Unread items have a neutral dot and a semibold title; read items are quieter. Title, then message, then the time. Dismiss buttons show on hover or focus, and stay visible on touch screens. The header has no count or divider, and "Clear" is grey until hovered, then red |
 | Tooltips | Inverted (dark on light, light on dark), 11px, 4px corners, no shadow |
 
 ## Other

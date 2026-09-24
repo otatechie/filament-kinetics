@@ -19,6 +19,7 @@ class OverriddenPanelProvider extends PanelProvider
             ->theme('css/overridden/theme.css')
             ->topbar()
             ->breadcrumbs()
+            ->collapsibleNavigationGroups()
             ->font('Inter')
             ->icons(['tables::actions.filter' => 'lucide-list-filter'])
             ->bootUsing(fn () => Notifications::verticalAlignment(VerticalAlignment::Start));
