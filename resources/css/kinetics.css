@@ -1542,8 +1542,22 @@
      * weight, and the time last, since it matters least.
      */
 
+    /* The header and footer have backgrounds, so they follow the window's
+     * corners, or they paint square corners over its border. */
     .fi-modal-window .fi-modal-header {
         background: var(--kinetics-card);
+        border-top-left-radius: calc(var(--kinetics-radius) - 1px);
+        border-top-right-radius: calc(var(--kinetics-radius) - 1px);
+    }
+
+    .fi-modal-window > .fi-modal-footer {
+        border-bottom-left-radius: calc(var(--kinetics-radius) - 1px);
+        border-bottom-right-radius: calc(var(--kinetics-radius) - 1px);
+    }
+
+    .fi-modal-slide-over .fi-modal-window .fi-modal-header,
+    .fi-modal-slide-over .fi-modal-window > .fi-modal-footer {
+        border-radius: 0;
     }
 
     .fi-no-database.fi-modal .fi-modal-window {

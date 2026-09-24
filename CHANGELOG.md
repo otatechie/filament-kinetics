@@ -14,7 +14,8 @@ All notable changes to Kinetics are recorded here. The format follows
 - Modals have the same edge as dropdowns and toasts: a solid border, the
   Kinetics radius and a soft shadow. Before, a faint ring and a long shadow
   made the bottom edge heavier than the top, and in dark mode the edge almost
-  disappeared.
+  disappeared. Modal headers and footers follow the rounded corners, instead of
+  painting square corners over the border.
 - Modals built as steps, such as setting up two-factor authentication, put the
   primary button first and Cancel or Back after it, together at the start, as
   other modals do. Before, the buttons sat at opposite edges in the reverse
