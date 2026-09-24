@@ -6,6 +6,10 @@
 
 A calm, compact theme for [Filament 5](https://filamentphp.com) admin panels.
 
+**[Try the live demo](https://kinetics.atoaugustine.com/admin)**: a small
+marketplace admin with sample data on every page. The sign-in is filled in, and
+the data resets on every deploy, so click anything.
+
 ![Kinetics in light mode: the Orders page of a marketplace admin, on a rounded panel beside the sidebar](docs/images/orders-light.png)
 
 Pages sit on a quiet canvas as one rounded panel. Tables have no lines,
