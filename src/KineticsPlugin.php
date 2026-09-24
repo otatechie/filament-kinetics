@@ -241,11 +241,6 @@ class KineticsPlugin implements Plugin
         // A table emptied by a search or filters says so, instead of "No
         // orders", and offers to clear them. A table's own empty state wins.
         Table::configureUsing(fn (Table $table): Table => $table
-            ->emptyStateIcon(fn (Table $table): ?string => match (self::emptiedBy($table)) {
-                'search', 'both' => 'lucide-search-x',
-                'filters' => 'lucide-funnel-x',
-                default => null,
-            })
             ->emptyStateHeading(fn (Table $table): ?string => match (self::emptiedBy($table)) {
                 'search', 'both' => __('kinetics::tables.empty.search.heading', ['search' => $table->getLivewire()->getTableSearch()]),
                 'filters' => __('kinetics::tables.empty.filters.heading', ['model' => $table->getPluralModelLabel()]),

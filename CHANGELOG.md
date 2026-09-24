@@ -4,6 +4,14 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.2.1 - 2026-09-24
+
+### Changed
+- Empty tables have no icon above the heading, as in modals: the heading says
+  what happened.
+- With only a search on, the row of active filters is hidden, since the search
+  box already shows it. It still appears once a filter is on.
+
 ## 1.2.0 - 2026-09-24
 
 ### Added

@@ -170,7 +170,9 @@ theme after the Kinetics import:
 When a search or filters leave a table with nothing to show, Filament says
 "No orders", as if there were none. Kinetics says what happened instead,
 `No results for “ok”` or "No orders match these filters", and adds a button
-that clears the search, the filters or both.
+that clears the search, the filters or both. Like modals, empty tables have no
+icon above the heading. With only a search on, the row of active filters is
+hidden, since the search box already shows it.
 
 A table's own `->emptyStateHeading()`, `->emptyStateDescription()` or
 `->emptyStateActions()` still wins. To change the wording everywhere, publish

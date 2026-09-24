@@ -672,6 +672,19 @@
         }
     }
 
+    /* Empty tables: the heading says what happened, so no icon above it, as
+       in modals. */
+    .fi-ta-empty-state .fi-ta-empty-state-icon-bg {
+        display: none;
+    }
+
+    /* With only a search on, the row just repeats the search box, so hide it.
+       While the box has text, the search is always one of the badges, so a
+       single badge means nothing else is on. */
+    .fi-ta-ctn:has(.fi-ta-search-field input:not(:placeholder-shown)) .fi-ta-filter-indicators:has(.fi-ta-filter-indicators-badges-ctn > .fi-badge:only-child) {
+        display: none;
+    }
+
     /* The filter count shows only while filters are on (Filament shows 0). */
     .fi-ta-ctn:not(:has(.fi-ta-filter-indicators)) .fi-ta-header-toolbar .fi-icon-btn-badge-ctn {
         display: none;
