@@ -210,5 +210,12 @@ class KineticsPlugin implements Plugin
         // panel's ->bootUsing() runs after this, so it can move them back.
         Notifications::alignment(Alignment::End);
         Notifications::verticalAlignment(VerticalAlignment::End);
+
+        // Confirmations read like every other modal: from the left, with the
+        // button that acts first. Calls on your own actions after ::make()
+        // still win.
+        Action::configureUsing(fn (Action $action): Action => $action
+            ->modalAlignment(Alignment::Start)
+            ->modalFooterActionsAlignment(Alignment::Start));
     }
 }

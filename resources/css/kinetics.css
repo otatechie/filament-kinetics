@@ -1427,6 +1427,12 @@
         border-radius: 0;
     }
 
+    /* No icon beside modal headings: the heading says what the modal is for,
+       and a red button already marks a destructive one. */
+    .fi-modal-window .fi-modal-icon-ctn {
+        display: none;
+    }
+
     .fi-modal-heading {
         font-size: 1rem;
         line-height: 1.25;

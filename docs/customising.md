@@ -20,6 +20,7 @@ Most of Kinetics is set by your panel. For the rest, change a variable.
 | Sign-out item | No icon | `->userMenuItems(['logout' => fn (Action $action) => $action->icon('lucide-log-out')])` |
 | Filament's icons | Lucide | `->icons([...])`, see [Icons](#icons) |
 | Notifications | Bottom-right | `->bootUsing(...)`, see [Notifications](#notifications) |
+| Modals | Aligned to the start, confirmations too, with no icon beside the heading | See [Modals](#modals) |
 
 It also adds a small script that warns in the browser console if the theme is
 missing or loaded in the wrong order, and stops a panel that has no custom
@@ -124,6 +125,32 @@ use Filament\Support\Enums\VerticalAlignment;
 $panel
     ->plugin(KineticsPlugin::make())
     ->bootUsing(fn () => Notifications::verticalAlignment(VerticalAlignment::Start));
+```
+
+## Modals
+
+Every modal reads the same way: heading and text from the left, then the
+button that acts, then Cancel. Filament centres confirmations, such as Delete,
+and puts an icon above them. Kinetics doesn't: the heading says what the modal
+is for, and a red button already marks a destructive one.
+
+To centre one action's modal again, set it on the action:
+
+```php
+use Filament\Support\Enums\Alignment;
+
+DeleteAction::make()
+    ->modalAlignment(Alignment::Center)
+    ->modalFooterActionsAlignment(Alignment::Center);
+```
+
+Kinetics hides the icon in its CSS. To show icons again, add this to your
+theme after the Kinetics import:
+
+```css
+.fi-modal-window .fi-modal-icon-ctn {
+    display: flex;
+}
 ```
 
 ## Variables

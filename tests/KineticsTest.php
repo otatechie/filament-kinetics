@@ -2,6 +2,7 @@
 
 use BladeUI\Icons\Exceptions\SvgNotFound;
 use BladeUI\Icons\Factory;
+use Filament\Actions\DeleteAction;
 use Filament\Enums\GlobalSearchPosition;
 use Filament\Enums\UserMenuPosition;
 use Filament\Facades\Filament;
@@ -59,6 +60,21 @@ it('shows notifications in the bottom corner', function () {
 
     expect(Notifications::$alignment)->toBe(Alignment::End)
         ->and(Notifications::$verticalAlignment)->toBe(VerticalAlignment::End);
+});
+
+it('aligns confirmation modals like other modals', function () {
+    Filament::getPanel('admin')->boot();
+
+    $action = DeleteAction::make();
+
+    expect($action->getModalAlignment())->toBe(Alignment::Start)
+        ->and($action->getModalFooterActionsAlignment())->toBe(Alignment::Start);
+});
+
+it('lets an action keep its own modal alignment', function () {
+    Filament::getPanel('admin')->boot();
+
+    expect(DeleteAction::make()->modalAlignment(Alignment::Center)->getModalAlignment())->toBe(Alignment::Center);
 });
 
 it('lets the panel move notifications back', function () {

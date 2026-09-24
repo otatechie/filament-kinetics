@@ -4,6 +4,16 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Changed
+- Confirmation modals, such as Delete, read like every other modal: from the
+  left, with the button that acts first and Cancel after it. Filament centres
+  them. An action's own `->modalAlignment()` still wins.
+- No modal shows an icon beside its heading. The heading says what the modal
+  is for, and a red button already marks a destructive one. See
+  [Customising: Modals](docs/customising.md#modals) to bring icons back.
+
 ## 0.4.2 - 2026-09-24
 
 ### Added
