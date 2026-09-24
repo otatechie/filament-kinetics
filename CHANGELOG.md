@@ -4,6 +4,11 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.1.1 - 2026-09-24
+
+### Changed
+- A plainer package description: "A minimal theme for Filament 4 and 5."
+
 ## 1.1.0 - 2026-09-24
 
 ### Added
