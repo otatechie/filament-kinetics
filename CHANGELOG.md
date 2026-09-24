@@ -15,6 +15,8 @@ All notable changes to Kinetics are recorded here. The format follows
   imports.
 
 ### Changed
+- Notifications appear in the bottom-right corner, clear of the page header's
+  buttons, and rise into place over 250ms instead of sliding in from the side.
 - Lucide icons are set through the panel's `->icons()`, so an `->icons()` call
   after the plugin overrides them, like any other panel setting.
 - The variable tables in [Customising](docs/customising.md) list light and dark

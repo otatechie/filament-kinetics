@@ -24,12 +24,14 @@ quick, eased out, and only where it helps.
 | Buttons, icon buttons, page numbers | Scale to 0.97 while pressed, over 150ms |
 | Dropdowns | Fade in and grow from 0.96 over 150ms. Table menus grow from the top right, the account menu upward from the bottom right |
 | Modals | Open over 200ms and close over 150ms, from 0.95, with the backdrop fading in over 200ms |
+| Notifications | Rise 1rem into place and fade in over 250ms. Leave by fading and shrinking to 0.95 |
 | Hover colours | 150ms fade |
 
 The easing curve is `--kinetics-ease-out`, `cubic-bezier(0.23, 1, 0.32, 1)`.
 
 ## Reduced motion
 
-When the operating system is set to reduce motion, Kinetics turns off the
-scaling on buttons, dropdowns and modals. Fades stay, so changes are still
-visible.
+When the operating system is set to reduce motion, Filament makes every
+transition near-instant, and Kinetics turns off the scaling and sliding on
+buttons, dropdowns, modals and notifications, so nothing moves even for a
+frame. Things still appear and disappear, just without animation.

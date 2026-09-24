@@ -2,8 +2,10 @@
 
 namespace Otatechie\Kinetics\Tests\Fixtures;
 
+use Filament\Notifications\Livewire\Notifications;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\Support\Enums\VerticalAlignment;
 use Otatechie\Kinetics\KineticsPlugin;
 
 class OverriddenPanelProvider extends PanelProvider
@@ -18,6 +20,7 @@ class OverriddenPanelProvider extends PanelProvider
             ->topbar()
             ->breadcrumbs()
             ->font('Inter')
-            ->icons(['tables::actions.filter' => 'lucide-list-filter']);
+            ->icons(['tables::actions.filter' => 'lucide-list-filter'])
+            ->bootUsing(fn () => Notifications::verticalAlignment(VerticalAlignment::Start));
     }
 }

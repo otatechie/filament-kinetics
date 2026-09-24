@@ -68,7 +68,7 @@ Every button scales to 0.97 while pressed.
 |---|---|
 | Modals | 12px corners and a hairline, sized to their form. Slide-overs stay square against the screen edge |
 | Dropdowns | 8px corners, a soft shadow, faint dividers between sections, 16px icons |
-| Notifications | The card colour, a medium-weight title and muted body text |
+| Notifications | Bottom-right, clear of the header's buttons. The card colour, a medium-weight title and muted body text |
 | Tooltips | Inverted (dark on light, light on dark), 11px, 4px corners, no shadow |
 
 ## Other

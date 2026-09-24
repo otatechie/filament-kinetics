@@ -86,6 +86,21 @@ $panel
 Lucide is installed with Kinetics, so your own navigation items and actions can
 use it too: `->icon('lucide-shopping-bag')`.
 
+## Notifications
+
+Kinetics shows notifications in the bottom-right corner, since the top of the
+page holds the header's buttons. To move them, set Filament's position in
+`->bootUsing()`, which runs after the plugin:
+
+```php
+use Filament\Notifications\Livewire\Notifications;
+use Filament\Support\Enums\VerticalAlignment;
+
+$panel
+    ->plugin(KineticsPlugin::make())
+    ->bootUsing(fn () => Notifications::verticalAlignment(VerticalAlignment::Start));
+```
+
 ## Variables
 
 Everything else is a CSS variable. Set them in your theme after the Kinetics

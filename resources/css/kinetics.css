@@ -1358,7 +1358,8 @@
         .fi-icon-btn,
         .fi-pagination-item-btn,
         .fi-dropdown-panel,
-        .fi-modal-window {
+        .fi-modal-window,
+        .fi-no-notification {
             scale: none;
             translate: none;
         }
@@ -1383,6 +1384,16 @@
         border-radius: var(--kinetics-radius);
         box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.18);
         --tw-ring-shadow: 0 0 #0000;
+        transition-duration: 250ms;
+        transition-timing-function: var(--kinetics-ease-out);
+    }
+
+    /* In the bottom corner, toasts rise into place instead of sliding in
+       from the side. */
+    @media (prefers-reduced-motion: no-preference) {
+        .fi-no.fi-vertical-align-end .fi-no-notification.fi-transition-enter-start {
+            translate: 0 1rem;
+        }
     }
 
     /* ─── Sign-in and other auth pages ───

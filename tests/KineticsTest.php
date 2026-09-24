@@ -5,6 +5,9 @@ use BladeUI\Icons\Factory;
 use Filament\Enums\GlobalSearchPosition;
 use Filament\Enums\UserMenuPosition;
 use Filament\Facades\Filament;
+use Filament\Notifications\Livewire\Notifications;
+use Filament\Support\Enums\Alignment;
+use Filament\Support\Enums\VerticalAlignment;
 use Filament\Support\Enums\Width;
 use Filament\Support\Facades\FilamentIcon;
 use Otatechie\Kinetics\KineticsPlugin;
@@ -44,6 +47,22 @@ it('swaps Filament icons for Lucide when the panel boots', function () {
     Filament::getPanel('admin')->boot();
 
     expect(FilamentIcon::resolve('tables::search-field'))->toBe('lucide-search');
+});
+
+it('shows notifications in the bottom corner', function () {
+    Notifications::alignment(Alignment::Right);
+    Notifications::verticalAlignment(VerticalAlignment::Start);
+
+    Filament::getPanel('admin')->boot();
+
+    expect(Notifications::$alignment)->toBe(Alignment::End)
+        ->and(Notifications::$verticalAlignment)->toBe(VerticalAlignment::End);
+});
+
+it('lets the panel move notifications back', function () {
+    Filament::getPanel('overridden')->boot();
+
+    expect(Notifications::$verticalAlignment)->toBe(VerticalAlignment::Start);
 });
 
 it('lets icons set after the plugin override it', function () {

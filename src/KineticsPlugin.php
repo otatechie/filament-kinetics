@@ -7,7 +7,10 @@ use Filament\Contracts\Plugin;
 use Filament\Enums\GlobalSearchPosition;
 use Filament\Enums\UserMenuPosition;
 use Filament\FontProviders\LocalFontProvider;
+use Filament\Notifications\Livewire\Notifications;
 use Filament\Panel;
+use Filament\Support\Enums\Alignment;
+use Filament\Support\Enums\VerticalAlignment;
 use Filament\Support\Enums\Width;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\HtmlString;
@@ -193,5 +196,10 @@ class KineticsPlugin implements Plugin
                 .'See https://github.com/otatechie/filament-kinetics#installation',
             );
         }
+
+        // Bottom corner: the top of the page holds the header's buttons. The
+        // panel's ->bootUsing() runs after this, so it can move them back.
+        Notifications::alignment(Alignment::End);
+        Notifications::verticalAlignment(VerticalAlignment::End);
     }
 }
