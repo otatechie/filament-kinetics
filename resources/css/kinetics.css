@@ -450,7 +450,10 @@
      * lighter than the global border so a page of cards reads as grouping.
      */
 
-    .fi-section:not(.fi-section-not-contained),
+    /* An aside section is a heading beside a card: only its content is the
+     * card, as in Filament. */
+    .fi-section:not(.fi-section-not-contained, .fi-aside),
+    .fi-section.fi-aside:not(.fi-section-not-contained) > .fi-section-content-ctn,
     .fi-wi-stats-overview-stat {
         background: var(--kinetics-card);
         border: 1px solid var(--kinetics-card-border);

@@ -4,6 +4,12 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Fixed
+- Aside sections (`Section::make()->aside()`) show their heading beside the
+  card, as in Filament, instead of inside a card that also wrapped the heading.
+
 ## 0.4.1 - 2026-09-24
 
 ### Fixed
