@@ -108,7 +108,7 @@ multiple panels, updating and removing.
 
 ## Demo
 
-The screenshots come from the [Kinetics demo](https://github.com/otatechie/kinetics),
+The screenshots come from the [Kinetics demo](https://github.com/otatechie/kinetics-demo),
 a small marketplace admin with realistic data on every page.
 
 ## Credits

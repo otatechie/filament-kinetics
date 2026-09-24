@@ -49,7 +49,7 @@ composer require otatechie/filament-kinetics:@dev
 Then set the app up as in [Installation](installation.md), and keep
 `npm run dev` running, or run `npm run build` after each change.
 
-The [demo app](https://github.com/otatechie/kinetics) is set up this way, with
+The [demo app](https://github.com/otatechie/kinetics-demo) is set up this way, with
 realistic data on every page. `php artisan db:seed --class=DemoDataSeeder`
 resets it.
 

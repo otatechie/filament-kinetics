@@ -81,7 +81,7 @@ from you.
 ## From 0.1
 
 0.1 wasn't a package: it was the theme inside the
-[demo app](https://github.com/otatechie/kinetics). If you copied its CSS into
+[demo app](https://github.com/otatechie/kinetics-demo). If you copied its CSS into
 your own app, remove that copy, including any `--g-*` variables, and follow
 [Installation](installation.md). Variables are named `--kinetics-*` now; see
 [Customising](customising.md#variables).
