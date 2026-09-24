@@ -22,6 +22,9 @@ All notable changes to Kinetics are recorded here. The format follows
 
 ## 0.1.0 - 2026-09-24
 
+Released from the [demo repository](https://github.com/otatechie/kinetics/releases/tag/v0.1.0),
+before Kinetics became a package, so it has no tag here.
+
 First tagged version: the canvas and panel layout, palette-driven colours with
 passing contrast, Open Runde, Lucide icons, motion, tables, form controls,
 overlays, sign-in page and dark mode, with the demo panel.
