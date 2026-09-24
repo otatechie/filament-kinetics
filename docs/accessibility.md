@@ -22,8 +22,9 @@ a difference.
   | Cards and inputs | 4.84:1 | 5.65:1 |
   | The content panel | 4.63:1 | 6.16:1 |
 
-- **Checkboxes and radios** have a stronger outline than dividers, since they
-  have no fill when unchecked.
+- **Unchecked checkboxes and radios, and switches that are off,** have an edge
+  that passes WCAG's 3:1 for controls against the card they sit on: 3.76:1 in
+  light mode and 3.39:1 in dark, with the default `gray` palette.
 - **Dark-mode inputs** have a stronger edge than dividers, so fields stay easy
   to find.
 
@@ -55,6 +56,10 @@ templates.
   then red, and stays in the tab order.
 - **Pop-up notifications appear bottom-right**, away from the buttons you just
   used. Filament announces them to screen readers wherever they are.
+- **Errors and warnings stay until they're closed**, so there's time to read
+  them. Other notifications close after six seconds, and stay open while the
+  pointer is over them.
+- **Stacked notifications spread out on keyboard focus** as well as on hover.
 
 ## Motion
 

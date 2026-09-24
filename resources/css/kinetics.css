@@ -41,8 +41,9 @@
         --kinetics-muted-foreground: var(--gray-500);
         --kinetics-border: var(--gray-200);
         --kinetics-input-border: var(--gray-200);
-        /* Checkboxes and radios are outline-only, so they need a stronger edge. */
-        --kinetics-control-border: var(--gray-400);
+        /* Unchecked checkboxes and radios, and the off switch, need a stronger
+           edge: at least 3:1 against the card, as controls should have. */
+        --kinetics-control-border: color-mix(in oklab, var(--gray-400) 40%, var(--gray-500));
         --kinetics-destructive: var(--danger-500);
         --kinetics-destructive-ring: color-mix(in oklab, var(--danger-600) 12%, transparent);
         --kinetics-canvas: color-mix(in oklab, var(--gray-100) 70%, var(--gray-200));
@@ -69,7 +70,7 @@
         --kinetics-border: #373532;
         /* Inputs need a stronger edge than dividers to read as fields. */
         --kinetics-input-border: #4a4844;
-        --kinetics-control-border: #6a6762;
+        --kinetics-control-border: #7c7973;
         --kinetics-destructive: var(--danger-400);
         --kinetics-canvas: #1a1918;
         --kinetics-panel: #222120;
@@ -1189,14 +1190,16 @@
     }
 
     /* ─── Toggles ───
-     * A compact switch: 32×18 with a 14px thumb and no shadow.
+     * A compact switch: 32×18 with a 14px thumb and no shadow. Off, the track
+     * uses the same strong edge as an unchecked checkbox, so it reads as a
+     * control rather than a faint stripe.
      */
 
     .fi-toggle {
         height: 1.125rem;
         width: 2rem;
         border-width: 2px;
-        background: var(--kinetics-input-border);
+        background: var(--kinetics-control-border);
 
         &.fi-color {
             --bg: var(--kinetics-primary-button) !important;

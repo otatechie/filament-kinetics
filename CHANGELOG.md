@@ -4,6 +4,15 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.3.1 - 2026-09-24
+
+### Fixed
+- Switches that are off were a faint stripe on white cards, at 1.2:1. The
+  track now uses the same edge as an unchecked checkbox.
+- That edge is stronger, so unchecked checkboxes, radios and off switches pass
+  WCAG's 3:1 for controls: 3.76:1 in light mode and 3.39:1 in dark, up from
+  2.6:1.
+
 ## 1.3.0 - 2026-09-24
 
 ### Added

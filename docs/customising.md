@@ -243,7 +243,7 @@ so on. Dark mode uses fixed warm charcoal (see [Dark mode](#dark-mode)).
 | `--kinetics-muted-foreground` | Secondary text, placeholders, labels, sort arrows | `gray-500` | `#a3a09a` |
 | `--kinetics-border` | Dividers and dropdown edges | `gray-200` | `#373532` |
 | `--kinetics-input-border` | Text inputs and selects | `gray-200` | `#4a4844` |
-| `--kinetics-control-border` | Unchecked checkboxes and radios | `gray-400` | `#6a6762` |
+| `--kinetics-control-border` | Unchecked checkboxes and radios, and switches that are off | `gray-400` mixed 40% with `gray-500` | `#7c7973` |
 
 ### Primary colour
 
