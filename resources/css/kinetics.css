@@ -1349,6 +1349,37 @@
         }
     }
 
+    /* ─── Copyable text ───
+     * Filament copies on click but shows no sign of it until then, so a copy
+     * icon follows the text.
+     */
+
+    .fi-sc-text.fi-copyable {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        cursor: pointer;
+        border-radius: 0.25rem;
+
+        &::after {
+            content: '';
+            flex-shrink: 0;
+            width: 0.875rem;
+            height: 0.875rem;
+            background-color: var(--kinetics-muted-foreground);
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3E%3C/svg%3E") center / contain no-repeat;
+        }
+
+        &:hover::after {
+            background-color: var(--kinetics-foreground);
+        }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--kinetics-primary) 50%, transparent);
+        }
+    }
+
     /* ─── Stats widgets ─── */
 
     .fi-wi-stats-overview-stat {
@@ -1376,10 +1407,13 @@
 
     /* ─── Dialogs ─── */
 
+    /* The same edge as dropdowns and toasts: a solid border the same weight on
+     * every side, and a soft shadow that doesn't darken the bottom edge. */
     .fi-modal-window {
         background: var(--kinetics-card);
-        border-radius: 0.75rem;
-        box-shadow: 0 0 0 1px color-mix(in srgb, var(--kinetics-foreground) 10%, transparent), 0 20px 40px -16px rgb(0 0 0 / 0.25);
+        border: 1px solid var(--kinetics-border);
+        border-radius: var(--kinetics-radius);
+        box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.18);
         --tw-ring-shadow: 0 0 #0000;
     }
 
@@ -1397,6 +1431,15 @@
     .fi-modal-description {
         font-size: 0.875rem;
         color: var(--kinetics-muted-foreground);
+    }
+
+    /* A modal built as steps (such as setting up 2FA) puts its buttons in the
+     * wizard's footer: Back or Cancel at one edge, Next or Submit at the
+     * other. Match the other modals: the primary action first, then the way
+     * out, together at the start. */
+    .fi-modal-window .fi-sc-wizard-footer {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
     }
 
     .fi-modal-close-overlay {
