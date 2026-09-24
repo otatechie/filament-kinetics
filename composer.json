@@ -1,6 +1,6 @@
 {
     "name": "otatechie/filament-kinetics",
-    "description": "Filament 4 and 5 theme: quiet tables, rounded panels, Lucide icons and a warm dark mode.",
+    "description": "A minimal theme for Filament 4 and 5.",
     "keywords": [
         "laravel",
         "filamentphp",
