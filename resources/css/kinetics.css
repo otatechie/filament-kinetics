@@ -1,0 +1,1445 @@
+/* Load-order check: getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order') returns "ok". */
+@layer kinetics {
+    body {
+        --kinetics-layer-order: ok;
+    }
+}
+
+@layer kinetics {
+    /*
+     * Kinetics: calm surfaces, compact controls and quick motion for Filament.
+     * Every colour, radius and border comes from these tokens.
+     */
+
+    :root {
+        /* Every colour comes from Filament's palette, so the panel's ->colors()
+           recolours the whole theme. */
+        --kinetics-radius: 0.5rem;
+        --kinetics-background: var(--gray-50);
+        --kinetics-foreground: var(--gray-900);
+        --kinetics-card: #fff;
+        --kinetics-card-border: color-mix(in oklab, var(--gray-200) 60%, #fff);
+        --kinetics-primary: var(--primary-600);
+        /* Text and button backgrounds use 700: white on 600 is under 4.5:1
+           (Teal 3.7, Orange 3.6), on 700 it's 5.2 to 5.5. */
+        --kinetics-primary-text: var(--primary-700);
+        --kinetics-primary-button: var(--primary-700);
+        --kinetics-primary-button-hover: var(--primary-800);
+        --kinetics-primary-ring: color-mix(in oklab, var(--primary-600) 12%, transparent);
+        --kinetics-primary-foreground: #fff;
+        --kinetics-muted: var(--gray-100);
+        --kinetics-muted-foreground: var(--gray-500);
+        --kinetics-border: var(--gray-200);
+        --kinetics-input-border: var(--gray-200);
+        /* Checkboxes and radios are outline-only, so they need a stronger edge. */
+        --kinetics-control-border: var(--gray-400);
+        --kinetics-destructive: var(--danger-500);
+        --kinetics-destructive-ring: color-mix(in oklab, var(--danger-600) 12%, transparent);
+        --kinetics-canvas: color-mix(in oklab, var(--gray-100) 70%, var(--gray-200));
+        --kinetics-panel: var(--gray-50);
+        --kinetics-panel-border: var(--gray-200);
+        /* Motion (Emil Kowalski): ease-out for anything entering or leaving. */
+        --kinetics-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .dark {
+        /* Charcoal with a hint of sepia (as in Anthropic's dark mode) and
+           off-white text. Surfaces are fixed; the primary colour follows ->colors(). */
+        --kinetics-background: #1a1918;
+        --kinetics-foreground: #e9e7e3;
+        --kinetics-card: #292826;
+        --kinetics-card-border: #33322f;
+        --kinetics-primary: var(--primary-500);
+        --kinetics-primary-text: var(--primary-400);
+        --kinetics-primary-button: var(--primary-700);
+        --kinetics-primary-button-hover: var(--primary-800);
+        --kinetics-primary-ring: color-mix(in oklab, var(--primary-500) 20%, transparent);
+        --kinetics-muted: #302f2c;
+        --kinetics-muted-foreground: #a3a09a;
+        --kinetics-border: #373532;
+        /* Inputs need a stronger edge than dividers to read as fields. */
+        --kinetics-input-border: #4a4844;
+        --kinetics-control-border: #6a6762;
+        --kinetics-destructive: var(--danger-400);
+        --kinetics-canvas: #1a1918;
+        --kinetics-panel: #222120;
+        --kinetics-panel-border: #33322f;
+    }
+
+    /* ─── Icons ───
+     * Lucide draws at stroke 2; 1.75 sits better beside Open Runde. Heroicons
+     * (stroke 1.5) are left alone.
+     */
+
+    svg.fi-icon[stroke-width="2"] {
+        stroke-width: 1.75;
+    }
+
+    /* ─── Base ─── */
+
+    .fi-body {
+        background: var(--kinetics-canvas);
+        color: var(--kinetics-foreground);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Top bar and sidebar sit on the canvas; the content panel's edge
+     * is the only divider. ─── */
+
+    .fi-topbar,
+    .fi-topbar-ctn {
+        background: var(--kinetics-canvas);
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-topbar .fi-icon-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.375rem;
+        color: var(--kinetics-muted-foreground);
+
+        &:hover {
+            color: var(--kinetics-foreground);
+            background: var(--kinetics-muted);
+        }
+    }
+
+    /* ─── Sidebar ───
+     * The current page shows in ink and weight alone: a filled pill reads as
+     * hover, or as a pressed control, rather than as where you are.
+     */
+
+    .fi-sidebar,
+    .fi-sidebar-header,
+    .fi-sidebar-nav {
+        background: var(--kinetics-canvas);
+        box-shadow: none;
+        border: 0;
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-logo {
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--kinetics-foreground);
+    }
+
+    .fi-sidebar-group + .fi-sidebar-group {
+        margin-top: 0.5rem;
+    }
+
+    .fi-sidebar-group-label {
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-weight: 400;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    .fi-sidebar-item-btn {
+        justify-content: flex-start;
+        gap: 0.625rem;
+        padding-block: 0.375rem;
+        padding-inline: 0.75rem 0.625rem;
+        border-radius: 0.375rem;
+        transition: color 150ms, background-color 150ms;
+
+        & > .fi-icon {
+            width: 1rem;
+            height: 1rem;
+            color: currentColor;
+        }
+
+        & > .fi-sidebar-item-label {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 400;
+            color: inherit;
+        }
+    }
+
+    .fi-sidebar-item > .fi-sidebar-item-btn {
+        color: var(--kinetics-foreground);
+    }
+
+    .fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover {
+        background: color-mix(in srgb, var(--kinetics-foreground) 5%, transparent);
+    }
+
+    .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+        background: transparent;
+        color: var(--kinetics-primary-text);
+
+        & > .fi-sidebar-item-label {
+            font-weight: 600;
+        }
+    }
+
+    /* ─── Sidebar spacing: compact, aligned to one 12px gutter ─── */
+
+    .fi-sidebar-header {
+        height: 3.5rem;
+        padding-inline: 1.125rem;
+    }
+
+    .fi-sidebar .fi-logo {
+        font-size: 1.0625rem;
+        line-height: 1.5rem;
+    }
+
+    .fi-sidebar-header-controls {
+        padding-inline: 0.75rem;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    .fi-sidebar .fi-input-wrp {
+        min-height: 2.25rem;
+    }
+
+    .fi-sidebar .fi-input {
+        padding-block: 0.4375rem;
+    }
+
+    .fi-sidebar-nav {
+        row-gap: 1.25rem;
+        padding: 0.875rem 0.75rem;
+    }
+
+    .fi-sidebar-nav-groups {
+        margin-inline: 0;
+        row-gap: 1.25rem;
+    }
+
+    .fi-sidebar-group,
+    .fi-sidebar-group-items {
+        row-gap: 0.125rem;
+    }
+
+    .fi-sidebar-group-btn {
+        padding-block: 0.25rem;
+        padding-inline: 0.75rem 0.625rem;
+    }
+
+    /* Collapsed sidebar (->sidebarCollapsibleOnDesktop()): one centred column of
+       icons with even spacing. Filament shrinks the menu to its content here, so
+       it's stretched back to the rail's width before centring. */
+    @media (min-width: 1024px) {
+        .fi-body-has-sidebar-collapsible-on-desktop .fi-sidebar:not(.fi-sidebar-open) {
+            & .fi-sidebar-nav {
+                padding-inline: 0.75rem;
+                row-gap: 0.75rem;
+            }
+
+            & .fi-sidebar-nav-groups {
+                width: 100%;
+                row-gap: 0.75rem;
+            }
+
+            & .fi-sidebar-group,
+            & .fi-sidebar-group-items,
+            & .fi-sidebar-item {
+                width: 100%;
+                align-items: center;
+            }
+
+            & .fi-sidebar-item-btn,
+            & .fi-sidebar-group-dropdown-trigger-btn,
+            & .fi-user-menu-trigger {
+                justify-content: center;
+                width: 2.5rem;
+                padding-inline: 0;
+                margin-inline: auto;
+            }
+
+            & .fi-sidebar-header {
+                justify-content: center;
+                padding-inline: 0;
+            }
+        }
+    }
+
+    /* The collapse and expand buttons: small and quiet. */
+    .fi-sidebar-header .fi-icon-btn .fi-icon,
+    .fi-sidebar-close-collapse-sidebar-btn .fi-icon,
+    .fi-sidebar-open-collapse-sidebar-btn .fi-icon {
+        width: 1.125rem;
+        height: 1.125rem;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    /* ─── Sidebar footer: the account menu sits at the foot ─── */
+
+    .fi-sidebar-footer {
+        padding: 0.75rem;
+        border-top: 0;
+        background: var(--kinetics-canvas);
+    }
+
+    .fi-sidebar .fi-user-menu-trigger {
+        gap: 0.5rem;
+        padding: 0.375rem 0.625rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+
+        &:hover {
+            background: color-mix(in srgb, var(--kinetics-foreground) 5%, transparent);
+        }
+
+        & .fi-avatar {
+            width: 1.5rem;
+            height: 1.5rem;
+            font-size: 0.6875rem;
+        }
+
+        & .fi-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    /* ─── Content panel ───
+     * The page floats on the canvas as one rounded, bordered panel. Its header
+     * is a slim band with a hairline underneath, running the panel's width.
+     */
+
+    .fi-main-ctn {
+        display: flex;
+        /* No outline: the panel stands apart from the canvas by colour alone. */
+        background: var(--kinetics-panel);
+        border-radius: 0.75rem;
+        margin: 0.5rem;
+        min-height: calc(100dvh - 1rem);
+    }
+
+    @media (min-width: 1024px) {
+        .fi-main-ctn {
+            margin-inline-start: 0;
+        }
+    }
+
+    /* With the top bar turned back on, the panel fits under it. */
+    .fi-body-has-topbar .fi-main-ctn {
+        min-height: calc(100dvh - var(--topbar-height, 4rem) - 1rem);
+    }
+
+    .fi-page-header-main-ctn {
+        padding-top: 0;
+        row-gap: 1.5rem;
+    }
+
+    .fi-header {
+        min-height: 3.5rem;
+        margin-inline: -1rem;
+        padding: 0.625rem 1rem;
+        border-bottom: 1px solid var(--kinetics-panel-border);
+    }
+
+    @media (min-width: 768px) {
+        .fi-header {
+            margin-inline: -1.5rem;
+            padding-inline: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .fi-header {
+            margin-inline: -2rem;
+            padding-inline: 1.5rem;
+        }
+    }
+
+    /* With a narrower ->maxContentWidth() the page is centred inside the panel,
+       so the header can't reach the panel's edges: its line spans the content. */
+    .fi-main:not(.fi-width-full) .fi-header {
+        margin-inline: 0;
+        padding-inline: 0;
+    }
+
+    .fi-header-heading {
+        font-size: 0.9375rem;
+        line-height: 1.5rem;
+        font-weight: 500;
+        letter-spacing: 0;
+        color: var(--kinetics-foreground);
+    }
+
+    .fi-header-subheading,
+    .fi-breadcrumbs {
+        font-size: 0.8125rem;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    /* ─── Cards ───
+     * No shadow in either theme: the border alone defines the card, a step
+     * lighter than the global border so a page of cards reads as grouping.
+     */
+
+    .fi-section:not(.fi-section-not-contained),
+    .fi-wi-stats-overview-stat {
+        background: var(--kinetics-card);
+        border: 1px solid var(--kinetics-card-border);
+        border-radius: var(--kinetics-radius);
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-ta-header,
+    .fi-section-header,
+    .fi-section-content-ctn {
+        border-color: var(--kinetics-card-border);
+    }
+
+    .fi-section-header-heading,
+    .fi-ta-header-heading {
+        font-weight: 600;
+        color: var(--kinetics-foreground);
+    }
+
+    /* ─── Tables ─── */
+
+    .fi-ta-table {
+        font-size: 0.875rem;
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* Tables sit straight on the panel: no card, no background, and no lines
+       around the table, under the toolbar or header row, between rows, or above
+       the pagination. */
+    .fi-ta-ctn {
+        border: 0;
+        background: transparent;
+        /* Filament outlines tables with a shadow ring, not a border. */
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-ta-header,
+    .fi-ta-header-toolbar,
+    .fi-ta-content,
+    .fi-ta-content > *,
+    .fi-ta-table,
+    .fi-ta-table > thead,
+    .fi-ta-table > tbody,
+    .fi-ta-table tr,
+    .fi-ta-ctn .fi-pagination,
+    .fi-ta-filters-above-content-ctn,
+    .fi-ta-filters-below-content {
+        border-width: 0;
+    }
+
+    .fi-ta-table > thead,
+    .fi-ta-table > thead > tr {
+        background: transparent;
+    }
+
+    .fi-ta-header-cell,
+    .fi-ta-header-cell-sort-btn {
+        height: 2.5rem;
+        padding-block: 0;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        color: var(--kinetics-foreground);
+    }
+
+    /* Row hover: a tint on the cells, rounded at the row's ends, hugging the
+       content (12px outer padding instead of Filament's 24px). */
+    .fi-ta-row,
+    .fi-ta-row.fi-clickable:hover {
+        background: transparent;
+    }
+
+    .fi-ta-row > td {
+        transition: background-color 150ms ease;
+    }
+
+    .fi-ta-row:hover > td {
+        background: color-mix(in srgb, var(--kinetics-muted) 70%, transparent);
+    }
+
+    .fi-ta-row > td:first-child {
+        border-start-start-radius: 0.5rem;
+        border-end-start-radius: 0.5rem;
+    }
+
+    .fi-ta-row > td:last-child {
+        border-start-end-radius: 0.5rem;
+        border-end-end-radius: 0.5rem;
+    }
+
+    /* Headings and cell text share one 12px outer edge. Text cells get their
+       padding from the column inside them, so the cell itself adds none; action
+       and checkbox cells have no inner padding, so they keep 12px. */
+    .fi-ta-header-cell:first-of-type,
+    .fi-ta-cell:first-of-type:is(:has(.fi-ta-actions), :has(.fi-ta-record-checkbox), :has(.fi-ta-reorder-handle)) {
+        padding-inline-start: 0.75rem;
+    }
+
+    .fi-ta-header-cell:last-of-type,
+    .fi-ta-cell:last-of-type:is(:has(.fi-ta-actions), :has(.fi-ta-record-checkbox), :has(.fi-ta-reorder-handle)) {
+        padding-inline-end: 0.75rem;
+    }
+
+    .fi-ta-cell:first-of-type:not(:has(.fi-ta-actions, .fi-ta-record-checkbox, .fi-ta-reorder-handle)) {
+        padding-inline-start: 0;
+    }
+
+    .fi-ta-cell:last-of-type:not(:has(.fi-ta-actions, .fi-ta-record-checkbox, .fi-ta-reorder-handle)) {
+        padding-inline-end: 0;
+    }
+
+    .fi-ta-text-description {
+        color: var(--kinetics-muted-foreground);
+    }
+
+    /* Icon columns (e.g. Active): text-sized, not Filament's 24px. */
+    .fi-ta-icon .fi-icon {
+        width: 1.125rem;
+        height: 1.125rem;
+    }
+
+    /* Toolbar and pagination on the same 12px edge as the columns. */
+    .fi-ta-header-toolbar,
+    .fi-ta-ctn .fi-pagination {
+        padding-inline: 0.75rem;
+    }
+
+    /* Sort arrows: small and quiet beside the heading. */
+    .fi-ta-header-cell-sort-btn .fi-icon {
+        width: 0.875rem;
+        height: 0.875rem;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    /* Compact rows: 10px above and below cell content instead of Filament's 16px,
+       for every column type and the actions and checkbox cells. */
+    .fi-ta-cell :is(.fi-ta-text, .fi-ta-icon, .fi-ta-toggle, .fi-ta-select, .fi-ta-text-input, .fi-ta-checkbox, .fi-ta-color, .fi-ta-image):not(.fi-inline),
+    .fi-ta-cell:has(.fi-ta-actions),
+    .fi-ta-cell:has(.fi-ta-record-checkbox) {
+        padding-block: 0.625rem;
+    }
+
+    .fi-ta-header-cell {
+        padding-block: 0.625rem;
+    }
+
+    /* Codes and references: the UI font with even figures, muted, not monospace. */
+    .fi-ta-text-item.fi-font-mono,
+    .fi-in-text-item.fi-font-mono {
+        font-family: inherit;
+        font-variant-numeric: tabular-nums;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    /* Toolbar: a 36px search box beside the icon buttons. */
+    .fi-ta-header-toolbar .fi-input-wrp {
+        min-height: 2.25rem;
+    }
+
+    .fi-ta-header-toolbar .fi-input {
+        padding-block: 0.4375rem;
+    }
+
+    /* The filter count shows only while filters are on (Filament shows 0). */
+    .fi-ta-ctn:not(:has(.fi-ta-filter-indicators)) .fi-ta-header-toolbar .fi-icon-btn-badge-ctn {
+        display: none;
+    }
+
+    /* ─── Pagination ───
+     * Count on the left, small and muted; per-page and page numbers on the
+     * right. Per-page is a quiet borderless select. Page numbers are ghost
+     * buttons; the current page shows in primary and weight, like the active
+     * menu item.
+     */
+
+    .fi-pagination {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 2rem;
+    }
+
+    .fi-pagination .fi-pagination-overview {
+        margin-inline-end: auto;
+        font-size: 0.8125rem;
+        font-weight: 400;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    .fi-pagination .fi-pagination-records-per-page-select-ctn {
+        margin-inline-start: auto;
+    }
+
+    .fi-pagination .fi-pagination-overview + .fi-pagination-records-per-page-select-ctn {
+        margin-inline-start: 0;
+    }
+
+    .fi-pagination .fi-pagination-records-per-page-select .fi-input-wrp {
+        min-height: 2rem;
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+        transition: background-color 150ms;
+
+        &:hover {
+            background: var(--kinetics-muted);
+        }
+
+        &:focus-within {
+            border-color: var(--kinetics-primary);
+            box-shadow: 0 0 0 3px var(--kinetics-primary-ring);
+        }
+
+        & .fi-input-wrp-prefix {
+            border: 0;
+            padding-inline-end: 0;
+            font-size: 0.8125rem;
+            color: var(--kinetics-muted-foreground);
+        }
+
+        & select {
+            font-size: 0.8125rem;
+            padding-block: 0.375rem;
+        }
+    }
+
+    .fi-pagination .fi-pagination-items {
+        gap: 0.125rem;
+        /* The last button's empty edge would leave the arrow short of the
+           column edge; pull it out so the arrow lines up with the row actions. */
+        margin-inline-end: -0.625rem;
+        background: transparent;
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-pagination .fi-pagination-item {
+        border: 0;
+
+        & .fi-pagination-item-btn {
+            min-width: 2rem;
+            height: 2rem;
+            justify-content: center;
+            align-items: center;
+            padding: 0 0.375rem;
+            border-radius: 0.375rem;
+            background: transparent;
+
+            &:enabled:hover {
+                background: var(--kinetics-muted);
+            }
+        }
+
+        & .fi-pagination-item-btn .fi-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        & .fi-pagination-item-label {
+            padding: 0;
+            font-size: 0.8125rem;
+            font-weight: 400;
+            color: var(--kinetics-foreground);
+        }
+
+        &.fi-active .fi-pagination-item-label {
+            font-weight: 600;
+            color: var(--kinetics-primary-text);
+        }
+
+        &.fi-disabled .fi-pagination-item-label {
+            color: var(--kinetics-muted-foreground);
+        }
+    }
+
+    /* ─── Badges: tinted background, coloured text, fully rounded ─── */
+
+    .fi-badge {
+        border-radius: 999px;
+        padding: 0.125rem 0.5rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-weight: 500;
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+
+        &:not(.fi-color) {
+            background: var(--kinetics-muted);
+            color: var(--kinetics-foreground);
+        }
+    }
+
+    /* ─── Buttons ─── */
+
+    .fi-btn {
+        height: 2.5rem;
+        /* Height is fixed, so no vertical padding: Filament's 8px would push the
+           text row past a short button's middle. */
+        padding-block: 0;
+        padding-inline: 0.875rem;
+        gap: 0.375rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        box-shadow: none;
+        transition:
+            scale 150ms var(--kinetics-ease-out),
+            background-color 150ms ease,
+            border-color 150ms ease,
+            color 150ms ease;
+
+        /* Press feedback: a 0.97 scale over 150ms. */
+        &:active:not([aria-haspopup]):not(:disabled) {
+            scale: 0.97;
+        }
+
+        /* Every Filament size keeps its own height, so ->size() still works. */
+        &.fi-size-xs {
+            height: 2rem;
+            padding-inline: 0.625rem;
+            font-size: 0.8125rem;
+        }
+
+        &.fi-size-sm {
+            height: 2.25rem;
+            padding-inline: 0.75rem;
+        }
+
+        &.fi-size-lg {
+            height: 2.75rem;
+            padding-inline: 1rem;
+        }
+
+        &.fi-size-xl {
+            height: 3rem;
+            padding-inline: 1.125rem;
+            font-size: 0.9375rem;
+        }
+    }
+
+    /* Header buttons are compact, to sit inside the slim header band, unless an
+       action asks for a size of its own. */
+    .fi-header .fi-btn.fi-size-md {
+        height: 2rem;
+        padding-inline: 0.75rem;
+        gap: 0.3125rem;
+        font-size: 0.8125rem;
+
+        & .fi-icon {
+            width: 0.875rem;
+            height: 0.875rem;
+        }
+    }
+
+    /* Filament colours buttons with utility classes (fi-bg-color-400…),
+       which rank above this layer; !important on these variables is the one
+       place the theme needs it. */
+    .fi-btn.fi-color-primary:not(.fi-outlined):not(label) {
+        --bg: var(--kinetics-primary-button) !important;
+        --hover-bg: var(--kinetics-primary-button-hover) !important;
+        --dark-bg: var(--kinetics-primary-button) !important;
+        --dark-hover-bg: var(--kinetics-primary-button-hover) !important;
+        --text: var(--kinetics-primary-foreground) !important;
+        --hover-text: var(--kinetics-primary-foreground) !important;
+        --dark-text: var(--kinetics-primary-foreground) !important;
+        --dark-hover-text: var(--kinetics-primary-foreground) !important;
+    }
+
+    /* Secondary buttons are outlined. */
+    .fi-btn.fi-color-gray:not(label),
+    .fi-btn:not(.fi-color):not(label) {
+        background: var(--kinetics-background);
+        border-color: var(--kinetics-border);
+        color: var(--kinetics-foreground);
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+        &:hover {
+            background: var(--kinetics-muted);
+        }
+    }
+
+    /* Destructive buttons: a tint, not a solid red block. */
+    .fi-btn.fi-color-danger:not(.fi-outlined):not(label) {
+        --bg: color-mix(in srgb, var(--kinetics-destructive) 10%, transparent) !important;
+        --hover-bg: color-mix(in srgb, var(--kinetics-destructive) 20%, transparent) !important;
+        --dark-bg: color-mix(in srgb, var(--kinetics-destructive) 20%, transparent) !important;
+        --dark-hover-bg: color-mix(in srgb, var(--kinetics-destructive) 30%, transparent) !important;
+        --text: var(--kinetics-destructive) !important;
+        --hover-text: var(--kinetics-destructive) !important;
+        --dark-text: var(--kinetics-destructive) !important;
+        --dark-hover-text: var(--kinetics-destructive) !important;
+    }
+
+    .fi-btn:focus-visible,
+    .fi-icon-btn:focus-visible {
+        border-color: var(--kinetics-primary);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--kinetics-primary) 50%, transparent);
+    }
+
+    /* Inside dropdowns (Apply columns, Apply filters) a button is a quiet link:
+       the dropdown is light, and a solid pill would outweigh what it confirms. */
+    .fi-dropdown-panel .fi-btn,
+    .fi-ta-filters-actions-ctn .fi-btn,
+    .fi-ta-col-manager-actions-ctn .fi-btn {
+        height: auto;
+        padding: 0.25rem 0;
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+        color: var(--kinetics-primary-text);
+        --bg: transparent !important;
+        --hover-bg: transparent !important;
+        --dark-bg: transparent !important;
+        --dark-hover-bg: transparent !important;
+        --text: var(--kinetics-primary-text) !important;
+        --hover-text: var(--kinetics-primary-text) !important;
+        --dark-text: var(--kinetics-primary-text) !important;
+        --dark-hover-text: var(--kinetics-primary-text) !important;
+
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        &:active {
+            scale: none;
+        }
+    }
+
+    .fi-link.fi-color-primary {
+        color: var(--kinetics-primary-text);
+        text-underline-offset: 4px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    /* ─── Inputs ───
+     * 2.5rem fields to match the buttons beside them, 8px corners, a 1px
+     * border on the card colour, small labels on top, a faded placeholder, and
+     * a primary border with a soft 3px ring on focus (red when invalid).
+     */
+
+    .fi-input-wrp {
+        min-height: 2.5rem;
+        background: var(--kinetics-card);
+        border: 1px solid var(--kinetics-input-border);
+        border-radius: var(--kinetics-radius);
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+        transition: border-color 0.15s, box-shadow 0.15s;
+
+        &:focus-within {
+            border-color: var(--kinetics-primary);
+            box-shadow: 0 0 0 3px var(--kinetics-primary-ring);
+        }
+
+        &.fi-invalid {
+            border-color: var(--kinetics-destructive);
+
+            &:focus-within {
+                box-shadow: 0 0 0 3px var(--kinetics-destructive-ring);
+            }
+        }
+
+        &.fi-disabled {
+            background: var(--kinetics-muted);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+
+    .fi-input,
+    .fi-select-input-btn {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        padding-block: 0.5625rem;
+        color: var(--kinetics-foreground);
+        caret-color: var(--kinetics-foreground);
+    }
+
+    .fi-input::placeholder,
+    .fi-select-input-placeholder {
+        color: var(--kinetics-muted-foreground);
+        opacity: 0.5;
+    }
+
+    .fi-fo-field-label-content {
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-weight: 500;
+        color: var(--kinetics-foreground);
+    }
+
+    .fi-fo-field-label-required-mark {
+        color: var(--kinetics-destructive);
+    }
+
+    /* Help text under a field is muted; an error is red. */
+    .fi-fo-field-content-col > .fi-sc-text,
+    .fi-fo-field-content-col > p:not(.fi-fo-field-wrp-error-message) {
+        font-size: 0.75rem;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    .fi-fo-field-content-col .fi-fo-field-wrp-error-message {
+        font-size: 0.75rem;
+        color: var(--kinetics-destructive);
+    }
+
+    .fi-in-entry-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    input:-webkit-autofill {
+        -webkit-text-fill-color: var(--kinetics-foreground);
+        box-shadow: inset 0 0 0 9999px var(--kinetics-card);
+    }
+
+    input,
+    textarea,
+    select {
+        color-scheme: light;
+    }
+
+    .dark input,
+    .dark textarea,
+    .dark select {
+        color-scheme: dark;
+    }
+
+    /* Dropdowns and select menus */
+
+    .fi-dropdown-panel {
+        background: var(--kinetics-card);
+        border: 1px solid var(--kinetics-border);
+        border-radius: var(--kinetics-radius);
+        box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.18);
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-dropdown-list-item,
+    .fi-select-input-option {
+        font-size: 0.875rem;
+        border-radius: 0.375rem;
+    }
+
+    /* Dropdown item icons at text size, not Filament's 20px. */
+    .fi-dropdown-list-item .fi-icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* Dropdown sections: faint dividers, not full-strength lines. */
+    .fi-dropdown-panel:not(.fi-dropdown-list) > * {
+        border-color: color-mix(in srgb, var(--kinetics-foreground) 6%, transparent);
+    }
+
+    /* ─── Account menu ───
+     * Who you are is a header, not an item: name in medium weight, no icon, no
+     * hover. The theme switcher is a small segmented control.
+     */
+
+    .fi-user-menu .fi-dropdown-header {
+        padding: 0.75rem;
+        cursor: default;
+
+        & .fi-icon {
+            display: none;
+        }
+
+        & span {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--kinetics-foreground);
+        }
+    }
+
+    /* Filament stretches this to the sidebar's width; it only holds a name,
+       three icons and Sign out. */
+    .fi-sidebar .fi-user-menu .fi-dropdown-panel {
+        width: 12.5rem;
+        max-width: 12.5rem;
+    }
+
+    .fi-theme-switcher {
+        gap: 0.125rem;
+        padding: 0.1875rem;
+        border-radius: 0.5rem;
+        background: var(--kinetics-muted);
+    }
+
+    .fi-theme-switcher-btn {
+        padding: 0.3125rem;
+        border-radius: 0.375rem;
+
+        & .fi-icon {
+            width: 0.875rem;
+            height: 0.875rem;
+        }
+
+        &.fi-active {
+            background: var(--kinetics-card);
+            color: var(--kinetics-primary-text);
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.08);
+        }
+
+        &:not(.fi-active) {
+            color: var(--kinetics-muted-foreground);
+
+            &:hover {
+                background: transparent;
+                color: var(--kinetics-foreground);
+            }
+        }
+    }
+
+    /* ─── Checkboxes and radios ───
+     * 1px border like inputs, no shadow, the button shade when checked, and the
+     * same soft focus ring as inputs.
+     */
+
+    input[type='checkbox'].fi-checkbox-input,
+    input[type='radio'].fi-radio-input {
+        width: 1rem;
+        height: 1rem;
+        /* Unchecked: an outline only. A filled box nearly matched its own border
+           in dark mode and read as a grey block. */
+        background-color: transparent;
+        box-shadow: inset 0 0 0 1px var(--kinetics-control-border);
+        transition: background-color 150ms ease, box-shadow 150ms ease;
+
+        &:checked,
+        &:indeterminate {
+            background-color: var(--kinetics-primary-button);
+            box-shadow: none;
+        }
+
+        &:focus-visible {
+            box-shadow: inset 0 0 0 1px var(--kinetics-primary), 0 0 0 3px var(--kinetics-primary-ring);
+        }
+    }
+
+    input[type='checkbox'].fi-checkbox-input {
+        border-radius: 0.25rem;
+    }
+
+    /* A label beside a checkbox or toggle is body text (14px on a 20px line),
+       not a small field label, so the control sits level with it. */
+    .fi-fo-field-label:has(> .fi-checkbox-input) .fi-fo-field-label-content,
+    .fi-fo-field-label:has(> .fi-toggle) .fi-fo-field-label-content {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 400;
+    }
+
+    /* Centre the 18px switch on that 20px line. */
+    .fi-fo-field-label > .fi-toggle {
+        margin-block: 0.0625rem;
+    }
+
+    /* ─── Toggles ───
+     * A compact switch: 32×18 with a 14px thumb and no shadow.
+     */
+
+    .fi-toggle {
+        height: 1.125rem;
+        width: 2rem;
+        border-width: 2px;
+        background: var(--kinetics-input-border);
+
+        &.fi-color {
+            --bg: var(--kinetics-primary-button) !important;
+            --dark-bg: var(--kinetics-primary-button) !important;
+        }
+
+        & > :first-child {
+            width: 0.875rem;
+            height: 0.875rem;
+            box-shadow: none;
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 3px var(--kinetics-primary-ring);
+            --tw-ring-shadow: 0 0 #0000;
+        }
+    }
+
+    /* Filament slides the thumb 20px for its larger switch; this one travels
+       14px (the 28px track minus the 14px thumb). */
+    .fi-toggle.fi-toggle-on > :first-child {
+        --tw-translate-x: 0.875rem;
+    }
+
+    [dir='rtl'] .fi-toggle.fi-toggle-on > :first-child {
+        --tw-translate-x: -0.875rem;
+    }
+
+    /* ─── Tabs ───
+     * Standalone tabs are a segmented control, like the theme switcher: a muted
+     * track with the active tab raised. Tabs inside a card are underlined.
+     */
+
+    .fi-tabs:not(.fi-contained) {
+        gap: 0.125rem;
+        padding: 0.1875rem;
+        border-radius: 0.5rem;
+        background: var(--kinetics-muted);
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+
+        & .fi-tabs-item {
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.8125rem;
+
+            &.fi-active {
+                background: var(--kinetics-card);
+                box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.08);
+            }
+
+            &:not(.fi-active):hover {
+                background: transparent;
+            }
+        }
+    }
+
+    .fi-tabs.fi-contained {
+        gap: 1rem;
+        padding-block: 0;
+        border-color: var(--kinetics-card-border);
+
+        & .fi-tabs-item {
+            padding: 0.75rem 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: inset 0 -2px 0 transparent;
+            font-size: 0.875rem;
+
+            &.fi-active {
+                box-shadow: inset 0 -2px 0 var(--kinetics-primary-text);
+            }
+        }
+    }
+
+    .fi-tabs-item {
+        & .fi-tabs-item-label,
+        & > .fi-icon {
+            color: var(--kinetics-muted-foreground);
+            transition: color 150ms ease;
+        }
+
+        &:hover .fi-tabs-item-label,
+        &:hover > .fi-icon {
+            color: var(--kinetics-foreground);
+        }
+
+        &.fi-active .fi-tabs-item-label,
+        &.fi-active > .fi-icon {
+            color: var(--kinetics-foreground);
+        }
+
+        & > .fi-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    /* ─── Select menus ─── */
+
+    .fi-select-input-option {
+        padding: 0.375rem 0.625rem;
+
+        &:hover,
+        &.fi-focused {
+            background: var(--kinetics-muted);
+        }
+
+        &.fi-selected,
+        &[aria-selected='true'] {
+            color: var(--kinetics-primary-text);
+            font-weight: 500;
+        }
+    }
+
+    /* ─── Date picker ─── */
+
+    .fi-fo-date-time-picker-panel {
+        padding: 0.75rem;
+    }
+
+    .fi-fo-date-time-picker-calendar-header-day {
+        font-size: 0.6875rem;
+        font-weight: 500;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    .fi-fo-date-time-picker-calendar-day {
+        border-radius: 0.375rem;
+        font-size: 0.8125rem;
+
+        &.fi-focused:not(.fi-selected) {
+            background: var(--kinetics-muted);
+        }
+
+        &.fi-selected {
+            background: var(--kinetics-primary-button);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        &.fi-fo-date-time-picker-calendar-day-today:not(.fi-selected) {
+            color: var(--kinetics-primary-text);
+            font-weight: 600;
+        }
+    }
+
+    /* ─── Empty states ─── */
+
+    .fi-empty-state {
+        padding-block: 3rem;
+
+        & .fi-empty-state-icon-bg {
+            padding: 0.625rem;
+            background: var(--kinetics-muted);
+
+            & .fi-icon {
+                width: 1.25rem;
+                height: 1.25rem;
+                color: var(--kinetics-muted-foreground);
+            }
+        }
+
+        & .fi-empty-state-heading {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--kinetics-foreground);
+        }
+
+        & .fi-empty-state-description {
+            font-size: 0.8125rem;
+            color: var(--kinetics-muted-foreground);
+        }
+    }
+
+    /* ─── Tooltips ───
+     * Inverted (ink background, light text), small and quick.
+     */
+
+    .tippy-box,
+    .tippy-box[data-theme~='light'] {
+        --tippy-background-color: var(--kinetics-foreground);
+        color: var(--kinetics-card);
+        font-size: 0.6875rem;
+        line-height: 1rem;
+        border-radius: 0.25rem;
+        box-shadow: none;
+
+        & .tippy-content {
+            padding: 0.25rem 0.5rem;
+        }
+    }
+
+    /* ─── Stats widgets ─── */
+
+    .fi-wi-stats-overview-stat {
+        padding: 1.25rem;
+
+        & .fi-wi-stats-overview-stat-label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--kinetics-muted-foreground);
+        }
+
+        & .fi-wi-stats-overview-stat-value {
+            font-size: 1.625rem;
+            line-height: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums;
+            color: var(--kinetics-foreground);
+        }
+
+        & .fi-wi-stats-overview-stat-description {
+            font-size: 0.8125rem;
+        }
+    }
+
+    /* ─── Dialogs ─── */
+
+    .fi-modal-window {
+        background: var(--kinetics-card);
+        border-radius: 0.75rem;
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--kinetics-foreground) 10%, transparent), 0 20px 40px -16px rgb(0 0 0 / 0.25);
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-modal-slide-over .fi-modal-window {
+        border-radius: 0;
+    }
+
+    .fi-modal-heading {
+        font-size: 1rem;
+        line-height: 1.25;
+        font-weight: 500;
+        color: var(--kinetics-foreground);
+    }
+
+    .fi-modal-description {
+        font-size: 0.875rem;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    .fi-modal-close-overlay {
+        background: rgb(0 0 0 / 0.3);
+        transition-duration: 200ms;
+        transition-timing-function: var(--kinetics-ease-out);
+    }
+
+    /* ─── Motion ───
+     * Kept under 300ms, eased out, and only on transform and opacity.
+     */
+
+    /* Icon buttons and page numbers press in like buttons do. */
+    .fi-icon-btn,
+    .fi-pagination-item-btn {
+        transition: scale 150ms var(--kinetics-ease-out), background-color 150ms ease, color 150ms ease;
+
+        &:active:not(:disabled) {
+            scale: 0.97;
+        }
+    }
+
+    /* Dropdowns grow from their trigger (from 0.96, never from 0) as they fade. */
+    .fi-dropdown-panel {
+        transform-origin: top center;
+        transition:
+            opacity 150ms var(--kinetics-ease-out),
+            scale 150ms var(--kinetics-ease-out);
+
+        &.fi-opacity-0 {
+            scale: 0.96;
+        }
+    }
+
+    .fi-ta-ctn .fi-dropdown-panel {
+        transform-origin: top right;
+    }
+
+    .fi-sidebar .fi-user-menu .fi-dropdown-panel {
+        transform-origin: bottom right;
+    }
+
+    /* Search results follow every keystroke: no animation. */
+    .fi-global-search-results-ctn {
+        transition: none;
+    }
+
+    /* Modals: 200ms in, 150ms out, eased out, from 0.95 (Filament's scale). */
+    .fi-modal .fi-modal-window.fi-transition-enter {
+        transition-duration: 200ms;
+        transition-timing-function: var(--kinetics-ease-out);
+    }
+
+    .fi-modal .fi-modal-window.fi-transition-leave {
+        transition-duration: 150ms;
+        transition-timing-function: var(--kinetics-ease-out);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .fi-btn,
+        .fi-icon-btn,
+        .fi-pagination-item-btn,
+        .fi-dropdown-panel,
+        .fi-modal-window {
+            scale: none;
+            translate: none;
+        }
+    }
+
+    /* ─── Notifications ─── */
+
+    .fi-no-notification {
+        & .fi-no-notification-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--kinetics-foreground);
+        }
+
+        & .fi-no-notification-body {
+            font-size: 0.8125rem;
+            color: var(--kinetics-muted-foreground);
+        }
+
+        background: var(--kinetics-card);
+        border: 1px solid var(--kinetics-border);
+        border-radius: var(--kinetics-radius);
+        box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.18);
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    /* ─── Sign-in and other auth pages ───
+     * No card: a narrow centred column on the canvas, like the app's surfaces.
+     * The fields carry their own edges, so the form reads without a box.
+     */
+
+    .fi-simple-layout {
+        background: var(--kinetics-canvas);
+    }
+
+    .fi-simple-main {
+        max-width: 22.5rem;
+        margin-block: 0;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        --tw-ring-shadow: 0 0 #0000;
+    }
+
+    .fi-simple-header {
+        margin-bottom: 0.5rem;
+
+        & .fi-logo {
+            margin-bottom: 1.5rem;
+            font-size: 1.0625rem;
+        }
+    }
+
+    .fi-simple-header-heading {
+        font-size: 1.375rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        color: var(--kinetics-foreground);
+    }
+
+    .fi-simple-header-subheading {
+        font-size: 0.875rem;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    .fi-simple-footer {
+        padding: 1.5rem 1rem;
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--kinetics-muted-foreground);
+    }
+
+    /* ─── Selection ─── */
+
+    ::selection {
+        background: color-mix(in oklab, var(--kinetics-primary) 15%, transparent);
+    }
+
+    .dark ::selection {
+        background: color-mix(in oklab, var(--kinetics-primary) 30%, transparent);
+    }
+}

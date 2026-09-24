@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "tailwindcss --input resources/css/theme.css --output resources/dist/kinetics.css --minify"
+    },
+    "devDependencies": {
+        "@tailwindcss/cli": "4.3.3",
+        "tailwindcss": "4.3.3"
+    }
+}

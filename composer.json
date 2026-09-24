@@ -1,0 +1,63 @@
+{
+    "name": "otatechie/filament-kinetics",
+    "description": "A calm, compact theme for Filament admin panels.",
+    "keywords": [
+        "laravel",
+        "filamentphp",
+        "filament",
+        "filament-plugin",
+        "filament-theme",
+        "theme"
+    ],
+    "homepage": "https://github.com/otatechie/filament-kinetics",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "otatechie"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "filament/filament": "^5.8.3",
+        "mallardduck/blade-lucide-icons": "^2.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.14",
+        "orchestra/testbench": "^10.0||^11.0",
+        "pestphp/pest": "^4.0||^5.0",
+        "pestphp/pest-plugin-laravel": "^4.0||^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Otatechie\\Kinetics\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Otatechie\\Kinetics\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Otatechie\\Kinetics\\KineticsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/otatechie/filament-kinetics/issues",
+        "source": "https://github.com/otatechie/filament-kinetics"
+    }
+}
