@@ -2,7 +2,7 @@
 
 [![Latest release](https://img.shields.io/packagist/v/otatechie/filament-kinetics?label=release)](https://packagist.org/packages/otatechie/filament-kinetics)
 [![Downloads](https://img.shields.io/packagist/dt/otatechie/filament-kinetics)](https://packagist.org/packages/otatechie/filament-kinetics/stats)
-[![License](https://img.shields.io/packagist/l/otatechie/filament-kinetics)](LICENSE.md)
+[![License](https://img.shields.io/packagist/l/otatechie/filament-kinetics)](https://github.com/otatechie/filament-kinetics/blob/main/LICENSE.md)
 
 A calm, compact theme for [Filament 5](https://filamentphp.com) admin panels.
 
@@ -10,7 +10,7 @@ A calm, compact theme for [Filament 5](https://filamentphp.com) admin panels.
 marketplace admin with sample data on every page. The sign-in is filled in, and
 the data resets on every deploy, so click anything.
 
-![Kinetics in light mode: the Orders page of a marketplace admin, on a rounded panel beside the sidebar](docs/images/orders-light.png)
+![Kinetics in light mode: the Orders page of a marketplace admin, on a rounded panel beside the sidebar](https://raw.githubusercontent.com/otatechie/filament-kinetics/main/docs/images/orders-light.png)
 
 Pages sit on a quiet canvas as one rounded panel. Tables have no lines,
 controls are compact, and motion is quick and eased out. Kinetics takes its
@@ -38,7 +38,7 @@ colours from your panel and stays out of the way of your own Tailwind classes.
   buttons and links use the 700 shade so text passes contrast checks.
 - **Setup checks.** A missing theme or wrong import order tells you what to fix.
 
-![Kinetics in dark mode: the same Orders page on warm charcoal surfaces](docs/images/orders-dark.png)
+![Kinetics in dark mode: the same Orders page on warm charcoal surfaces](https://raw.githubusercontent.com/otatechie/filament-kinetics/main/docs/images/orders-dark.png)
 
 ## Compatibility
 
@@ -83,37 +83,99 @@ $panel
 npm run build
 ```
 
-[Installation](docs/installation.md) covers each step in detail, including
+[Installation](https://github.com/otatechie/filament-kinetics/blob/main/docs/installation.md) covers each step in detail, including
 multiple panels, updating and removing.
+
+## Customising
+
+**Colours** come from your panel. Change `primary` and buttons, links, focus
+rings, the current page, toggles and checkboxes all follow; `gray` sets the
+light-mode surfaces and text:
+
+```php
+use Filament\Support\Colors\Color;
+
+$panel
+    ->plugin(KineticsPlugin::make())
+    ->colors([
+        'primary' => Color::Teal,
+        'gray' => Color::Stone,
+    ]);
+```
+
+**Anything the plugin sets**, such as the font, the top bar or the content
+width, you can change by calling the panel method after the plugin:
+
+```php
+$panel
+    ->plugin(KineticsPlugin::make())
+    ->font('Inter')
+    ->topbar();
+```
+
+**Everything else** is a CSS variable. Set them in your `theme.css` after the
+Kinetics import, light values on `:root` and dark ones on `.dark`:
+
+```css
+:root {
+    --kinetics-radius: 0.75rem;
+}
+
+.dark {
+    --kinetics-panel: #1c1c1c;
+}
+```
+
+| Variable | Used for |
+|---|---|
+| `--kinetics-radius` | Corners of cards, inputs, modals and dropdowns |
+| `--kinetics-canvas` | The page behind the sidebar and panel |
+| `--kinetics-panel` | The rounded content panel |
+| `--kinetics-card` | Sections, inputs, modals, dropdowns and notifications |
+| `--kinetics-foreground` | Main text |
+| `--kinetics-muted-foreground` | Secondary text, placeholders and labels |
+| `--kinetics-border` | Dividers and dropdown edges |
+
+[Customising](https://github.com/otatechie/filament-kinetics/blob/main/docs/customising.md) lists every setting and variable, with
+their light and dark values.
 
 ## Documentation
 
 **Getting started**
 
-- [Installation](docs/installation.md): requirements, setup, multiple panels,
+- [Installation](https://github.com/otatechie/filament-kinetics/blob/main/docs/installation.md): requirements, setup, multiple panels,
   updating and removing
-- [Troubleshooting](docs/troubleshooting.md): what each warning means, and
+- [Troubleshooting](https://github.com/otatechie/filament-kinetics/blob/main/docs/troubleshooting.md): what each warning means, and
   fixes for common problems
 
 **Using Kinetics**
 
-- [Customising](docs/customising.md): what the plugin sets, colours, font,
+- [Customising](https://github.com/otatechie/filament-kinetics/blob/main/docs/customising.md): what the plugin sets, colours, font,
   layout, icons, notifications, every variable, dark mode, and styling your
   own pages
-- [Components](docs/components.md): how each part of Filament is styled
+- [Components](https://github.com/otatechie/filament-kinetics/blob/main/docs/components.md): how each part of Filament is styled
 
 **Background**
 
-- [Design principles](docs/design-principles.md): the decisions behind the look
-- [Motion](docs/motion.md): timing, easing and reduced motion
-- [Accessibility](docs/accessibility.md): contrast, focus, keyboard use and
+- [Design principles](https://github.com/otatechie/filament-kinetics/blob/main/docs/design-principles.md): the decisions behind the look
+- [Motion](https://github.com/otatechie/filament-kinetics/blob/main/docs/motion.md): timing, easing and reduced motion
+- [Accessibility](https://github.com/otatechie/filament-kinetics/blob/main/docs/accessibility.md): contrast, focus, keyboard use and
   notifications
 
 **Contributing**
 
-- [Development](docs/development.md): how the package is organised, the CSS
+- [Development](https://github.com/otatechie/filament-kinetics/blob/main/docs/development.md): how the package is organised, the CSS
   rules, testing and releasing
-- [Changelog](CHANGELOG.md)
+- [Changelog](https://github.com/otatechie/filament-kinetics/blob/main/CHANGELOG.md)
+
+## Support
+
+Found a bug or stuck on setup? [Open an issue](https://github.com/otatechie/filament-kinetics/issues/new/choose)
+with your Filament and Kinetics versions
+(`composer show filament/filament otatechie/filament-kinetics`), your
+`theme.css` and your panel provider. [Troubleshooting](https://github.com/otatechie/filament-kinetics/blob/main/docs/troubleshooting.md)
+covers the common problems first. For security issues, see
+[SECURITY.md](https://github.com/otatechie/filament-kinetics/blob/main/SECURITY.md) instead.
 
 ## Credits
 
@@ -124,4 +186,4 @@ Font License.
 
 ## License
 
-MIT. See [LICENSE.md](LICENSE.md).
+MIT. See [LICENSE.md](https://github.com/otatechie/filament-kinetics/blob/main/LICENSE.md).
