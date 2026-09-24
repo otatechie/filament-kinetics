@@ -11,6 +11,18 @@ composer update otatechie/filament-kinetics
 npm run build
 ```
 
+## From 0.4 to 0.5
+
+### Modals have no icons, and confirmations aren't centred
+
+**Affects you if** you rely on the icon beside a modal's heading, or on
+confirmations such as Delete being centred.
+
+Kinetics now aligns every modal to the start and hides the icon beside the
+heading. To centre one action's modal again, call `->modalAlignment()` and
+`->modalFooterActionsAlignment()` on it. To show icons again, see
+[Customising: Modals](customising.md#modals).
+
 ## From 0.3 to 0.4
 
 ### Navigation groups no longer collapse
