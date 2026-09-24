@@ -4,7 +4,7 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## 0.3.0 - 2026-09-24
 
 ### Added
 - `resources/css/layers.css`, to import before Filament's theme in place of
@@ -20,7 +20,9 @@ All notable changes to Kinetics are recorded here. The format follows
 - The notifications panel (`->databaseNotifications()`) is a plain list on the
   panel's surface instead of stacked cards. Unread items get a dot and a
   semibold title, the time moves under the message, and dismiss buttons show on
-  hover.
+  hover. The header drops its unread count (the list's dots and the sidebar
+  button already show it) and its divider, and "Clear" stays grey until you
+  point at it.
 - The notifications button and account menu at the foot of the sidebar line up
   with the menu above.
 - Notifications appear in the bottom-right corner, clear of the page header's

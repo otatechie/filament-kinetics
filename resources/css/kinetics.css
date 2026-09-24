@@ -1445,11 +1445,32 @@
     }
 
     .fi-no-database.fi-modal .fi-modal-window {
+        /* Space alone separates the header from the list. */
+        & > .fi-modal-header {
+            border-bottom: 0;
+        }
+
+        /* The unread count is already on the sidebar button and in the list's
+           dots. */
+        & .fi-modal-heading .fi-badge {
+            display: none;
+        }
+
         & .fi-modal-header .fi-ac {
             column-gap: 1.5rem;
 
             & .fi-link {
                 font-size: 0.8125rem;
+            }
+
+            /* "Clear" deletes everything: quiet until pointed at, then red. */
+            & .fi-link.fi-color-danger {
+                color: var(--kinetics-muted-foreground);
+
+                &:hover,
+                &:focus-visible {
+                    color: var(--kinetics-destructive);
+                }
             }
         }
 

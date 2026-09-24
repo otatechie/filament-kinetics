@@ -70,7 +70,7 @@ Every button scales to 0.97 while pressed.
 | Modals | 12px corners and a hairline, sized to their form. Slide-overs stay square against the screen edge |
 | Dropdowns | 8px corners, a soft shadow, faint dividers between sections, 16px icons |
 | Notifications | Bottom-right, clear of the header's buttons. The card colour, a medium-weight title and muted body text |
-| Notifications panel | A plain list, no boxes. Unread items have a primary dot and a semibold title; read items are quieter. Title, then message, then the time. Dismiss buttons show on hover or focus, and stay visible on touch screens |
+| Notifications panel | A plain list, no boxes. Unread items have a primary dot and a semibold title; read items are quieter. Title, then message, then the time. Dismiss buttons show on hover or focus, and stay visible on touch screens. The header has no count or divider, and "Clear" is grey until hovered, then red |
 | Tooltips | Inverted (dark on light, light on dark), 11px, 4px corners, no shadow |
 
 ## Other
