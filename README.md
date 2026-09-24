@@ -55,8 +55,10 @@ Filament's installer runs it after every `composer install` and
 `composer update`, through `filament:upgrade`; if your app doesn't, run it once
 yourself.
 
-To check Kinetics loaded in the right order, run this in the browser console. It
-returns `ok`:
+Kinetics checks its setup for you. A panel without a custom theme stops with an
+error explaining what to add. If the panel has a theme but the Kinetics imports
+are missing, the browser console shows a warning. To check by hand, run this in
+the console. It returns `ok`:
 
 ```js
 getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order')

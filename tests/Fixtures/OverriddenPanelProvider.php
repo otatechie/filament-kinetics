@@ -14,6 +14,7 @@ class OverriddenPanelProvider extends PanelProvider
             ->id('overridden')
             ->path('overridden')
             ->plugin(KineticsPlugin::make())
+            ->theme('css/overridden/theme.css')
             ->topbar()
             ->breadcrumbs()
             ->font('Inter')

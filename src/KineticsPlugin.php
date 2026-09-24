@@ -9,6 +9,9 @@ use Filament\Enums\UserMenuPosition;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Panel;
 use Filament\Support\Enums\Width;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\HtmlString;
+use LogicException;
 
 class KineticsPlugin implements Plugin
 {
@@ -168,8 +171,27 @@ class KineticsPlugin implements Plugin
             ->userMenu(position: UserMenuPosition::Sidebar)
             ->userMenuItems([
                 'logout' => fn (Action $action): Action => $action->icon(null),
-            ]);
+            ])
+            // kinetics.css sets this variable, so if it's missing, so are the imports.
+            ->renderHook(PanelsRenderHook::SCRIPTS_AFTER, fn (): HtmlString => new HtmlString(<<<'HTML'
+                <script>
+                    if (getComputedStyle(document.body).getPropertyValue('--kinetics-layer-order').trim() !== 'ok') {
+                        console.warn('Kinetics: the theme CSS is missing. Add the Kinetics imports to your theme.css: https://github.com/otatechie/filament-kinetics#installation')
+                    }
+                </script>
+                HTML));
     }
 
-    public function boot(Panel $panel): void {}
+    public function boot(Panel $panel): void
+    {
+        // Without a custom theme the panel gets Kinetics' layout but Filament's
+        // look, so stop with directions instead.
+        if (blank($panel->getViteTheme()) && $panel->getTheme() === $panel->getDefaultTheme()) {
+            throw new LogicException(
+                "Kinetics needs a custom theme on the [{$panel->getId()}] panel. Run `php artisan make:filament-theme`, "
+                .'add the Kinetics imports to its theme.css, and set ->viteTheme() on the panel. '
+                .'See https://github.com/otatechie/filament-kinetics#installation',
+            );
+        }
+    }
 }

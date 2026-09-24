@@ -29,11 +29,16 @@ it('lets panel methods called after the plugin override it', function () {
         ->and($panel->getFontFamily())->toBe('Inter');
 });
 
-it('loads Open Runde on the sign-in page', function () {
+it('loads Open Runde and the load check on the sign-in page', function () {
     $this->get('/admin/login')
         ->assertOk()
-        ->assertSee('fonts/otatechie/filament-kinetics/open-runde/index.css', escape: false);
+        ->assertSee('fonts/otatechie/filament-kinetics/open-runde/index.css', escape: false)
+        ->assertSee("getPropertyValue('--kinetics-layer-order')", escape: false);
 });
+
+it('stops a panel without a custom theme', function () {
+    Filament::getPanel('themeless')->boot();
+})->throws(LogicException::class, 'Kinetics needs a custom theme');
 
 it('swaps Filament icons for Lucide when the panel boots', function () {
     Filament::getPanel('admin')->boot();

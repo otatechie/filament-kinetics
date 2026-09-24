@@ -9,6 +9,10 @@ All notable changes to Kinetics are recorded here. The format follows
 ### Added
 - `resources/css/layers.css`, to import before Filament's theme in place of
   typing the `@layer` order yourself.
+- A panel without a custom theme stops with an error explaining how to set one
+  up, instead of getting Kinetics' layout with Filament's look.
+- A browser console warning when the panel's theme is missing the Kinetics
+  imports.
 
 ### Changed
 - Lucide icons are set through the panel's `->icons()`, so an `->icons()` call

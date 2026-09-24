@@ -19,6 +19,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Otatechie\Kinetics\KineticsServiceProvider;
 use Otatechie\Kinetics\Tests\Fixtures\AdminPanelProvider;
 use Otatechie\Kinetics\Tests\Fixtures\OverriddenPanelProvider;
+use Otatechie\Kinetics\Tests\Fixtures\ThemelessPanelProvider;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 abstract class TestCase extends Orchestra
@@ -43,6 +44,7 @@ abstract class TestCase extends Orchestra
             KineticsServiceProvider::class,
             AdminPanelProvider::class,
             OverriddenPanelProvider::class,
+            ThemelessPanelProvider::class,
         ];
     }
 

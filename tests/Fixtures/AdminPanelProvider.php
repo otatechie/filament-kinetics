@@ -15,6 +15,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->plugin(KineticsPlugin::make());
+            ->plugin(KineticsPlugin::make())
+            ->theme('css/admin/theme.css');
     }
 }
