@@ -364,7 +364,7 @@ in light and dark mode. In Blade, with Tailwind:
 
 ```blade
 <p class="text-sm text-(--kinetics-muted-foreground)">
-    Paystack pays sellers the next working day.
+    Sellers are paid the next working day.
 </p>
 
 <div class="rounded-(--kinetics-radius) bg-(--kinetics-card) p-4">
