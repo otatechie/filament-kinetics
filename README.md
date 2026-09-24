@@ -106,11 +106,6 @@ multiple panels, updating and removing.
   rules, testing and releasing
 - [Changelog](CHANGELOG.md)
 
-## Demo
-
-The screenshots come from the [Kinetics demo](https://github.com/otatechie/kinetics-demo),
-a small marketplace admin with realistic data on every page.
-
 ## Credits
 
 Motion follows [Emil Kowalski](https://emilkowal.ski/ui/7-practical-animation-tips).

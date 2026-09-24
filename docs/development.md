@@ -49,9 +49,8 @@ composer require otatechie/filament-kinetics:@dev
 Then set the app up as in [Installation](installation.md), and keep
 `npm run dev` running, or run `npm run build` after each change.
 
-The [demo app](https://github.com/otatechie/kinetics-demo) is set up this way, with
-realistic data on every page. `php artisan db:seed --class=DemoDataSeeder`
-resets it.
+It helps to have realistic data on every page (long names, empty states,
+every status), so tables, badges and forms get tested the way people use them.
 
 ## CSS rules
 
@@ -124,5 +123,4 @@ allowed versions, every push and every Monday. Pint must pass too.
 3. Tag and push: `git tag -a v0.4.0 -m "v0.4.0" && git push origin v0.4.0`.
 4. Create the GitHub release from the tag, with that version's changelog
    entry as the notes. Mark it **Latest**, not pre-release.
-5. Release the demo app with the same version and a short note on what it
-   shows.
+5. If you keep a demo app, release it with the same version.
