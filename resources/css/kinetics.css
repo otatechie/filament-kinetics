@@ -48,13 +48,13 @@
         --kinetics-canvas: color-mix(in oklab, var(--gray-100) 70%, var(--gray-200));
         --kinetics-panel: var(--gray-50);
         --kinetics-panel-border: var(--gray-200);
-        /* Motion (Emil Kowalski): ease-out for anything entering or leaving. */
+        /* Motion: ease-out for anything entering or leaving. */
         --kinetics-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .dark {
-        /* Charcoal with a hint of sepia (as in Anthropic's dark mode) and
-           off-white text. Surfaces are fixed; the primary colour follows ->colors(). */
+        /* Charcoal with a hint of sepia, and off-white text. Surfaces are
+           fixed; the primary colour follows ->colors(). */
         --kinetics-background: #1a1918;
         --kinetics-foreground: #e9e7e3;
         --kinetics-card: #292826;

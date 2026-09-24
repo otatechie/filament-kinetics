@@ -181,13 +181,6 @@ with your Filament and Kinetics versions
 covers the common problems first. For security issues, see
 [SECURITY.md](https://github.com/otatechie/filament-kinetics/blob/main/SECURITY.md) instead.
 
-## Credits
-
-Motion follows [Emil Kowalski](https://emilkowal.ski/ui/7-practical-animation-tips).
-Icons by [Lucide](https://lucide.dev). Open Runde by
-[Laurids Kern](https://github.com/lauridskern/open-runde), under the SIL Open
-Font License.
-
 ## License
 
 MIT. See [LICENSE.md](https://github.com/otatechie/filament-kinetics/blob/main/LICENSE.md).
