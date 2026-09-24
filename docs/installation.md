@@ -155,8 +155,7 @@ npm run build
 
 Kinetics' CSS is built into your own theme, so **rebuild after every update**,
 or you'll keep the previous version. Read the [changelog](../CHANGELOG.md)
-first, and [Upgrading](upgrading.md) for versions that need changes on your
-side.
+first.
 
 ## Removing
 

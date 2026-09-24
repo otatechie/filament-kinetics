@@ -16,10 +16,6 @@ Pages sit on a quiet canvas as one rounded panel. Tables have no lines,
 controls are compact, and motion is quick and eased out. Kinetics takes its
 colours from your panel and stays out of the way of your own Tailwind classes.
 
-Kinetics follows semantic versioning: updates within 1.x won't need changes
-on your side. See [Upgrading](docs/upgrading.md) when you move between major
-versions.
-
 ## What you get
 
 - **A calmer layout.** No top bar: search, notifications and the account menu
@@ -98,7 +94,6 @@ multiple panels, updating and removing.
   updating and removing
 - [Troubleshooting](docs/troubleshooting.md): what each warning means, and
   fixes for common problems
-- [Upgrading](docs/upgrading.md): what to change between versions
 
 **Using Kinetics**
 

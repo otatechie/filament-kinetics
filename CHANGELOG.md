@@ -6,9 +6,7 @@ All notable changes to Kinetics are recorded here. The format follows
 
 ## 1.0.0 - 2026-09-24
 
-The first stable release. It's 0.5.1 with a stability promise: updates
-within 1.x won't need changes on your side. Upgrading from 0.5 needs nothing
-but the version constraint; see [Upgrading](docs/upgrading.md#from-05-to-10).
+The first release.
 
 ## 0.5.1 - 2026-09-24
 
@@ -74,7 +72,8 @@ but the version constraint; see [Upgrading](docs/upgrading.md#from-05-to-10).
 
 ### Changed
 - Navigation groups no longer collapse, so there are no arrows beside group
-  headings. See [Upgrading](docs/upgrading.md#from-03-to-04) to bring them back.
+  headings. `->collapsibleNavigationGroups()` after the plugin brings them
+  back.
 - The unread dot in the notifications panel is neutral, so the primary colour
   only marks things you can act on.
 - The README has a compatibility table and badges.
@@ -83,7 +82,7 @@ but the version constraint; see [Upgrading](docs/upgrading.md#from-05-to-10).
 
 ### Added
 - Guides for [installation](docs/installation.md),
-  [troubleshooting](docs/troubleshooting.md), [upgrading](docs/upgrading.md) and
+  [troubleshooting](docs/troubleshooting.md), upgrading and
   [development](docs/development.md), a reference of everything the plugin sets,
   recipes for styling your own pages and adding a sign-in footer, and
   screenshots in the README.
