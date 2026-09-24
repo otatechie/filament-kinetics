@@ -4,6 +4,12 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.2.2 - 2026-09-24
+
+### Fixed
+- Clearing a search no longer shows the row of active filters for a moment
+  before it disappears.
+
 ## 1.2.1 - 2026-09-24
 
 ### Changed

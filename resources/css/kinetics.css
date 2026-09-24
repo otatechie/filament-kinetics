@@ -679,9 +679,10 @@
     }
 
     /* With only a search on, the row just repeats the search box, so hide it.
-       While the box has text, the search is always one of the badges, so a
-       single badge means nothing else is on. */
-    .fi-ta-ctn:has(.fi-ta-search-field input:not(:placeholder-shown)) .fi-ta-filter-indicators:has(.fi-ta-filter-indicators-badges-ctn > .fi-badge:only-child) {
+       The search badge is the one whose remove button resets the search. It
+       goes by the badge rather than the box, which empties before the badge
+       does and would show the row for a moment. */
+    .fi-ta-filter-indicators:has(.fi-ta-filter-indicators-badges-ctn > .fi-badge:only-child [wire\:click="resetTableSearch"]) {
         display: none;
     }
 
