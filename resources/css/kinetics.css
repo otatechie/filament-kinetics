@@ -1218,6 +1218,13 @@
         }
     }
 
+    /* On, the track takes the primary colour; without this the grey off track
+       above would cover Filament's, and on and off would differ only by where
+       the thumb sits. */
+    .fi-toggle.fi-toggle-on {
+        background: var(--kinetics-primary-button);
+    }
+
     /* Filament slides the thumb 20px for its larger switch; this one travels
        14px (the 28px track minus the 14px thumb). */
     .fi-toggle.fi-toggle-on > :first-child {

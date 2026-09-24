@@ -4,6 +4,12 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.3.2 - 2026-09-24
+
+### Fixed
+- Switches that are on show the primary colour again. Kinetics' grey track
+  covered it, so on and off differed only by where the thumb sat.
+
 ## 1.3.1 - 2026-09-24
 
 ### Fixed
