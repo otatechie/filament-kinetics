@@ -17,6 +17,7 @@ jobs:
         php: ['8.3', '8.4']
         laravel: ['12.*', '13.*']
         stability: [prefer-lowest, prefer-stable]
+        filament: ['^5.8.3']
         include:
           - laravel: '12.*'
             testbench: '10.*'
@@ -38,7 +39,7 @@ jobs:
             filament: '^4.13.3'
             stability: prefer-stable
 
-    name: PHP ${{ matrix.php }} · Laravel ${{ matrix.laravel }} · Filament ${{ matrix.filament || '^5.8.3' }} · ${{ matrix.stability }}
+    name: PHP ${{ matrix.php }} · Laravel ${{ matrix.laravel }} · Filament ${{ matrix.filament }} · ${{ matrix.stability }}
 
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +52,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/filament:${{ matrix.filament || '^5.8.3' }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "filament/filament:${{ matrix.filament }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Run tests
