@@ -4,7 +4,7 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## 1.5.3 - 2026-09-25
 
 ### Changed
 - A link's underline is faint at rest, 35% of its colour, and turns full
