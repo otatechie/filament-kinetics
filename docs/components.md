@@ -28,6 +28,7 @@ How Kinetics styles each part of Filament. Sizes are at the default text size.
 | Outlined (`->outlined()`) | A 1px border in the button's colour, and a faint tint on hover |
 | Disabled | Grey and flat whatever the colour, with a not-allowed cursor |
 | In a dropdown | A text link in the primary colour |
+| Text links | No underline until pointed at or focused, then a 2px underline 4px below the text |
 | Sizes | xs 32px, sm 36px, md 40px, lg 44px, xl 48px. In the page header, md is 32px |
 
 Every button scales to 0.97 while pressed.

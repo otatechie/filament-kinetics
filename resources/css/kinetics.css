@@ -1042,8 +1042,9 @@
         --dark-text: var(--kinetics-primary-text) !important;
         --dark-hover-text: var(--kinetics-primary-text) !important;
 
-        &:hover {
+        &:is(:hover, :focus-visible) {
             text-decoration: underline;
+            text-decoration-thickness: 2px;
             text-underline-offset: 4px;
         }
 
@@ -1054,11 +1055,14 @@
 
     .fi-link.fi-color-primary {
         color: var(--kinetics-primary-text);
-        text-underline-offset: 4px;
+    }
 
-        &:hover {
-            text-decoration: underline;
-        }
+    /* Every text link underlines the same way on hover and keyboard focus:
+       2px, a little below the text, like links in the sign-in footer. */
+    .fi-link:not(.fi-disabled):not([disabled]):is(:hover, :focus-visible) {
+        text-decoration-line: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
     }
 
     /* Actions on each table row are quiet, so the row's data is what reads,
@@ -2190,9 +2194,9 @@
         & a {
             color: var(--kinetics-primary-text);
             text-decoration: underline;
-            text-underline-offset: 2px;
+            text-underline-offset: 4px;
 
-            &:hover {
+            &:is(:hover, :focus-visible) {
                 text-decoration-thickness: 2px;
             }
         }
