@@ -4,6 +4,13 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Changed
+- A link's underline is faint at rest, 35% of its colour, and turns full
+  colour and 2px on hover and keyboard focus, so pointing at a link is
+  obvious and the underlines don't compete with the text.
+
 ## 1.5.2 - 2026-09-25
 
 ### Changed

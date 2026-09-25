@@ -1044,10 +1044,12 @@
 
         text-decoration: underline;
         text-decoration-thickness: 1px;
+        text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
         text-underline-offset: 4px;
 
         &:is(:hover, :focus-visible) {
             text-decoration-thickness: 2px;
+            text-decoration-color: currentColor;
         }
 
         &:active {
@@ -1060,15 +1062,17 @@
     }
 
     /* Every text link is underlined, so it reads as a link without pointing
-       at it, and the line thickens on hover and keyboard focus, like the
-       sign-in footer's. */
+       at it. At rest the line is faint, so it doesn't compete with the text;
+       on hover and keyboard focus it's the full colour and 2px. */
     .fi-link {
         text-decoration-line: underline;
         text-decoration-thickness: 1px;
+        text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
         text-underline-offset: 4px;
 
         &:not(.fi-disabled):not([disabled]):is(:hover, :focus-visible) {
             text-decoration-thickness: 2px;
+            text-decoration-color: currentColor;
         }
     }
 
@@ -2202,10 +2206,12 @@
             color: var(--kinetics-primary-text);
             text-decoration: underline;
             text-decoration-thickness: 1px;
+            text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
             text-underline-offset: 4px;
 
             &:is(:hover, :focus-visible) {
                 text-decoration-thickness: 2px;
+                text-decoration-color: currentColor;
             }
         }
     }
