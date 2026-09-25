@@ -4,6 +4,17 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Changed
+- Actions on table rows are muted, text and icon, and take their own colour
+  when pointed at or focused: the primary colour for Edit, red for Delete.
+  Filament coloured them differently from page to page, and a red Delete on
+  every row drew the eye to the action least wanted by mistake.
+- Coloured badges are tinted with the 100 shade instead of 50 in light mode.
+  The 50 tint was nearly the panel's colour, so a badge read as coloured
+  text.
+
 ## 1.4.0 - 2026-09-25
 
 ### Added

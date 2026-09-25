@@ -14,7 +14,7 @@ How Kinetics styles each part of Filament. Sizes are at the default text size.
 | Active menu item | Primary colour and semibold, no background |
 | Collapsed sidebar | One centred column of icons, 40px targets |
 | Notifications button | At the foot of the sidebar, styled like a menu item, with the unread count as a badge |
-| Top bar (when turned on) | On the canvas, no divider. Icon buttons are 36px and muted. Badges are ringed in the canvas colour, and the last button leaves room for its badge at the window's edge |
+| Top bar (when turned on) | On the canvas, no divider. Icon buttons are 36px and muted, with 18px icons. Badges are ringed in the canvas colour, and the last button leaves room for its badge at the window's edge |
 | Account menu | At the foot of the sidebar: 24px avatar centred on the menu's icons, name in line with the menu's labels, 200px menu, a small segmented theme switcher |
 
 ## Buttons
@@ -59,6 +59,7 @@ Every button scales to 0.97 while pressed.
 | Sort arrows | 14px, muted |
 | Toolbar | A 36px search box. The filter count only shows while filters are on |
 | Wide tables | A soft shadow on each side that has more to scroll to, since macOS hides scrollbars. It disappears when you reach that end |
+| Row actions | Muted text and icon on every row, so the row's data is what reads. Each takes its own colour when pointed at or focused: the primary colour for Edit, red for Delete |
 | Pagination | The count on the left, small and muted. On the right, a borderless per-page select and page numbers as quiet buttons, with the current page in the primary colour |
 
 ## Tabs
@@ -82,7 +83,7 @@ Every button scales to 0.97 while pressed.
 
 | Part | Style |
 |---|---|
-| Badges | Fully rounded, tinted background, coloured text |
+| Badges | Fully rounded, coloured text on a tint of the same colour (the 100 shade in light mode), so the badge's shape shows against the panel |
 | Stats widgets | Large semibold figures with even-width digits, muted labels |
 | Empty states | A small icon in a muted circle, a 15px heading, muted description |
 | Sign-in page | No card: a 360px column on the canvas. An optional footer is styled if you add one; see [Customising](customising.md#a-footer-on-the-sign-in-page) |

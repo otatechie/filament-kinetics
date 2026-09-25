@@ -827,6 +827,16 @@
             background: var(--kinetics-muted);
             color: var(--kinetics-foreground);
         }
+
+        /* Filament's 50 tint is nearly the panel's colour, so a badge read as
+           coloured text rather than a badge. 100 shows the shape. */
+        &.fi-color {
+            background: var(--color-100);
+        }
+    }
+
+    .dark .fi-badge.fi-color {
+        background: color-mix(in oklab, var(--color-400) 10%, transparent);
     }
 
     /* ─── Buttons ─── */
@@ -974,6 +984,32 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    /* Actions on each table row are quiet, so the row's data is what reads,
+       and they take their own colour when pointed at or focused: the primary
+       colour for Edit, red for Delete. Filament colours them differently from
+       page to page, and a red Delete on every row pulls the eye. */
+    .fi-ta-actions .fi-link {
+        color: var(--kinetics-muted-foreground);
+
+        & > .fi-icon {
+            color: inherit;
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: var(--kinetics-foreground);
+        }
+
+        &.fi-color:hover,
+        &.fi-color:focus-visible {
+            color: var(--text);
+        }
+    }
+
+    .dark .fi-ta-actions .fi-link.fi-color:is(:hover, :focus-visible) {
+        color: var(--dark-text);
     }
 
     /* ─── Inputs ───

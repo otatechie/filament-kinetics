@@ -28,6 +28,9 @@ checkboxes and radios.
 - **Secondary text** (descriptions, codes, counts) is muted, so the main value
   in each row stands out.
 - **Destructive buttons** are a red tint, not a solid block.
+- **Actions on table rows** are muted until pointed at, so a column of Edit
+  and Delete links doesn't compete with the data, and Delete isn't red on
+  every row.
 - Inside dropdowns, buttons are **text links**, so they don't outweigh the
   options they confirm.
 
