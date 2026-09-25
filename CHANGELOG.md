@@ -13,7 +13,7 @@ All notable changes to Kinetics are recorded here. The format follows
   and where notifications appear can be changed from the panel, for
   everyone, by the people you allow. It needs a table:
   `php artisan vendor:publish --tag=kinetics-migrations`, then migrate. See
-  [Customising: The Appearance page](docs/customising.md#the-appearance-page).
+  [The Appearance page](docs/appearance-page.md).
 
 ### Changed
 - Toggle buttons in a row look like standalone tabs: one track, the chosen

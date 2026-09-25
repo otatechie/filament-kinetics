@@ -171,7 +171,7 @@ first.
    3. Run `php artisan migrate`.
 
    Keep the migration that step 1 of
-   [Turning it on](customising.md#turning-it-on) copied in, the file ending
+   [Turning it on](appearance-page.md#turning-it-on) copied in, the file ending
    in `_create_kinetics_appearance_table.php`: the new migration runs after
    it and removes the table, on every environment.
 

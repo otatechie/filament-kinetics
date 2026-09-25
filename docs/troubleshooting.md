@@ -105,11 +105,11 @@ Work through these in order:
 1. **Is the page turned on?** In your panel provider
    (`app/Providers/Filament/AdminPanelProvider.php`), the plugin line should
    include `->appearancePage(...)`, as in
-   [Turning it on](customising.md#turning-it-on). If it has
+   [Turning it on](appearance-page.md#turning-it-on). If it has
    `condition: false`, or a `condition` read from `.env` that's `false`, the
    page is off.
 2. **Is `condition` read from `.env`?** Read it through a config file, as in
-   [All the options](customising.md#all-the-options), not with `env()` in
+   [All the options](appearance-page.md#turning-it-on-and-off-from-env), not with `env()` in
    the panel provider: once the config is cached, `env()` there always gives
    the default. After changing `.env`, run `php artisan config:clear`, or
    `php artisan config:cache` again on a server that caches it.

@@ -43,16 +43,9 @@ it('loads Open Runde and the load check on the sign-in page', function () {
         ->assertSee("getPropertyValue('--kinetics-layer-order')", escape: false);
 });
 
-it('warns when the theme CSS is on a panel without the plugin', function () {
-    $this->get('/pluginless/login')
-        ->assertOk()
-        ->assertSee("KineticsPlugin isn't on this panel", escape: false);
-});
-
-it('does not warn about the plugin on a panel that has it', function () {
-    $this->get('/admin/login')
-        ->assertOk()
-        ->assertDontSee("KineticsPlugin isn't on this panel", escape: false);
+it('warns when the theme CSS is on a panel without the plugin, and only then', function () {
+    $this->get('/pluginless/login')->assertSee("KineticsPlugin isn't on this panel", escape: false);
+    $this->get('/admin/login')->assertDontSee("KineticsPlugin isn't on this panel", escape: false);
 });
 
 it('stops a panel without a custom theme', function () {

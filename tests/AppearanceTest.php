@@ -83,17 +83,16 @@ it('applies saved choices when the panel boots', function () {
         ->and(Notifications::$verticalAlignment)->toBe(VerticalAlignment::Start);
 });
 
-it('saves from the page, and resets to how the panel is set up', function () {
+it('saves only what was changed, and resets to how the panel is set up', function () {
     signInAs('owner@example.com');
 
     Livewire::test(Appearance::class)
-        ->fillForm(['radius' => 'round', 'buttons' => 'rounded', 'topbar' => true])
+        ->fillForm(['radius' => 'round', 'topbar' => true])
         ->call('save')
         ->assertHasNoFormErrors();
 
-    expect(KineticsPlugin::get()->appearance()->saved())
-        ->toMatchArray(['radius' => 'round', 'buttons' => 'rounded', 'topbar' => '1'])
-        ->and((string) KineticsPlugin::get()->appearance()->css())->toContain('--kinetics-radius: 0.75rem');
+    // Only what was changed, so the panel's code still decides the rest.
+    expect(KineticsPlugin::get()->appearance()->saved())->toBe(['radius' => 'round', 'topbar' => '1']);
 
     Livewire::test(Appearance::class)
         ->callAction(TestAction::make('reset')->schemaComponent('form-actions', schema: 'content'));
@@ -102,22 +101,20 @@ it('saves from the page, and resets to how the panel is set up', function () {
         ->and((string) KineticsPlugin::get()->appearance()->css())->toBe('');
 });
 
-it('only saves what was changed, so the code still decides the rest', function () {
-    signInAs('owner@example.com');
+it('writes CSS only for the shape choices made', function () {
+    $settings = KineticsPlugin::get()->appearance();
 
-    Livewire::test(Appearance::class)
-        ->fillForm(['radius' => 'round'])
-        ->call('save');
+    // Corners set in the theme's CSS stay until corners are chosen here.
+    $settings->save(['buttons' => 'rounded', 'field_borders' => 'strong', 'dark_style' => 'palette']);
 
-    expect(KineticsPlugin::get()->appearance()->saved())->toBe(['radius' => 'round']);
-});
-
-it('leaves corners set in the theme alone until corners are chosen', function () {
-    KineticsPlugin::get()->appearance()->save(['buttons' => 'rounded']);
-
-    expect((string) KineticsPlugin::get()->appearance()->css())
+    expect((string) $settings->css())
         ->toContain('.fi-btn { border-radius: var(--kinetics-radius); }')
+        ->toContain('.dark { --kinetics-input-border: var(--gray-600); }')
         ->not->toContain('--kinetics-radius:');
+
+    $settings->save(['radius' => 'round']);
+
+    expect((string) $settings->css())->toContain('--kinetics-radius: 0.75rem');
 });
 
 it('keeps choices made in code that the page does not offer', function () {
@@ -127,13 +124,6 @@ it('keeps choices made in code that the page does not offer', function () {
     $settings->save($settings->current(Filament::getPanel('styled')));
 
     expect($settings->saved())->not->toHaveKey('primary_color');
-});
-
-it('makes field borders stronger in dark mode too', function () {
-    KineticsPlugin::get()->appearance()->save(['field_borders' => 'strong', 'dark_style' => 'palette']);
-
-    expect((string) KineticsPlugin::get()->appearance()->css())
-        ->toContain('.dark { --kinetics-input-border: var(--gray-600); }');
 });
 
 it('keeps the saved choices to their own panel', function () {
