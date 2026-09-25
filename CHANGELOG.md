@@ -15,7 +15,20 @@ All notable changes to Kinetics are recorded here. The format follows
   The 50 tint was nearly the panel's colour, so a badge read as coloured
   text.
 
+- Success, warning, info and custom-coloured buttons are solid like
+  primary: the 700 shade with white text. Filament's bright fills with dark
+  text made green and amber the loudest buttons on a page.
+- Disabled buttons are grey and flat whatever their colour. Faded to 70%, a
+  disabled orange button looked like a lighter orange one.
+- Badge text in light mode is the 800 shade, at least 6.3:1 on its tint.
+
 ### Fixed
+- Red buttons failed contrast: red text on the red tint was 3.1:1 in light
+  mode and 4.1:1 in dark. It's 5.3:1 and 6.2:1 now.
+- Blue badges failed contrast in light mode, at 4.3:1.
+- Outlined buttons had no outline, so they looked like links.
+- Badge sizes were ignored: xs, sm and md all showed at 20px. They're 16px,
+  18px and 20px now, with lg at 24px.
 - In infolists with labels beside their values (`->inlineLabel()`), each
   label sat 3px above its value. It's on the value's baseline now.
 

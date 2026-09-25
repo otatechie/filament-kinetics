@@ -22,8 +22,11 @@ How Kinetics styles each part of Filament. Sizes are at the default text size.
 | Kind | Style |
 |---|---|
 | Primary | Solid primary (700 shade), white text, fully rounded |
+| Success, warning, info and your own colours | Solid, like primary: the 700 shade with white text |
 | Secondary | Outlined, on the background colour |
-| Destructive | A red tint with red text |
+| Destructive | A red tint with dark red text (700 in light mode, 300 in dark) |
+| Outlined (`->outlined()`) | A 1px border in the button's colour, and a faint tint on hover |
+| Disabled | Grey and flat whatever the colour, with a not-allowed cursor |
 | In a dropdown | A text link in the primary colour |
 | Sizes | xs 32px, sm 36px, md 40px, lg 44px, xl 48px. In the page header, md is 32px |
 
@@ -84,7 +87,7 @@ Every button scales to 0.97 while pressed.
 
 | Part | Style |
 |---|---|
-| Badges | Fully rounded, coloured text on a tint of the same colour (the 100 shade in light mode), so the badge's shape shows against the panel |
+| Badges | Fully rounded, coloured text on a tint of the same colour. In light mode the tint is the 100 shade and the text the 800, at least 6.3:1. Sizes: xs 16px, sm 18px, md 20px (the default), lg 24px |
 | Stats widgets | Large semibold figures with even-width digits, muted labels |
 | Empty states | A small icon in a muted circle, a 15px heading, muted description |
 | Sign-in page | No card: a 360px column on the canvas. An optional footer is styled if you add one; see [Customising](customising.md#a-footer-on-the-sign-in-page) |
