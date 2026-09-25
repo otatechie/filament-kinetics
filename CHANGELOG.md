@@ -4,6 +4,17 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+### Changed
+- On phones, actions on table rows show just their icon, so the row's data
+  has the width. The word is still there for screen readers.
+
+### Fixed
+- "Reset" in the filters panel was red, as if it deleted something. It's
+  muted until pointed at.
+- The README screenshots show the current look.
+
 ## 1.5.0 - 2026-09-25
 
 ### Changed

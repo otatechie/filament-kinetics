@@ -63,7 +63,8 @@ Every button scales to 0.97 while pressed.
 | Sort arrows | 14px, muted |
 | Toolbar | A 36px search box. The filter count only shows while filters are on |
 | Wide tables | A soft shadow on each side that has more to scroll to, since macOS hides scrollbars. It disappears when you reach that end |
-| Row actions | Muted text and icon on every row, so the row's data is what reads. Each takes its own colour when pointed at or focused: the primary colour for Edit, red for Delete |
+| Row actions | Muted text and icon on every row, so the row's data is what reads. Each takes its own colour when pointed at or focused: the primary colour for Edit, red for Delete. On phones, just the icon, with the word kept for screen readers |
+| Filters | "Reset" is muted until pointed at, not red: resetting filters loses nothing |
 | Pagination | The count on the left, small and muted. On the right, a borderless per-page select and page numbers as quiet buttons, with the current page in the primary colour |
 
 ## Tabs
