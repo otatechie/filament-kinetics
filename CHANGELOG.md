@@ -4,12 +4,13 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## 1.5.2 - 2026-09-25
 
 ### Changed
-- Every text link underlines the same way on hover and keyboard focus: 2px,
-  4px below the text. Filament's links had a thin line and the sign-in
-  footer's a thick one.
+- Every text link is underlined, so it reads as a link without pointing at
+  it, and the line thickens from 1px to 2px on hover and keyboard focus.
+  Filament's links were only underlined on hover, and the sign-in footer's
+  link differently from the rest.
 
 ## 1.5.1 - 2026-09-25
 

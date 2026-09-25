@@ -1042,10 +1042,12 @@
         --dark-text: var(--kinetics-primary-text) !important;
         --dark-hover-text: var(--kinetics-primary-text) !important;
 
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+
         &:is(:hover, :focus-visible) {
-            text-decoration: underline;
             text-decoration-thickness: 2px;
-            text-underline-offset: 4px;
         }
 
         &:active {
@@ -1057,12 +1059,17 @@
         color: var(--kinetics-primary-text);
     }
 
-    /* Every text link underlines the same way on hover and keyboard focus:
-       2px, a little below the text, like links in the sign-in footer. */
-    .fi-link:not(.fi-disabled):not([disabled]):is(:hover, :focus-visible) {
+    /* Every text link is underlined, so it reads as a link without pointing
+       at it, and the line thickens on hover and keyboard focus, like the
+       sign-in footer's. */
+    .fi-link {
         text-decoration-line: underline;
-        text-decoration-thickness: 2px;
+        text-decoration-thickness: 1px;
         text-underline-offset: 4px;
+
+        &:not(.fi-disabled):not([disabled]):is(:hover, :focus-visible) {
+            text-decoration-thickness: 2px;
+        }
     }
 
     /* Actions on each table row are quiet, so the row's data is what reads,
@@ -2194,6 +2201,7 @@
         & a {
             color: var(--kinetics-primary-text);
             text-decoration: underline;
+            text-decoration-thickness: 1px;
             text-underline-offset: 4px;
 
             &:is(:hover, :focus-visible) {
