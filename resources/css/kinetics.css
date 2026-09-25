@@ -1091,6 +1091,12 @@
         color: var(--kinetics-muted-foreground);
     }
 
+    /* A label beside its value sits on the value's baseline: the smaller
+       label, aligned to the top, sat 3px above it. */
+    .fi-in-entry.fi-in-entry-has-inline-label {
+        align-items: baseline;
+    }
+
     input:-webkit-autofill {
         -webkit-text-fill-color: var(--kinetics-foreground);
         box-shadow: inset 0 0 0 9999px var(--kinetics-card);

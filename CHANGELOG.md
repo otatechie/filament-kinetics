@@ -15,6 +15,10 @@ All notable changes to Kinetics are recorded here. The format follows
   The 50 tint was nearly the panel's colour, so a badge read as coloured
   text.
 
+### Fixed
+- In infolists with labels beside their values (`->inlineLabel()`), each
+  label sat 3px above its value. It's on the value's baseline now.
+
 ## 1.4.0 - 2026-09-25
 
 ### Added
