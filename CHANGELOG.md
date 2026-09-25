@@ -29,6 +29,8 @@ All notable changes to Kinetics are recorded here. The format follows
   underlined. They looked like the text around them.
 - With the top bar on, the notification badge on the bell was cut off at the
   window's edge, and sat on a white patch instead of the top bar's grey.
+- With the top bar on, its icons (the sidebar toggle and the bell) were 24px
+  beside 16px menu icons. They're 18px, as in the sidebar.
 
 ## 1.3.2 - 2026-09-24
 

@@ -288,6 +288,7 @@
 
     /* The collapse and expand buttons: small and quiet. */
     .fi-sidebar-header .fi-icon-btn .fi-icon,
+    .fi-topbar .fi-icon-btn .fi-icon,
     .fi-sidebar-close-collapse-sidebar-btn .fi-icon,
     .fi-sidebar-open-collapse-sidebar-btn .fi-icon,
     .fi-layout-sidebar-toggle-btn .fi-icon {
