@@ -38,6 +38,9 @@ colours from your panel and stays out of the way of your own Tailwind classes.
   text on buttons and links passes contrast checks.
 - **Quick motion.** Animations stay under 300ms, and stop when reduced motion
   is on.
+- **An Appearance page, if you want one.** Colours, corners, font, dark mode
+  and layout, changed from the panel by the people you allow. Off unless you
+  turn it on.
 - **Setup checks.** A missing theme, a wrong import order or a missing plugin
   comes with a message saying what to fix.
 
@@ -117,6 +120,11 @@ $panel
     ->topbar();
 ```
 
+**Or from the panel.** `->appearancePage()` adds a page where colours, shape,
+font, dark mode and layout can be changed without a deploy, by the people you
+allow. It's off unless you turn it on; see
+[The Appearance page](https://github.com/otatechie/filament-kinetics/blob/main/docs/customising.md#the-appearance-page).
+
 **Everything else** is a CSS variable. Set them in your `theme.css` after the
 Kinetics import, light values on `:root` and dark ones on `.dark`:
 
@@ -152,13 +160,13 @@ mode from your own greys, and stronger field borders.
 - [Installation](https://github.com/otatechie/filament-kinetics/blob/main/docs/installation.md): requirements, setup, multiple panels,
   updating and removing
 - [Troubleshooting](https://github.com/otatechie/filament-kinetics/blob/main/docs/troubleshooting.md): what each warning means, and
-  fixes for common problems
+  fixes for common problems, including the Appearance page
 
 **Using Kinetics**
 
-- [Customising](https://github.com/otatechie/filament-kinetics/blob/main/docs/customising.md): what the plugin sets, colours, font,
-  layout, icons, notifications, every variable, dark mode, and styling your
-  own pages
+- [Customising](https://github.com/otatechie/filament-kinetics/blob/main/docs/customising.md): what the plugin sets, the Appearance
+  page, colours, font, layout, icons, notifications, every variable, dark
+  mode, and styling your own pages
 - [Components](https://github.com/otatechie/filament-kinetics/blob/main/docs/components.md): how each part of Filament is styled
 
 **Background**

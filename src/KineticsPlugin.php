@@ -2,10 +2,12 @@
 
 namespace Otatechie\Kinetics;
 
+use Closure;
 use Filament\Actions\Action;
 use Filament\Contracts\Plugin;
 use Filament\Enums\GlobalSearchPosition;
 use Filament\Enums\UserMenuPosition;
+use Filament\Facades\Filament;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Notifications\Livewire\Notifications;
 use Filament\Notifications\Notification;
@@ -18,6 +20,9 @@ use Filament\Tables\Table;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\HtmlString;
 use LogicException;
+use Otatechie\Kinetics\Appearance\AppearanceSettings;
+use Otatechie\Kinetics\Pages\Appearance;
+use UnitEnum;
 
 class KineticsPlugin implements Plugin
 {
@@ -150,9 +155,70 @@ class KineticsPlugin implements Plugin
         'widgets::chart-widget.filter' => 'lucide-funnel',
     ];
 
+    protected bool $hasAppearancePage = false;
+
+    protected ?Closure $authorizeAppearance = null;
+
+    protected string|UnitEnum|null $appearanceNavigationGroup = null;
+
+    protected ?int $appearanceNavigationSort = null;
+
+    protected ?AppearanceSettings $appearance = null;
+
     public static function make(): static
     {
         return app(static::class);
+    }
+
+    /** The plugin on the current panel. */
+    public static function get(): static
+    {
+        return Filament::getCurrentOrDefaultPanel()->getPlugin('kinetics');
+    }
+
+    /**
+     * Adds the Appearance page, where colours, shape, font, dark mode and
+     * layout can be changed from the panel, for everyone. Off, the page is
+     * hidden and anything saved on it is ignored.
+     *
+     * @param  ?Closure(mixed $user): bool  $authorize  Who can open it. Without one, anyone who can use the panel.
+     */
+    public function appearancePage(
+        bool $condition = true,
+        ?Closure $authorize = null,
+        string|UnitEnum|null $navigationGroup = null,
+        ?int $navigationSort = null,
+    ): static {
+        $this->hasAppearancePage = $condition;
+        $this->authorizeAppearance = $authorize;
+        $this->appearanceNavigationGroup = $navigationGroup;
+        $this->appearanceNavigationSort = $navigationSort;
+
+        return $this;
+    }
+
+    public function canManageAppearance(): bool
+    {
+        if (! $this->hasAppearancePage) {
+            return false;
+        }
+
+        return $this->authorizeAppearance === null || (bool) ($this->authorizeAppearance)(Filament::auth()->user());
+    }
+
+    public function getAppearanceNavigationGroup(): string|UnitEnum|null
+    {
+        return $this->appearanceNavigationGroup;
+    }
+
+    public function getAppearanceNavigationSort(): ?int
+    {
+        return $this->appearanceNavigationSort;
+    }
+
+    public function appearance(): AppearanceSettings
+    {
+        return $this->appearance ??= new AppearanceSettings(Filament::getCurrentOrDefaultPanel()->getId());
     }
 
     public function getId(): string
@@ -245,6 +311,12 @@ class KineticsPlugin implements Plugin
                     })()
                 </script>
                 HTML));
+
+        if ($this->hasAppearancePage) {
+            $panel
+                ->pages([Appearance::class])
+                ->renderHook(PanelsRenderHook::HEAD_END, fn (): HtmlString => $this->appearance()->css());
+        }
     }
 
     /**
@@ -281,6 +353,11 @@ class KineticsPlugin implements Plugin
         // panel's ->bootUsing() runs after this, so it can move them back.
         Notifications::alignment(Alignment::End);
         Notifications::verticalAlignment(VerticalAlignment::End);
+
+        // After the panel's own configuration, so saved choices win.
+        if ($this->hasAppearancePage) {
+            $this->appearance()->apply($panel);
+        }
 
         // Confirmations read like every other modal: from the left, with the
         // button that acts first. Calls on your own actions after ::make()

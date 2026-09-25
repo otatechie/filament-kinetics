@@ -4,6 +4,32 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.4.0 - 2026-09-25
+
+### Added
+- An Appearance page, off unless you turn it on with
+  `KineticsPlugin::make()->appearancePage()`. The primary colour, tone,
+  corners, buttons, font, dark mode, content width, the top bar, the sidebar
+  and where notifications appear can be changed from the panel, for
+  everyone, by the people you allow. It needs a table:
+  `php artisan vendor:publish --tag=kinetics-migrations`, then migrate. See
+  [Customising: The Appearance page](docs/customising.md#the-appearance-page).
+
+### Changed
+- Toggle buttons in a row look like standalone tabs: one track, the chosen
+  option raised. On phones, a row of up to four fills the width instead of
+  wrapping onto a second line, and on touch screens each option is 40px tall.
+- In dark mode, the chosen toggle button and the active standalone tab are
+  lifted instead of looking sunken.
+- The description under a switch or a row of toggle buttons is a step
+  smaller than its label: 12px.
+
+### Fixed
+- Links in the sign-in page's footer are in the primary colour and
+  underlined. They looked like the text around them.
+- With the top bar on, the notification badge on the bell was cut off at the
+  window's edge, and sat on a white patch instead of the top bar's grey.
+
 ## 1.3.2 - 2026-09-24
 
 ### Fixed

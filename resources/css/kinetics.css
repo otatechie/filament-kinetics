@@ -104,6 +104,18 @@
         --tw-ring-shadow: 0 0 #0000;
     }
 
+    /* Filament rings badges in white, for its white top bar: here the ring
+       is the canvas, so the badge doesn't sit on a white patch. */
+    .fi-topbar .fi-icon-btn > .fi-icon-btn-badge-ctn {
+        background: var(--kinetics-canvas);
+    }
+
+    /* A badge overhangs its button's edge, so the last button in the top bar
+       leaves room for it: at the window's edge it was cut off. */
+    .fi-topbar-end > :last-child:has(.fi-icon-btn-badge-ctn) {
+        margin-inline-end: 0.5rem;
+    }
+
     .fi-topbar .fi-icon-btn {
         width: 2.25rem;
         height: 2.25rem;
@@ -1264,6 +1276,143 @@
         }
     }
 
+    /* Toggle buttons in a row are a segmented control too, like standalone
+       tabs: every option sits on one track, so the ones not chosen still read
+       as choices. Grouped ones (->grouped()) keep Filament's joined buttons. */
+    .fi-fo-toggle-buttons.fi-inline:not(.fi-btn-group) {
+        display: inline-flex;
+        flex-wrap: wrap;
+        width: max-content;
+        max-width: 100%;
+        gap: 0.125rem;
+        padding: 0.1875rem;
+        border-radius: 0.5rem;
+        background: var(--kinetics-muted);
+
+        & .fi-fo-toggle-buttons-btn-ctn {
+            display: flex;
+        }
+
+        & .fi-btn {
+            height: 2rem;
+            padding-inline: 0.75rem;
+            border-color: transparent;
+            border-radius: 0.375rem;
+            background: transparent;
+            box-shadow: none;
+            font-size: 0.8125rem;
+            color: var(--kinetics-muted-foreground);
+
+            &:hover {
+                background: transparent;
+                color: var(--kinetics-foreground);
+            }
+        }
+
+        & .fi-fo-toggle-buttons-input:checked + .fi-btn {
+            background: var(--kinetics-card);
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.08);
+            color: var(--kinetics-foreground);
+        }
+
+        & .fi-fo-toggle-buttons-input:focus-visible + .fi-btn {
+            box-shadow: 0 0 0 3px var(--kinetics-primary-ring);
+        }
+    }
+
+    /* On phones a row of up to four options fills the width, each column as
+       wide as its label needs, so the row never wraps onto a second line of
+       the track: a label too long to fit wraps inside its own button instead.
+       More options keep wrapping as a row. */
+    @media (max-width: 639px) {
+        .fi-fo-toggle-buttons.fi-inline:not(.fi-btn-group):not(:has(> :nth-child(5))) {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: auto;
+            width: 100%;
+
+            & .fi-btn {
+                width: 100%;
+                height: auto;
+                min-height: 2.5rem;
+                padding-inline: 0.5rem;
+                white-space: normal;
+                text-wrap: balance;
+                text-align: center;
+                line-height: 1.125rem;
+            }
+        }
+    }
+
+    /* Fingers need a bigger target than a pointer. */
+    @media (pointer: coarse) {
+        .fi-fo-toggle-buttons.fi-inline:not(.fi-btn-group) .fi-btn {
+            min-height: 2.5rem;
+            height: auto;
+        }
+    }
+
+    /* In dark mode the card is darker than the track, so the chosen option or
+       tab would look sunken. Lift it instead. */
+    .dark {
+        & .fi-fo-toggle-buttons.fi-inline:not(.fi-btn-group) .fi-fo-toggle-buttons-input:checked + .fi-btn,
+        & .fi-tabs:not(.fi-contained) .fi-tabs-item.fi-active {
+            background: color-mix(in oklab, var(--kinetics-foreground) 10%, var(--kinetics-muted));
+        }
+    }
+
+    /* A switch's or segmented control's description is secondary to its
+       label, so it's a step smaller. */
+    .fi-fo-field:has(> .fi-fo-field-label-col .fi-fo-toggle) > .fi-fo-field-content-col .fi-sc-text,
+    .fi-fo-field:has(.fi-fo-toggle-buttons.fi-inline) > .fi-fo-field-content-col .fi-sc-text {
+        font-size: 0.75rem;
+        line-height: 1rem;
+    }
+
+    /* ─── Appearance page ─── */
+
+    /* Each section's title and description get half the width, not a third,
+       so the fields aren't stretched across a full-width page. */
+    @media (min-width: 768px) {
+        .kinetics-appearance {
+            & .fi-section.fi-aside {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: 3rem;
+
+                & > .fi-section-content-ctn {
+                    grid-column: span 1 / span 1;
+                }
+            }
+
+            & .kinetics-appearance-form > :last-child .fi-grid {
+                column-gap: 3rem;
+            }
+        }
+    }
+
+    /* The buttons stick to the bottom of the window, so Save is in reach
+       from anywhere on the page. */
+    .kinetics-appearance-form > :last-child:has(.fi-ac) {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        padding-block: 1rem;
+        border-top: 1px solid var(--kinetics-panel-border);
+        background: var(--kinetics-panel);
+    }
+
+    .kinetics-swatch {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .kinetics-swatch-dot {
+        width: 0.875rem;
+        height: 0.875rem;
+        border-radius: 999px;
+    }
+
     .fi-tabs.fi-contained {
         gap: 1rem;
         padding-block: 0;
@@ -1888,6 +2037,17 @@
         text-align: center;
         font-size: 0.75rem;
         color: var(--kinetics-muted-foreground);
+
+        /* Tailwind's reset makes links look like the text around them. */
+        & a {
+            color: var(--kinetics-primary-text);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+
+            &:hover {
+                text-decoration-thickness: 2px;
+            }
+        }
     }
 
     /* ─── Selection ─── */

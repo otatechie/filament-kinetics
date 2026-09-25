@@ -18,6 +18,7 @@ use MallardDuck\LucideIcons\BladeLucideIconsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Otatechie\Kinetics\KineticsServiceProvider;
 use Otatechie\Kinetics\Tests\Fixtures\AdminPanelProvider;
+use Otatechie\Kinetics\Tests\Fixtures\AppearancePanelProvider;
 use Otatechie\Kinetics\Tests\Fixtures\OverriddenPanelProvider;
 use Otatechie\Kinetics\Tests\Fixtures\PluginlessPanelProvider;
 use Otatechie\Kinetics\Tests\Fixtures\ThemelessPanelProvider;
@@ -47,6 +48,7 @@ abstract class TestCase extends Orchestra
             OverriddenPanelProvider::class,
             ThemelessPanelProvider::class,
             PluginlessPanelProvider::class,
+            AppearancePanelProvider::class,
         ];
     }
 

@@ -29,6 +29,169 @@ theme. See [Troubleshooting](troubleshooting.md).
 
 It doesn't set your colours, brand name, logo or navigation.
 
+With [the Appearance page](#the-appearance-page) turned on, choices saved there
+apply on top of all of this.
+
+## The Appearance page
+
+The Appearance page lets people change how the panel looks from inside the
+panel, without editing code or deploying: colours, corners, font, dark mode
+and layout. A change saved there applies to everyone who uses the panel.
+
+The page is **off** until you turn it on, and you choose who can open it.
+
+### Turning it on
+
+**1. Create the table it saves to.** In your project's folder, run:
+
+```bash
+php artisan vendor:publish --tag=kinetics-migrations
+php artisan migrate
+```
+
+The first command copies Kinetics' migration into your `database/migrations`
+folder. The second creates the table, `kinetics_appearance`. If you skip this
+step, the page opens but says "Settings can't be saved yet".
+
+**2. Add the page to your panel.** Open your panel provider. It's in
+`app/Providers/Filament/`, usually named `AdminPanelProvider.php`.
+
+At the top of the file, with the other `use` lines, add this line if it isn't
+there already. It's the model your panel's users sign in with; if yours isn't
+`App\Models\User`, use your own:
+
+```php
+use App\Models\User;
+```
+
+Then find the line that adds Kinetics, `->plugin(KineticsPlugin::make())`,
+and add `->appearancePage(...)` to it:
+
+```php
+->plugin(KineticsPlugin::make()->appearancePage(
+    authorize: fn (User $user): bool => $user->email === 'you@example.com',
+))
+```
+
+If your panel adds plugins as a list instead, `->plugins([...])`, change
+`KineticsPlugin::make()` inside the list the same way.
+
+The `authorize` line decides who can open the page. It's given the signed-in
+user and returns `true` for people who may use it. The example allows one
+email address. Replace it with however your app recognises an admin, for
+example `$user->is_admin` if your `users` table has an `is_admin` column.
+
+**Leave `authorize` out only if everyone who can sign in to the panel may
+change its look.** Without it, they all can.
+
+**3. Check it.** Refresh the panel while signed in as someone `authorize`
+allows. **Appearance** appears in the navigation. Signed in as anyone else,
+it doesn't.
+
+### All the options
+
+```php
+->appearancePage(
+    condition: true,
+    authorize: fn (User $user): bool => $user->is_admin,
+    navigationGroup: 'Settings',
+    navigationSort: 2,
+)
+```
+
+| Option | What it does | If you leave it out |
+|---|---|---|
+| `condition` | `true` turns the page on, `false` turns it off. To switch it from `.env`, see below | On |
+| `authorize` | Who can open the page, as above | Everyone who can use the panel |
+| `navigationGroup` | The navigation group it's listed under, such as `'Settings'` | Not in a group |
+| `navigationSort` | Its position in that group: lower numbers come first | Filament's default order |
+
+To switch the page on and off from `.env`, read it through a config file.
+Calling `env()` in the panel provider stops working once your production
+server caches its config with `php artisan config:cache`:
+
+1. In `config/app.php`, inside the returned array, add
+   `'appearance_page' => (bool) env('APPEARANCE_PAGE', false),`
+2. In `.env`, add `APPEARANCE_PAGE=true` where you want the page.
+3. In the panel provider, pass `condition: config('app.appearance_page')`.
+
+### Turning it off
+
+Remove `->appearancePage(...)` from the plugin line, keeping
+`->plugin(KineticsPlugin::make())` itself, or pass `condition: false`. While
+it's off:
+
+- the page isn't in the navigation, and going to its address, such as
+  `/admin/appearance`, shows "Not Found";
+- anything saved on it is ignored, and the panel looks as your code sets it;
+- what was saved stays in the table, so turning the page back on brings it
+  back.
+
+Someone `authorize` turns away sees the same navigation without the page, and
+gets "Forbidden" if they go to its address.
+
+### What people can change
+
+| Section | Settings | The same thing in code |
+|---|---|---|
+| Colours | Primary colour, and tone: cool, neutral or warm greys | `->colors()` with `Color::Slate`, `Color::Neutral` or `Color::Stone` as `gray`, see [Colours](#colours) |
+| Shape | Corners, buttons, page (floating panel or flat), field borders | The [recipes](#recipes) below |
+| Type | Open Runde, Inter or DM Sans. DM Sans loads from Bunny Fonts, so it needs an internet connection | `->font()` |
+| Dark mode | Whether it's allowed, which mode people start in until they pick light or dark themselves, and dark surfaces in warm charcoal or matching the tone | `->darkMode()`, `->defaultThemeMode()`, [a dark mode from your own greys](#a-dark-mode-from-your-own-greys) |
+| Layout | Content width (full, medium or narrow), top bar, collapsible sidebar, collapsible menu groups | `->maxContentWidth()`, `->topbar()`, `->sidebarCollapsibleOnDesktop()`, `->collapsibleNavigationGroups()` |
+| Notifications | Bottom right or top right | See [Notifications](#notifications) |
+
+The page only changes how the panel looks. Settings that change how it
+behaves are left to your code, where you can test them against your own
+pages:
+
+| Setting | In code |
+|---|---|
+| A ⌘K (Mac) or Ctrl+K shortcut to search | `->globalSearchKeyBindings(['command+k', 'ctrl+k'])` |
+| Pages that change without a full reload | `->spa()`. Pages with their own JavaScript may need changes to work with it |
+| A warning before leaving a form with unsaved changes | `->unsavedChangesAlerts()` |
+
+### How saved changes work
+
+- **Before anything is saved,** the panel looks exactly as your code sets it.
+  The page shows your code's colours, font, dark mode and layout. For the
+  shape settings and dark surfaces it shows Kinetics' defaults, since it
+  can't read your `theme.css`.
+- **Only what someone changes is saved.** Everything they didn't touch is
+  still decided by your code, so later changes to your code still apply.
+- **A saved change wins over your code,** both your panel provider and your
+  `theme.css`. The one exception is code in a `->bootUsing()` callback, which
+  runs after saved changes, so it wins.
+- **"As set in code"** appears when your code chose something the page doesn't
+  offer, such as a colour given as a hex code. Leave it selected and your
+  code's choice stays.
+- **Reset to defaults** deletes what was saved. The panel goes back to how
+  your code sets it.
+- **After saving,** the page reloads. Everyone else sees the change the next
+  time they open or refresh a page.
+- **Each panel is separate.** With more than one panel, add
+  `->appearancePage(...)` to each one that should have the page. Each keeps
+  its own saved settings.
+
+### Changing the page's wording
+
+1. In your app, create the file `lang/vendor/kinetics/en/appearance.php`,
+   creating the folders if they don't exist.
+2. Make it return an array with only the text you want to change, under the
+   same keys as [Kinetics' own file](../resources/lang/en/appearance.php).
+   For example, to rename the page:
+
+   ```php
+   <?php
+
+   return [
+       'title' => 'Look and feel',
+   ];
+   ```
+
+Everything you leave out keeps Kinetics' wording. To translate the page, use
+your language's code in place of `en`, such as `fr`.
+
 ## Colours
 
 Kinetics takes every colour from the panel's palette:
@@ -387,17 +550,56 @@ they fit.
 
 ## A footer on the sign-in page
 
-Kinetics styles a small, muted footer under the sign-in form. To show one, add
-it with a render hook:
+Kinetics styles a small, muted footer under the sign-in form. It's most useful
+for someone who can't get in, so say how to get help rather than only your
+name or a copyright line.
+
+To add one:
+
+**1.** Open your panel provider. It's in `app/Providers/Filament/`, usually
+named `AdminPanelProvider.php`.
+
+**2.** At the top of the file, with the other `use` lines, add:
 
 ```php
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\HtmlString;
-
-$panel->renderHook(
-    PanelsRenderHook::SIMPLE_LAYOUT_END,
-    fn (): HtmlString => new HtmlString('<footer class="fi-simple-footer">Marketplace · support@marketplace.test</footer>'),
-);
 ```
 
-Escape anything that comes from your database with `e()`.
+**3.** In the `panel()` method, add a `->renderHook(...)` call to the chain
+of settings on `$panel`, before the `;` that ends it. A render hook adds your
+own HTML at a fixed place on Filament's pages; `SIMPLE_LAYOUT_END` is the
+bottom of the sign-in page:
+
+```php
+return $panel
+    // ...your other settings
+    ->plugin(KineticsPlugin::make())
+    ->renderHook(
+        PanelsRenderHook::SIMPLE_LAYOUT_END,
+        fn (): HtmlString => new HtmlString('<footer class="fi-simple-footer">Trouble signing in? support@example.com</footer>'),
+    );
+```
+
+**4.** Change the text between `<footer ...>` and `</footer>` to your own,
+and refresh the sign-in page. There's nothing to rebuild. Keep
+`class="fi-simple-footer"`: it's what gives the footer Kinetics' small, muted
+style.
+
+With a link:
+
+```php
+new HtmlString('<footer class="fi-simple-footer">Trouble signing in? <a href="mailto:support@example.com">support@example.com</a></footer>')
+```
+
+With text from your app's config or database, wrap it in `e()`. That escapes
+it, so text containing `<` or `&` shows as written instead of breaking the
+page:
+
+```php
+new HtmlString('<footer class="fi-simple-footer">'.e(config('app.name')).' · '.e(config('mail.from.address')).'</footer>')
+```
+
+It shows on every page with the centred layout: sign-in, registration,
+password reset and the two-factor code page, but not inside the panel. To
+remove it, delete the `->renderHook()` call.

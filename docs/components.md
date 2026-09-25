@@ -14,6 +14,7 @@ How Kinetics styles each part of Filament. Sizes are at the default text size.
 | Active menu item | Primary colour and semibold, no background |
 | Collapsed sidebar | One centred column of icons, 40px targets |
 | Notifications button | At the foot of the sidebar, styled like a menu item, with the unread count as a badge |
+| Top bar (when turned on) | On the canvas, no divider. Icon buttons are 36px and muted. Badges are ringed in the canvas colour, and the last button leaves room for its badge at the window's edge |
 | Account menu | At the foot of the sidebar: 24px avatar centred on the menu's icons, name in line with the menu's labels, 200px menu, a small segmented theme switcher |
 
 ## Buttons
@@ -40,6 +41,8 @@ Every button scales to 0.97 while pressed.
 | Checkboxes and radios | An outline when unchecked, solid primary when checked |
 | Toggles | A compact 32×18 switch |
 | Labels beside a checkbox or toggle | 14px body text, level with the control |
+| Descriptions under a switch or toggle buttons | 12px, a step below the label |
+| Toggle buttons in a row | A segmented control, like tabs on their own: a muted track, the chosen option raised. In dark mode it's lifted, not sunken. On phones, up to four options fill the width, and on touch screens each is 40px tall. Grouped ones (`->grouped()`) keep Filament's joined buttons |
 | Date picker | 6px rounded days. The selected day is solid primary, and today is in the primary colour |
 | Select menus | Compact options, a grey hover, the selected option in the primary colour |
 
@@ -62,7 +65,7 @@ Every button scales to 0.97 while pressed.
 
 | Kind | Style |
 |---|---|
-| On their own | A segmented control: a muted track with the active tab raised |
+| On their own | A segmented control: a muted track with the active tab raised, and lifted in dark mode |
 | Inside a card | Text tabs with a primary underline on the active tab |
 
 ## Overlays

@@ -98,6 +98,57 @@ $panel
     ->maxContentWidth(Width::SevenExtraLarge);
 ```
 
+## The Appearance page isn't in the navigation
+
+Work through these in order:
+
+1. **Is the page turned on?** In your panel provider
+   (`app/Providers/Filament/AdminPanelProvider.php`), the plugin line should
+   include `->appearancePage(...)`, as in
+   [Turning it on](customising.md#turning-it-on). If it has
+   `condition: false`, or a `condition` read from `.env` that's `false`, the
+   page is off.
+2. **Is `condition` read from `.env`?** Read it through a config file, as in
+   [All the options](customising.md#all-the-options), not with `env()` in
+   the panel provider: once the config is cached, `env()` there always gives
+   the default. After changing `.env`, run `php artisan config:clear`, or
+   `php artisan config:cache` again on a server that caches it.
+3. **Does `authorize` allow you?** It returns `true` only for the people who
+   may use the page. Signed in as anyone else, the page isn't listed. Check
+   that the account you're signed in with passes the check you wrote.
+
+## "Settings can't be saved yet"
+
+The Appearance page shows this when the table it saves to doesn't exist. In
+your project's folder, run:
+
+```bash
+php artisan vendor:publish --tag=kinetics-migrations
+php artisan migrate
+```
+
+Then refresh the page. Until you do, the page shows the panel's current
+settings but can't save them, and the rest of the panel works as usual.
+
+## A change on the Appearance page doesn't apply
+
+- **Did you refresh?** Other people see a saved change the next time they
+  open or refresh a page, not straight away.
+- **Did you change your code after saving on the page?** A setting saved on
+  the page wins over your code. Press **Reset to defaults** on the page to
+  go back to your code for everything.
+- **Does your code set it in `->bootUsing()`?** Code inside a
+  `->bootUsing(function (Panel $panel) { ... })` callback runs after saved
+  changes, so it wins. Move that setting out of the callback, into the chain
+  of methods on `$panel` (`->topbar()`, `->font()` and so on).
+- **Does it say "As set in code"?** Your code chose something the page
+  doesn't offer, such as a colour given as a hex code, and the page leaves it
+  alone. Pick one of the page's own options instead.
+- **Is DM Sans showing as a plain system font?** DM Sans downloads from Bunny
+  Fonts, so it doesn't load without an internet connection, or when your
+  site's content security policy blocks `fonts.bunny.net`. Open Runde and
+  Inter come with the panel and always load.
+
 ## My icon changes don't apply
 
 Kinetics sets its Lucide icons on the panel, which Filament applies when the

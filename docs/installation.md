@@ -164,6 +164,16 @@ first.
 3. Rebuild with `npm run build`.
 4. Remove the package with `composer remove otatechie/filament-kinetics`.
 5. Delete `public/fonts/otatechie/filament-kinetics/`.
+6. If you ran the Appearance page's migration, remove its table:
+   1. Run `php artisan make:migration drop_kinetics_appearance_table`.
+   2. Open the new file in `database/migrations/` and, inside `up()`, add
+      `Schema::dropIfExists('kinetics_appearance');`.
+   3. Run `php artisan migrate`.
+
+   Keep the migration that step 1 of
+   [Turning it on](customising.md#turning-it-on) copied in, the file ending
+   in `_create_kinetics_appearance_table.php`: the new migration runs after
+   it and removes the table, on every environment.
 
 If your own code uses `lucide-*` icons, require
 `mallardduck/blade-lucide-icons` directly before step 4, since it came with

@@ -15,6 +15,11 @@ class KineticsServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'kinetics');
 
+        // For the Appearance page: php artisan vendor:publish --tag=kinetics-migrations
+        $this->publishesMigrations([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'kinetics-migrations');
+
         // Published to public/ by `php artisan filament:assets`.
         FilamentAsset::register([
             Font::make('open-runde', __DIR__.'/../resources/fonts/open-runde'),
