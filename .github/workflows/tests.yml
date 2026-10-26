@@ -28,7 +28,7 @@ jobs:
             testbench: '11.*'
             stability: prefer-stable
             filament: '^5.8.3'
-          # Filament 4, on the Laravel it supports.
+          # Filament 4, on Laravel 12 and 13.
           - php: '8.3'
             laravel: '12.*'
             testbench: '10.*'
@@ -37,6 +37,16 @@ jobs:
           - php: '8.4'
             laravel: '12.*'
             testbench: '10.*'
+            filament: '^4.13.3'
+            stability: prefer-stable
+          - php: '8.3'
+            laravel: '13.*'
+            testbench: '11.*'
+            filament: '^4.13.3'
+            stability: prefer-lowest
+          - php: '8.4'
+            laravel: '13.*'
+            testbench: '11.*'
             filament: '^4.13.3'
             stability: prefer-stable
 

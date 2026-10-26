@@ -5,7 +5,7 @@
 | | Version |
 |---|---|
 | PHP | 8.3 or later |
-| Laravel | 12 or 13 (12 with Filament 4) |
+| Laravel | 12 or 13 |
 | Filament | 4.13.3 or later, or 5.8.3 or later |
 | Node.js | Any version your Vite build runs on |
 
