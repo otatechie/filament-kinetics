@@ -4,6 +4,24 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.6.0 - 2026-10-26
+
+### Changed
+- Lucide icons in the rich editor's toolbar, the file upload's image editor,
+  two-factor sign-in setup, the tenant menu, the query builder, the
+  sub-navigation menu on phones and the password reset's "back to sign-in"
+  link. Deleting a table row or column, and the header-cell toggle, keep
+  Filament's icons: Lucide has none for them.
+- Filament 4 is supported on Laravel 13 as well as 12, and CI tests it.
+
+### Fixed
+- Date pickers on Filament 4.15.2 and 5.10.2 or later: one day always looked
+  pointed at, and the day actually under the pointer was a different grey.
+  Filament now gives the keyboard-focus day its own class whether or not it
+  has focus; Kinetics shades only the day being pointed at or focused.
+- The keyboard focus outline on the selected day has a 1px gap, so it shows
+  against the day's solid primary colour.
+
 ## 1.5.3 - 2026-09-25
 
 ### Changed
