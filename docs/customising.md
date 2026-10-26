@@ -119,8 +119,8 @@ the line under the page title spans the content rather than the whole panel.
 
 Kinetics swaps Filament's own icons (table actions, sort arrows, modals and so
 on) for [Lucide](https://lucide.dev), drawn at a slightly lighter stroke. The
-full list is `KineticsPlugin::ICONS`; anything it leaves out keeps its
-Heroicon. To change one, call `->icons()` after the plugin:
+full list is `KineticsPlugin::ICONS`; anything it leaves out keeps Filament's
+icon. To change one, call `->icons()` after the plugin:
 
 ```php
 $panel
