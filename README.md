@@ -62,33 +62,14 @@ built with Vite. `php artisan make:filament-theme` creates one.
 ```bash
 composer require otatechie/filament-kinetics
 php artisan make:filament-theme   # if your panel doesn't have a theme yet
-```
-
-In your theme's `theme.css`, import `layers.css` before Filament and
-`kinetics.css` after it:
-
-```css
-@import '../../../../vendor/otatechie/filament-kinetics/resources/css/layers.css';
-@import '../../../../vendor/filament/filament/resources/css/theme.css';
-@import '../../../../vendor/otatechie/filament-kinetics/resources/css/kinetics.css';
-
-@source '../../../../app/Filament/**/*';
-@source '../../../../resources/views/filament/**/*';
-```
-
-Add the plugin to your panel, then build:
-
-```php
-use Otatechie\Kinetics\KineticsPlugin;
-
-$panel
-    ->plugin(KineticsPlugin::make())
-    ->viteTheme('resources/css/filament/admin/theme.css');
-```
-
-```bash
+php artisan kinetics:install
 npm run build
 ```
+
+`kinetics:install` adds Kinetics' two imports to your theme's `theme.css`,
+`layers.css` before Filament's and `kinetics.css` after it, and adds
+`->plugin(KineticsPlugin::make())` to your panel provider. It's safe to run
+again, and puts the imports right if they're in the wrong order.
 
 [Installation](https://github.com/otatechie/filament-kinetics/blob/main/docs/installation.md) covers each step in detail, including
 multiple panels, updating and removing.

@@ -8,12 +8,17 @@ use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\ServiceProvider;
+use Otatechie\Kinetics\Commands\InstallCommand;
 
 class KineticsServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'kinetics');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([InstallCommand::class]);
+        }
 
         // For the Appearance page: php artisan vendor:publish --tag=kinetics-migrations
         $this->publishesMigrations([

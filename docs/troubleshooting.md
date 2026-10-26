@@ -24,8 +24,9 @@ or `->theme(...)` if you build CSS without Vite.
 The panel has a theme, but Kinetics' styles aren't in the CSS the browser
 loaded. In order of likelihood:
 
-1. **The imports aren't in the theme.** Add `layers.css` and `kinetics.css` as
-   in [Installation, step 3](installation.md#3-add-the-kinetics-imports).
+1. **The imports aren't in the theme.** Run `php artisan kinetics:install`, or
+   add `layers.css` and `kinetics.css` by hand as in
+   [Installation, step 3](installation.md#3-add-the-kinetics-imports).
 2. **The theme hasn't been rebuilt.** Run `npm run build`, or check
    `npm run dev` is running.
 3. **`->viteTheme()` points at a different file** from the one you edited.
@@ -39,7 +40,8 @@ Kinetics loaded, but above Tailwind's utilities instead of below them. It
 still looks right, but Kinetics now overrides your own Tailwind classes, and
 some of Filament's.
 
-Make `layers.css` the first import in `theme.css`, before Filament's:
+`php artisan kinetics:install` puts the imports in order. Or make `layers.css`
+the first import in `theme.css` yourself, before Filament's:
 
 ```css
 @import '../../../../vendor/otatechie/filament-kinetics/resources/css/layers.css';

@@ -10,7 +10,8 @@ How Kinetics is put together, and how to change it without breaking it.
 | `resources/css/layers.css` | The cascade layer order apps import first |
 | `resources/fonts/open-runde/` | Open Runde, with its licence and `@font-face` rules |
 | `src/KineticsPlugin.php` | The panel settings, the Lucide icon map and the setup checks |
-| `src/KineticsServiceProvider.php` | Registers the font with Filament's asset publishing, the translations and the migration |
+| `src/KineticsServiceProvider.php` | Registers the font with Filament's asset publishing, the translations, the migration and the install command |
+| `src/Commands/InstallCommand.php` | `kinetics:install`: adds the imports to a panel's theme and the plugin to its provider |
 | `src/Pages/Appearance.php` | The Appearance page |
 | `src/Appearance/AppearanceSettings.php` | What the page saves, and how it's applied to the panel |
 | `database/migrations/` | The Appearance page's table, published into apps |

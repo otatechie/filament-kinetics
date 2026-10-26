@@ -47,7 +47,17 @@ on.
 
 ## 3. Add the Kinetics imports
 
-Open the theme's `theme.css` and add two lines around Filament's import:
+```bash
+php artisan kinetics:install
+```
+
+This does steps 3 and 4: it adds the imports below to the panel's `theme.css`
+and the plugin to its provider, then tells you if anything is left to do by
+hand. With more than one panel, it asks which, or name it:
+`php artisan kinetics:install admin`. It's safe to run again.
+
+To do it by hand instead, open the theme's `theme.css` and add two lines around
+Filament's import:
 
 ```css
 @import '../../../../vendor/otatechie/filament-kinetics/resources/css/layers.css';
