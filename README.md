@@ -174,6 +174,10 @@ with your Filament and Kinetics versions
 covers the common problems first. For security issues, see
 [SECURITY.md](https://github.com/otatechie/filament-kinetics/blob/main/SECURITY.md) instead.
 
+Questions and ideas go in [Discussions](https://github.com/otatechie/filament-kinetics/discussions).
+Built a panel with Kinetics? Post a screenshot in
+[Show and tell](https://github.com/otatechie/filament-kinetics/discussions/categories/show-and-tell).
+
 ## License
 
 MIT. See [LICENSE.md](https://github.com/otatechie/filament-kinetics/blob/main/LICENSE.md).

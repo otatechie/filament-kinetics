@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
+  - name: Ask a question
+    url: https://github.com/otatechie/filament-kinetics/discussions/categories/q-a
+    about: For help with setup or customising, ask in Discussions.
   - name: Report a security problem
     url: https://github.com/otatechie/filament-kinetics/security/policy
     about: Please don't open a public issue for security problems.
