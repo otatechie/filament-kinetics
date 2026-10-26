@@ -1650,8 +1650,19 @@
         border-radius: 0.375rem;
         font-size: 0.8125rem;
 
-        &.fi-focused:not(.fi-selected) {
+        /* Before Filament 4.15.2 and 5.10.2, .fi-focused followed the pointer. Since
+           then each day is focusable (it has a tabindex), .fi-focused marks the
+           one that takes keyboard focus whether or not it has it, and the
+           pointer is :hover. */
+        &.fi-focused:not([tabindex]):not(.fi-selected),
+        &:not(.fi-disabled):not(.fi-selected):is(:hover, :focus-visible) {
             background: var(--kinetics-muted);
+        }
+
+        /* Filament's focus outline is the primary colour, so on the solid
+           selected day it needs a gap to show. */
+        &:focus-visible {
+            outline-offset: 1px;
         }
 
         &.fi-selected {
