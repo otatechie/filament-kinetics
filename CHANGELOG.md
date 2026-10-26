@@ -4,6 +4,25 @@ All notable changes to Kinetics are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## 1.7.0 - 2026-10-26
+
+### Added
+- `php artisan kinetics:install` adds Kinetics' imports to a panel's
+  `theme.css` and the plugin to its provider. It finds the theme from the
+  panel, follows the paths and quotes of its Filament import, and puts
+  `layers.css` first. Run again, it changes nothing, or puts imports in the
+  wrong order right.
+- Questions and ideas have a home in GitHub Discussions, and the README asks
+  for screenshots of panels built with Kinetics.
+
+### Fixed
+- In the collapsed sidebar on Windows and Linux, the menu icons sat 4px left
+  of the expand button above them, because of the room Filament keeps for a
+  scrollbar. They're centred on one line now.
+- Actions in a page header are centred on the title. Filament puts them at
+  the foot of its tall header, so in Kinetics' slim one a link action sat 8px
+  low.
+
 ## 1.6.0 - 2026-10-26
 
 ### Changed
