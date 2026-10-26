@@ -252,9 +252,15 @@
        it's stretched back to the rail's width before centring. */
     @media (min-width: 1024px) {
         .fi-body-has-sidebar-collapsible-on-desktop .fi-sidebar:not(.fi-sidebar-open) {
+            /* Filament keeps room for a scrollbar on the right, which on
+               Windows and Linux pushed the icons 4px left of the expand button
+               above them. Room on both sides keeps them centred, and a thin
+               scrollbar leaves the 40px buttons space in the 72px rail. */
             & .fi-sidebar-nav {
-                padding-inline: 0.75rem;
+                padding-inline: 0;
                 row-gap: 0.75rem;
+                scrollbar-gutter: stable both-edges;
+                scrollbar-width: thin;
             }
 
             & .fi-sidebar-nav-groups {
@@ -422,6 +428,12 @@
         margin-inline: -1rem;
         padding: 0.625rem 1rem;
         border-bottom: 1px solid var(--kinetics-panel-border);
+    }
+
+    /* Filament sits the actions at the foot of its tall title. In the slim
+       band they're centred on the title instead, or a link action sat 8px low. */
+    .fi-header-actions-ctn {
+        align-self: center;
     }
 
     @media (min-width: 768px) {
@@ -1654,7 +1666,7 @@
            then each day is focusable (it has a tabindex), .fi-focused marks the
            one that takes keyboard focus whether or not it has it, and the
            pointer is :hover. */
-        &.fi-focused:not([tabindex]):not(.fi-selected),
+        &.fi-focused:not([tabindex]):not(.fi-disabled):not(.fi-selected),
         &:not(.fi-disabled):not(.fi-selected):is(:hover, :focus-visible) {
             background: var(--kinetics-muted);
         }
